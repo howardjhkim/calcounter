@@ -13,16 +13,9 @@ import FoodTable from "./Components/FoodTable"
 import Layout from "./Components/Layout"
 import {ContextProvider} from "./Context/DataContext"
 
-
-
-
-
-
-
-
 function App() {
-
-  return (
+    
+    return (
       <ContextProvider>
           <BrowserRouter>
               <Routes>
@@ -37,18 +30,5 @@ function App() {
   )
 }
 
-
-
-
-
-
-
-// function App() {
-//   return (
-//     <div className="App">
-      
-//     </div>
-//   );
-// }
 
 export default App;

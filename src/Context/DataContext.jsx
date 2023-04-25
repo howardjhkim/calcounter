@@ -1,11 +1,20 @@
 import React from "react"
 
+
+
+
 const Context = React.createContext()
 
 function ContextProvider({children}) {
     const [foodList, setFoodList] = React.useState([])
-    const addFood = (newFoodList) => {
-        setFoodList([...foodList, newFoodList])
+
+    const addFood = (newFood) => {
+        newFood.id = foodList.length + 1
+        setFoodList([...foodList, newFood]);
+    }
+
+    const updateFood = (updatedFood) => {
+        setFoodList(updatedFood)
     }
     
     
@@ -13,9 +22,13 @@ function ContextProvider({children}) {
     const addTdeeMacros = (newTdeeMacros) => {
         setTdeeMacros([newTdeeMacros])
     }
-        
+    
+    
+    console.log(foodList)
+
+
     return (
-        <Context.Provider value={{foodList, addFood, tdeeMacros, addTdeeMacros}}>
+        <Context.Provider value={{foodList, addFood, tdeeMacros, addTdeeMacros, updateFood}}>
             {children}
         </Context.Provider>
     )

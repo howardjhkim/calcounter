@@ -23,14 +23,14 @@ export default function FoodInputs() {
     
     // current new food object based on input value - before button submission
     let newFood = {
-                food: foodName,
-                calPerServ: Number(inputCalPerServ),
-                servings: Number(inputServings),
-                grams: Number(inputGrams),
-                carbs: Number(inputCarbs),
-                fats: Number(inputFats),
-                protein: Number(inputProtein)
-            }  
+        food: foodName,
+        calPerServ: Number(inputCalPerServ),
+        servings: Number(inputServings),
+        grams: Number(inputGrams),
+        carbs: Number(inputCarbs),
+        fats: Number(inputFats),
+        protein: Number(inputProtein),
+    }  
     
     //toggles the food input container
     function OpenContainer() {        
@@ -78,12 +78,9 @@ export default function FoodInputs() {
             addFood(newFood)
             clearVals()
         }
-        
-        
     }
     
-    
-    //clear all inputs
+    //clears all inputs
     function clearVals() {
         setFoodName('')
         setInputCalPerServ('')
@@ -96,8 +93,7 @@ export default function FoodInputs() {
     
     
     return (
-        
-        
+  
         <div className="component-container">
             <div className="food-input-container widget" ref={componentRef}>
                 <input 
