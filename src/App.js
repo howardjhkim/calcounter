@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route, NavLink, Outlet } from "react-router-dom";
+
+import Home from "./Pages/Home"
+import TDEE from "./Pages/TDEE"
+import Workouts from "./Pages/Workouts"
+
+import Header from "./Components/Header"
+import FoodInputs from "./Components/FoodInputs"
+import FoodTable from "./Components/FoodTable"
+
+import Layout from "./Components/Layout"
+import {ContextProvider} from "./Context/DataContext"
+
+
+
+
+
+
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <ContextProvider>
+          <BrowserRouter>
+              <Routes>
+                  <Route path="/" element={<Layout />}>
+                      <Route index element={<Home />} />
+                      <Route path="tdee" element={<TDEE />} />
+                      <Route path="workouts" element={<Workouts />} />
+                  </Route>
+              </Routes>
+          </BrowserRouter>
+      </ContextProvider>
+  )
 }
+
+
+
+
+
+
+
+// function App() {
+//   return (
+//     <div className="App">
+      
+//     </div>
+//   );
+// }
 
 export default App;
