@@ -22,12 +22,6 @@ textarea:focus, input:focus{
 
 
 
-.site-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 p {
   font-weight: 500;
   font-size: 0.85rem;
@@ -307,9 +301,57 @@ table > tbody > tr > td {
   line-height: 30px;
 }
 
+/******************************* 
+  General Site Design
+********************************/
+
+.site-wrapper {
+  display: flex;
+  flex-direction: row;
+  /* background-color: green; */
+}
+
+.vertical-nav-bar {
+  /* background-color: lightgray; */
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100vh;
+  margin-left: 20px;
+  border-right: 1px solid black;
+  margin: 0px;
+  padding: 0px;
+  /* border: 2px solid green; */
+  align-items: left;
+  padding-left: 30px;
+}
 
 
+ul{
+  /* border: 2px solid red; */
+  margin: 0;
+  padding: 10px;
+}
 
-.trashIcon {
-  
+
+li {
+  list-style-type: none;
+  margin: 20px 0px;
+  /* border: 2px solid blue; */
+}
+
+
+.components {
+  /* background-color: yellow; */
+  width: 80%;
+  padding: 0px 20px;
+  height: 100vh;
+}
+
+
+.vertical-nav-bar-li-title {
+  display: inline;
+  text-align: left;
+  align-items: left;
+  padding: 10px;
 }
