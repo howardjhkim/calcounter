@@ -6,10 +6,6 @@ import Home from "./Pages/Home"
 import TDEE from "./Pages/TDEE"
 import Workouts from "./Pages/Workouts"
 
-import Header from "./Components/Header"
-import FoodInputs from "./Components/FoodInputs"
-import FoodTable from "./Components/FoodTable"
-
 import Layout from "./Components/Layout"
 import {ContextProvider} from "./Context/DataContext"
 

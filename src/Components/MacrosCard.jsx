@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect, useRef} from "react"
 import {Context} from "../Context/DataContext"
 
-// import {Context} from "../Context/DataContext"
-
+import proteinIcon from "../Images/protein-icon.png"
+import carbIcon from "../Images/carb-icon.png"
+import fatsIcon from "../Images/fats-icon.png"
+import caloriesIcon from "../Images/calories-icon.png"
 
 
 export default function MacrosCard() {
@@ -20,10 +22,7 @@ export default function MacrosCard() {
         fats: fats
     }        
     
-    
-    // console.log(tdeeMacros)
-    
-    // console.log("bs " + tdeeMacros.cut)
+
     if(tdeeMacros.length > 0) {
         console.log(tdeeMacros[0].cut.protein)
     }
@@ -35,10 +34,11 @@ export default function MacrosCard() {
                 <span className="component-subtitle">Here's the breakdown of macronutrients you consumed today:</span>              
             </div>
             
-            <div className="multi-columns macros-card-container">
-                <div className="widget four-columns">
+            <div className="multi-columns macros-card-container ">
+                
+                <div className="widget four-columns card-1-color">
                     <div className="small-icon-with-title">
-                        <img className="small-icons" src="./Images/protein.png"/>
+                        <img className="small-icon" src={proteinIcon}/>
                         <div>Protein</div>
                     </div>
                     <span className="macro-counter">
@@ -46,9 +46,9 @@ export default function MacrosCard() {
                     </span>
                 </div>
                 
-                <div className="widget four-columns">
+                <div className="widget four-columns card-2-color">
                     <div className="small-icon-with-title">
-                        <img className="small-icons" src="./Images/bread.png"/>
+                        <img className="small-icon" src={carbIcon}/>
                         <div>Carbs</div>
                     </div>
                     <span className="macro-counter">
@@ -56,9 +56,9 @@ export default function MacrosCard() {
                     </span>
                 </div>
                 
-                <div className="widget four-columns">
+                <div className="widget four-columns card-3-color">
                     <div className="small-icon-with-title">
-                        <img className="small-icons" src="./Images/fats.png"/>
+                        <img className="small-icon" src={fatsIcon}/>
                         <div>Fats</div>
                     </div>
                     <span className="macro-counter">
@@ -66,9 +66,9 @@ export default function MacrosCard() {
                     </span>
                 </div>
                 
-                <div className="widget four-columns">
+                <div className="widget four-columns card-4-color">
                     <div className="small-icon-with-title">
-                        <img className="small-icons" src="./Images/calculator.png"/>
+                        <img className="small-icon" src={caloriesIcon}/>
                         <div>Calories</div>
                     </div>
                     <span className="macro-counter">{macros.calories ? macros.calories : 0} / 100</span>

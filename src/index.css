@@ -51,7 +51,7 @@ p {
 .component-container {
   margin: 50px 0px;
   padding: 0 20px;
-  
+
 }
 
 
@@ -68,7 +68,7 @@ p {
   font-weight: 600;
 }
 
-.small-icons {
+.small-icon {
   height: 15%;
   width: 15%;
   padding-right: 10%;
@@ -108,6 +108,7 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;   
+  height: 200px;
 }
 
 .three-columns, .four-columns {
@@ -318,7 +319,7 @@ table > tbody > tr > td {
   width: 200px;
   height: 100vh;
   margin-left: 20px;
-  border-right: 1px solid black;
+  border-right: 2px solid #edede9;
   margin: 0px;
   padding: 0px;
   /* border: 2px solid green; */
@@ -354,4 +355,39 @@ li {
   text-align: left;
   align-items: left;
   padding: 10px;
+  color: #8338ec;
+  font-weight: 600;
+}
+
+
+.side-bar-links{
+  display: flex;
+  flex-direction: column;
+  margin:20px 0px;
+}
+
+
+.nav-links-and-icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+
+.card-1-color {
+  background-color: #e9edc9
+
+}
+
+.card-2-color {
+  background-color: #fefae0
+}
+
+.card-3-color {
+  background-color: #d8e2dc
+}
+
+.card-4-color {
+  background-color: #fae1dd
 }
