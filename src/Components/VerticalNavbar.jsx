@@ -10,33 +10,57 @@ export default function VerticalNavbar() {
     
     return (
         <div className="vertical-nav-bar">
-            <span className="vertical-nav-bar-li-title">Menu</span>
             
-            <nav className="nav-links-container">
+            <div>
+                <NavLink className="home-logo" to="/">#CALCOUNT</NavLink>
+            </div>
 
-                <div className="nav-links-and-icon-container">
-                    <img className="small-icon" src={homeIcon} />
-                    <NavLink className="side-bar-links" to="/">Home</NavLink>
-                </div>
-
+            <div className="vertical-nav-bar-sections">
+                <span className="vertical-nav-bar-li-title">Menu</span>
                 
-                <div className="nav-links-and-icon-container">
-                    <img className="small-icon" src={calculatorIcon} />
-                    <NavLink className="side-bar-links" to="/tdee">TDEE</NavLink>
-                </div>
+                <nav className="nav-links-container">
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={homeIcon} />
+                        <NavLink className="nav-links" to="/">Home</NavLink>
+                    </div>
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={calculatorIcon} />
+                        <NavLink className="nav-links" to="/tdee">TDEE</NavLink>
+                    </div>
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={workoutIcon} />
+                        <NavLink className="nav-links" to="/workouts">Workouts</NavLink>
+                    </div>
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={settingsIcon} />
+                        <NavLink className="nav-links" to="/settings">Settings</NavLink>
+                    </div>
+                </nav>
+            </div>
 
+            <div className="vertical-nav-bar-sections">
+                <span className="vertical-nav-bar-li-title">Menu</span>
+                
+                <nav className="nav-links-container">
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={homeIcon} />
+                        <NavLink className="nav-links" to="/">Home</NavLink>
+                    </div>
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={calculatorIcon} />
+                        <NavLink className="nav-links" to="/tdee">TDEE</NavLink>
+                    </div>
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={workoutIcon} />
+                        <NavLink className="nav-links" to="/workouts">Workouts</NavLink>
+                    </div>
+                    <div className="nav-links-and-icon-container">
+                        <img className="small-icon" src={settingsIcon} />
+                        <NavLink className="nav-links" to="/settings">Settings</NavLink>
+                    </div>
+                </nav>
+            </div>
 
-                <div className="nav-links-and-icon-container">
-                    <img className="small-icon" src={workoutIcon} />
-                    <NavLink className="side-bar-links" to="/workouts">Workouts</NavLink>
-                </div>
-
-                <div className="nav-links-and-icon-container">
-                    <img className="small-icon" src={settingsIcon} />
-                    <NavLink className="side-bar-links" to="/settings">Settings</NavLink>
-                </div>
-
-            </nav>
         </div>
     )
 }

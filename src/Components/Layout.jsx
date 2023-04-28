@@ -7,14 +7,30 @@ import VerticalNavbar from "./VerticalNavbar"
 
 export default function Layout() {
     return(
-        <div className="site-wrapper">
-            <div>
-                <VerticalNavbar />
+        // <div className="site-wrapper">
+        //     <VerticalNavbar />
+        //     <div className="components">
+        //         <Header />
+        //         <Outlet />
+        //         <Footer />
+        //     </div>
+        // </div>
+
+
+        <div className="site-wrapper-grid">
+            <div className="navbar">
+                <VerticalNavbar/>
             </div>
 
-            <div className="components">
+            <div className="header">
                 <Header />
+            </div>
+
+            <div className="outlet">
                 <Outlet />
+            </div>
+
+            <div className="footer">
                 <Footer />
             </div>
         </div>

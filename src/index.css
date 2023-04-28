@@ -1,5 +1,5 @@
 html, body {
-  background-color: light;
+  background-color: #F9FAFC;
   font-family: "Google Sans", sans-serif;
   box-sizing: border-box;
   padding: 0px;
@@ -30,6 +30,13 @@ p {
 }
 
 
+
+.component-container {
+  margin: 50px 0px;
+  padding: 0 20px;
+
+}
+
 .component-title-container{
   display: flex;
   flex-direction: column;
@@ -48,19 +55,10 @@ p {
 
 }
 
-.component-container {
-  margin: 50px 0px;
-  padding: 0 20px;
-
-}
-
-
-
-
 
 .welcoming-text-container{
   display: block;
-  margin: 20px 20px -35px 20px;
+  margin: 20px 20px 0px 20px;
 }
 
 .welcoming-text {
@@ -71,14 +69,39 @@ p {
 .small-icon {
   height: 15%;
   width: 15%;
-  padding-right: 10%;
 }
 
-.small-icon-with-title {
+.macro-name-with-icon-container {
  display: flex;
  flex-direction: row; 
  align-items: center;
  margin-bottom: 1rem;
+ justify-content: space-between;
+}
+
+
+
+
+
+
+/******************************* 
+MacrosCard Component
+********************************/
+
+
+.suggested-consumed-master-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.suggested-consumed-sub-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px;
+  align-items: center;
+  gap: 10px;
 }
 
 
@@ -88,62 +111,46 @@ p {
   font-weight: 600
 }
 
+.macros-card-progressbar-container {
+  margin-top: 20px;
 
+}
 
-/******************************* 
-  MacrosCard Component
-********************************/
-
-.macros-card-container {
-  height: 150px;
-  
+.linear-progress {
+  width: 100%;
+  border: 2px solid grey;
+  height: 10px;
+  border-radius: 20px;
 }
 
 
-/******************************* 
-  global - columns
-********************************/
+.linear-progress::before {
 
-.multi-columns {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;   
-  height: 200px;
-}
-
-.three-columns, .four-columns {
-  flex: 1;
-  margin: 0 10px;
-  box-sizing: border-box;
-}
-
-.three-columns:first-child, .three-columns:last-child,
-.four-columns:first-child, .four-columns:last-child {
-  margin: 0px;
 }
 
 
-.data-two-column-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+
+
+
+
+
+
+
 
 
 
 /******************************* 
-  nav / header
+      Header Only
 ********************************/
 
 header {
-  margin: 0px;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   font-size: 1.175rem;
   font-weight: 600;
-  height: 3rem;
+  height: 5rem;
   align-items: center;
+  margin-left: auto;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 
 }
@@ -151,14 +158,6 @@ header {
 header .navlinks {
   padding: 0 10px;
 }
-
-.home-logo {
-  text-decoration: none;
-  color: black;
-  font-size: 1.65rem;
-  padding: 10px;
-}
-
 
 nav > a {
   text-decoration: none;
@@ -312,58 +311,161 @@ table > tbody > tr > td {
   /* background-color: green; */
 }
 
-.vertical-nav-bar {
-  /* background-color: lightgray; */
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  height: 100vh;
-  margin-left: 20px;
-  border-right: 2px solid #edede9;
-  margin: 0px;
-  padding: 0px;
-  /* border: 2px solid green; */
-  align-items: left;
-  padding-left: 30px;
-}
-
-
-ul{
-  /* border: 2px solid red; */
-  margin: 0;
-  padding: 10px;
-}
-
-
-li {
-  list-style-type: none;
-  margin: 20px 0px;
-  /* border: 2px solid blue; */
-}
-
 
 .components {
-  /* background-color: yellow; */
+  background-color: yellow;
   width: 80%;
   padding: 0px 20px;
   height: 100vh;
 }
 
 
+
+
+
+/*******************Layout Grid*******************************/
+
+.site-wrapper-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  
+}
+
+.navbar {
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+  border-right: 2px solid #edede9;
+  padding: 2.25rem
+}
+
+
+.header {
+  grid-column: 2 / -1;
+}
+
+
+.outlet {
+  grid-column: 2 / -1;
+}
+
+.footer {
+  grid-column: 2 / -1;
+}
+
+
+/**********************Homepage Grid****************************/
+
+.homepage-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  padding: 0 20px
+  /* justify-items: center; */
+}
+
+.homepage-title {
+  grid-column: 1 / -1;
+}
+
+.homepage-grid-1 {
+  grid-column: 4 / 10;
+}
+
+.homepage-grid-2 {
+  grid-column: 1 / 7;
+}
+
+.homepage-grid-3 {
+  grid-column: 7 / 13;
+}
+
+.homepage-grid-4 {
+  grid-column: 3 / 11;
+}
+
+/**********************MacrosCard Grid****************************/
+
+.macros-card-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 10px;
+  height:30rem;
+}
+
+.card-1{
+  background-color: #EDFFEF;
+  grid-column: 1/7;
+  color: #7CBF85;
+  font-weight: 600;
+  
+}
+
+.card-2{
+  background-color: #F4F2FF;
+  grid-column: 7/13;
+  color: #756CA3;
+  font-weight: 600;
+}
+
+.card-3{
+  background-color: #ECFBFF;
+  grid-column: 1/7;
+  color: #8BAEC1;
+  font-weight: 600;
+}
+
+.card-4{
+  background-color: #FFF2EC;
+  grid-column: 7/13;
+  color: #BEA794;
+  font-weight: 600;
+  
+}
+
+
+
+
+.macros-card-macro-name {
+  font-size: 1.75rem;
+}
+
+/**********************Vertical Side Nav Bar****************************/
+
+
+.vertical-nav-bar {
+  /* background-color: lightgray; */
+  display: flex;
+  flex-direction: column;
+  /* border: 2px solid green; */
+  align-items: left;
+  padding: 20px;
+}
+
 .vertical-nav-bar-li-title {
   display: inline;
   text-align: left;
   align-items: left;
-  padding: 10px;
+  
   color: #8338ec;
   font-weight: 600;
+  /* border: 1px solid green; */
 }
 
 
-.side-bar-links{
+.nav-links-container {
+  /* border: 1px solid orange; */
+}
+
+
+.nav-links{
   display: flex;
   flex-direction: column;
   margin:20px 0px;
+  text-decoration: none;
+  color: grey;
+  /* border: 1px solid blue; */
 }
 
 
@@ -373,21 +475,74 @@ li {
   align-items: center;
 }
 
-
-
-.card-1-color {
-  background-color: #e9edc9
-
+.vertical-nav-bar-sections {
+  /* border: 2px solid red; */
+  margin: 4rem 0px;
 }
 
-.card-2-color {
-  background-color: #fefae0
+
+.home-logo {
+  text-decoration: none;
+  color: black;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
-.card-3-color {
-  background-color: #d8e2dc
+
+/* header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.175rem;
+  font-weight: 600;
+  height: 5rem;
+  align-items: center;
+  margin-left: auto;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+
+} */
+
+/* header .navlinks {
+  padding: 0 10px;
+} */
+
+
+.nav-links:hover {
+  text-decoration: underline;
+  color: black;
 }
 
-.card-4-color {
-  background-color: #fae1dd
+
+
+/**********************WeightLossTracker Component Progress****************************/
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3.125em;
+}
+
+.circular-progress {
+  position: relative;
+  height: 15.625em; 
+  width: 15.625em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circular-progress::before {
+  content: "";
+  position: absolute;
+  height: 13.125em;
+  width: 13.125em;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.progress-value {
+  position: relative;
 }
