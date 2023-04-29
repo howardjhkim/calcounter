@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef} from "react"
+import React, { useContext, useState, useEffect} from "react"
 import {Context} from "../Context/DataContext"
 
 import proteinIcon from "../Images/protein-icon.png"
@@ -23,38 +23,48 @@ export default function MacrosCard() {
     }        
     
 
+    
+    
+    // tdeeMacros[0].cut.protein
+    
+    // Progress bar 
+    
+
+    let proteinProgress = 0;
+    
     if(tdeeMacros.length > 0) {
-        console.log(tdeeMacros[0].cut.protein)
+        proteinProgress = (macros.protein / tdeeMacros[0].cut.protein) * 100
     }
     
-
-    // tdeeMacros[0].cut.protein
-
-    // Progress bar 
-    // function progressBar(macro) {
-
-    //     const [progressValue, setProgressValue] = useState(0);
+    console.log(proteinProgress)
     
-    //     let progressStartValue = 0,
-    //         progressEndValue = 20,
-    //         speed = 20;
+    
+    
+    
+    // const [progressValue, setProgressValue] = useState(0);
+
+    // let progressEndValue = macros,
+    //     speed = 10000;
         
-    //     useEffect(() => {
-    //         const progress = setInterval(() => {
-    //             setProgressValue((prevValue) => {
-    //             const nextValue = prevValue + 1;
-    //             if (nextValue >= progressEndValue) {
-    //                 clearInterval(progress);
-    //             }
-    //             return nextValue;
-    //             });
-    //         }, speed);
-    //         return () => clearInterval(progress);
-    //         }, []);
-    // }
+    // useEffect(() => {
+    //     const progress = setInterval(() => {
+    //         setProgressValue((prevValue) => {
+    //         const nextValue = prevValue + 1;
+    //         if (nextValue >= progressEndValue) {
+    //             clearInterval(progress);
+    //         }
+    //         return nextValue;
+    //         });
+    //     }, speed);
+    //     return () => clearInterval(progress);
+    //     }, []);
+    
 
 
 
+
+
+    
     return (
         
         <div className="component-container">
@@ -87,7 +97,9 @@ export default function MacrosCard() {
                     </div>
 
                     <div className="macros-card-progressbar-container">
-                        <div className="linear-progress">
+                        <div className="linear-progress"
+                        style={{"width": `${proteinProgress}100%`}}
+                        >
 
                         </div>
 

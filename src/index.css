@@ -112,20 +112,33 @@ MacrosCard Component
 }
 
 .macros-card-progressbar-container {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px
 
 }
 
 .linear-progress {
-  width: 100%;
+  position: relative;
   border: 2px solid grey;
   height: 10px;
   border-radius: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
 }
 
 
 .linear-progress::before {
-
+  content: "";
+  background: red;
+  position: absolute;
+  height: 9.253px;
+  border-radius: 20px;
+  width: 100%;
+  background-color: red;
 }
 
 
@@ -532,10 +545,11 @@ table > tbody > tr > td {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* background: conic-gradient(#752ae8 3.6deg) */
 }
 
 .circular-progress::before {
-  content: "";
+  content: "asdsad";
   position: absolute;
   height: 13.125em;
   width: 13.125em;
