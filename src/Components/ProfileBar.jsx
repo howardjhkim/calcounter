@@ -12,14 +12,13 @@ export default function ProfileBar() {
     
     const { tdeeMacros } = useContext(Context)
     const {bodyInfo} = useContext(Context)
-    console.log(bodyInfo)
 
 
     
     return (
         <div className="profile-bar-master-container">
             <div className="profile-and-settings-container">
-                <span>My Profile</span>
+                <span className="component-title">My Profile</span>
             </div>
 
             <div className="profilepic-name-and-info-container">

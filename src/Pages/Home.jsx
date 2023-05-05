@@ -15,13 +15,14 @@ export default function Home() {
                 <hr />
             </div>
             
+            <div className="homepage-grid-2">
+                <FoodInputs />
+            </div>
+            
             <div className="homepage-grid-1">
                 <MacrosCard /> 
             </div>
 
-            <div className="homepage-grid-2">
-                <FoodInputs />
-            </div>
 
 
             <div className="homepage-grid-3">
