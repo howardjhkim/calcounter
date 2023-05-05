@@ -95,6 +95,10 @@ export default function FoodInputs() {
     return (
   
         <div className="component-container">
+            <div className="component-title-container">
+                <span className="component-title">Food Logger</span>
+                <span className="component-subtitle">Input the details of the food you ate:</span>              
+            </div>
             <div className="food-input-container widget" ref={componentRef}>
                 <input 
                 className="food-input-starter" 

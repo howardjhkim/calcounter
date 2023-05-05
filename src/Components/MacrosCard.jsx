@@ -14,17 +14,21 @@ export default function MacrosCard() {
     const { tdeeMacros } = useContext(Context)
     const { foodList } = useContext(Context)
     
-    let protein = foodList.reduce((acc, curr) => acc + curr.protein, 0)
-    let carbs = foodList.reduce((acc, curr) => acc + curr.carbs, 0)
-    let fats = foodList.reduce((acc, curr) => acc + curr.fats, 0)    
-    
+    const { protein, carbs, fats } = foodList.reduce(
+        (acc, curr) => ({
+          protein: acc.protein + curr.protein,
+          carbs: acc.carbs + curr.carbs,
+          fats: acc.fats + curr.fats,
+        }),
+        { protein: 0, carbs: 0, fats: 0 }
+      );   
+
     let macros = {
         protein: protein,
         carbs: carbs,
         fats: fats
     }        
     
-
     
     
     // tdeeMacros[0].cut.protein
@@ -32,7 +36,7 @@ export default function MacrosCard() {
     // Progress bar 
     
 
-    let proteinProgress = 0;
+    let proteinProgress = 10;
     
     if(tdeeMacros.length > 0) {
         proteinProgress = (macros.protein / tdeeMacros[0].cut.protein) * 100
@@ -44,14 +48,14 @@ export default function MacrosCard() {
     
     const [progressValue, setProgressValue] = useState(0);
 
-    let progressEndValue = proteinProgress,
-        speed = 10000;
+    let progressEndValue =  proteinProgress;
+    let speed = 5000000;
         
     useEffect(() => {
         const progress = setInterval(() => {
             setProgressValue((prevValue) => {
             const nextValue = prevValue + 1;
-            if (nextValue == progressEndValue) {
+            if (nextValue === progressEndValue) {
                 clearInterval(progress);
             }
             return nextValue;
@@ -60,147 +64,151 @@ export default function MacrosCard() {
         return () => clearInterval(progress);
         }, []);
     
+
+
+
+
+    
     
     return (
-        
-        <div className="component-container">
-            <div className="component-title-container">
-                <span className="component-title">Today's Milestone</span>
-                <span className="component-subtitle">Here's the breakdown of macronutrients you consumed today:</span>              
+        <>
+            <div className="component-container">
+                <div className="component-title-container">
+                    <span className="component-title">Today's Milestone</span>
+                    <span className="component-subtitle">Here's the breakdown of macronutrients you consumed today:</span>              
+                </div>
+                
+                <div className="macros-card-grid">
+                    <div className="widget card-1">
+                        <div className="macro-name-with-icon-container">
+                            <span className="macros-card-macro-name">Protein</span>
+                            <img className="small-icon" src={proteinIcon}/>
+                        </div>
+
+                        <div className="suggested-consumed-master-container">
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Consumed</span>
+                                <span className="macro-counter">
+                                    {macros.protein ? macros.protein : 0}
+                                </span>
+                            </div>
+
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Suggested</span>
+                                <span className="macro-counter">
+                                    {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="macros-card-progressbar-container">
+                            <div className="progress-container">
+                                <div 
+                                    className="linear-progress"
+                                    style={{"width": `${progressValue}%`, "background": `#7CBF85`}}
+                                >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="widget card-2">
+                        <div className="macro-name-with-icon-container">
+                            <span className="macros-card-macro-name">Carbs</span>
+                            <img className="small-icon" src={carbIcon}/>
+                        </div>
+                        <div className="suggested-consumed-master-container">
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Consumed</span>
+                                <span className="macro-counter">
+                                    {macros.carbs ? macros.carbs : 0}
+                                </span>
+                            </div>
+
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Suggested</span>
+                                <span className="macro-counter">
+                                    {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="macros-card-progressbar-container">
+
+                            <div 
+                                className="linear-progress"
+                                // style={{"width": `${progressValue}%`}}
+                            >
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="widget card-3">
+                        <div className="macro-name-with-icon-container">
+                            <span className="macros-card-macro-name">Fats</span>
+                            <img className="small-icon" src={fatsIcon}/>
+                        </div>
+                        <div className="suggested-consumed-master-container">
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Consumed</span>
+                                <span className="macro-counter">
+                                    {macros.fats ? macros.fats : 0}
+                                </span>
+                            </div>
+
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Suggested</span>
+                                <span className="macro-counter">
+                                    {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fats : 0}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="macros-card-progressbar-container">
+
+                            <div 
+                                className="linear-progress"
+                                // style={{"width": `${progressValue}%`}}
+                            >
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="widget card-4">
+                        <div className="macro-name-with-icon-container">
+                            <span className="macros-card-macro-name">Calories</span>
+                            <img className="small-icon" src={caloriesIcon}/>
+                        </div>
+                        <div className="suggested-consumed-master-container">
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Consumed</span>
+                                <span className="macro-counter">
+                                    {macros.protein ? macros.protein : 0}
+                                </span>
+                            </div>
+
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Suggested</span>
+                                <span className="macro-counter">
+                                    {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="macros-card-progressbar-container">
+
+                            <div 
+                                className="linear-progress"
+                                // style={{"width": `${progressValue}%`}}
+                            >
+
+                            </div>
+                        </div>
+                    </div>         
+                </div>
             </div>
-            
-            <div className="macros-card-grid">
-                <div className="widget card-1">
-                    <div className="macro-name-with-icon-container">
-                        <span className="macros-card-macro-name">Protein</span>
-                        <img className="small-icon" src={proteinIcon}/>
-                    </div>
-
-                    <div className="suggested-consumed-master-container">
-                        <div className="suggested-consumed-sub-container">
-                            <span>Consumed</span>
-                            <span className="macro-counter">
-                                {macros.protein ? macros.protein : 0}
-                            </span>
-                        </div>
-
-                        <div className="suggested-consumed-sub-container">
-                            <span>Suggested</span>
-                            <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="macros-card-progressbar-container">
-                        <div 
-                            className="linear-progress"
-                            style={{
-                                "width": `${progressValue}%`, 
-                                "background": `black`}}
-                        >
-                        </div>
-                    </div>
-
-
-                </div>
-                
-                <div className="widget card-2">
-                    <div className="macro-name-with-icon-container">
-                        <span className="macros-card-macro-name">Carbs</span>
-                        <img className="small-icon" src={carbIcon}/>
-                    </div>
-                    <div className="suggested-consumed-master-container">
-                        <div className="suggested-consumed-sub-container">
-                            <span>Consumed</span>
-                            <span className="macro-counter">
-                                {macros.carbs ? macros.carbs : 0}
-                            </span>
-                        </div>
-
-                        <div className="suggested-consumed-sub-container">
-                            <span>Suggested</span>
-                            <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="macros-card-progressbar-container">
-
-                        <div 
-                            className="linear-progress"
-                            style={{"width": `${progressValue}%`}}
-                        >
-
-                        </div>
-                    </div>
-                </div>
-                
-                <div className="widget card-3">
-                    <div className="macro-name-with-icon-container">
-                        <span className="macros-card-macro-name">Fats</span>
-                        <img className="small-icon" src={fatsIcon}/>
-                    </div>
-                    <div className="suggested-consumed-master-container">
-                        <div className="suggested-consumed-sub-container">
-                            <span>Consumed</span>
-                            <span className="macro-counter">
-                                {macros.fats ? macros.fats : 0}
-                            </span>
-                        </div>
-
-                        <div className="suggested-consumed-sub-container">
-                            <span>Suggested</span>
-                            <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fats : 0}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="macros-card-progressbar-container">
-
-                        <div 
-                            className="linear-progress"
-                            style={{"width": `${progressValue}%`}}
-                        >
-
-                        </div>
-                    </div>
-                </div>
-                
-                <div className="widget card-4">
-                    <div className="macro-name-with-icon-container">
-                        <span className="macros-card-macro-name">Calories</span>
-                        <img className="small-icon" src={caloriesIcon}/>
-                    </div>
-                    <div className="suggested-consumed-master-container">
-                        <div className="suggested-consumed-sub-container">
-                            <span>Consumed</span>
-                            <span className="macro-counter">
-                                {macros.protein ? macros.protein : 0}
-                            </span>
-                        </div>
-
-                        <div className="suggested-consumed-sub-container">
-                            <span>Suggested</span>
-                            <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="macros-card-progressbar-container">
-
-                        <div 
-                            className="linear-progress"
-                            style={{"width": `${progressValue}%`}}
-                        >
-
-                        </div>
-                    </div>
-                </div>         
-            </div>
-        </div>
+        </>
     )
 }

@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect} from "react"
 import {NavLink} from "react-router-dom"
 import {Context} from "../Context/DataContext"
 
-
+import Calendar from "./Calendar.jsx"
 
 
 import profilePicture from "../Images/profile-picture.png"
@@ -11,11 +11,10 @@ export default function ProfileBar() {
     
     
     const { tdeeMacros } = useContext(Context)
+    const {bodyInfo} = useContext(Context)
+    console.log(bodyInfo)
 
-    
-    
-    
-    
+
     
     return (
         <div className="profile-bar-master-container">
@@ -29,18 +28,20 @@ export default function ProfileBar() {
                 
                 <div className="weight-height-age-master-container">
                     <div className="weight-height-age-sub-container">
-                        <span>76</span>
-                        <span>Weight</span>
+                        <span>{bodyInfo.length > 0 && bodyInfo[0].weight}</span>
+                        <span className="component-subtitle">Weight</span>
                     </div>
                     <hr></hr>
                     <div className="weight-height-age-sub-container">
-                        <span>76</span>
-                        <span>Height</span>
+                        <span>{bodyInfo.length > 0 && bodyInfo[0].height}</span>
+                        <span className="component-subtitle">Height</span>
                     </div>
                     <hr></hr>
+
+                    
                     <div className="weight-height-age-sub-container">
-                        <span>76</span>
-                        <span>Age</span>
+                        <span>{bodyInfo.length > 0 && bodyInfo[0].age}</span>
+                        <span className="component-subtitle">Age</span>
                     </div>
                 </div>
             </div>
@@ -48,11 +49,21 @@ export default function ProfileBar() {
             <div className="goals-master-container">
                 <span>Longterm Goals</span>
                 <div className="goals-sub-container">
-                    <div className="goals goal-1">Goal</div>
-                    <div className="goals goal-2">Goal</div>
-                    <div className="goals goal-3">Goal</div>
+                    <div className="goals goal-1 component-subtitle">
+                        <span className="goal-title">Goal Weight</span>
+                        <div>{bodyInfo.length > 0 && bodyInfo[0].goalWeight}</div>
+                    </div>
+                    <div className="goals component-subtitle">
+                        <span className="goal-title">Goal Weight</span>
+                    </div>
+                    <div className="goals component-subtitle">
+                        <span className="goal-title">Goal Weight</span>
+                    </div>
                 </div>
             </div>
+
+
+            <Calendar />
         </div>
     )
 }

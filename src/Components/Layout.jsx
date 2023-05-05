@@ -23,7 +23,6 @@ export default function Layout() {
                 <VerticalNavbar/>
             </div>
 
-
             <div className="header">
                 <Header />
             </div>
@@ -36,9 +35,9 @@ export default function Layout() {
                 <Outlet />
             </div>
 
-            <div className="footer">
+            {/* <div className="footer">
                 <Footer />
-            </div>
+            </div> */}
 
 
         </div>

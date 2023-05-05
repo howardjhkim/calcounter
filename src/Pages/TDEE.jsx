@@ -7,13 +7,16 @@ import {Context} from "../Context/DataContext"
 export default function Tdee() {
         
     const { addTdeeMacros } = useContext(Context);       
-
-    let [macrosState, setMacrosState] = useState('')
+   
+    const { addBodyInfo } = useContext(Context);
+    const {bodyInfo} = useContext(Context);
     
     let [age, setAge] = useState('')
     let [weight, setWeight] = useState('')
-    let height = 183
+    let [height, setHeight] = useState('')
+    let [goalWeight, setGoalWeight] = useState('')
     
+    let [macrosState, setMacrosState] = useState('')
     let macros = {
         cut:{
             protein: 0,
@@ -35,11 +38,19 @@ export default function Tdee() {
         }
     }
     
+
+    
     function dataSubmit(e) {
         e.preventDefault()
         calculation()
         setMacrosState(macros)
         addTdeeMacros(macrosState)
+        addBodyInfo({
+            age: Number(age),
+            weight: Number(weight),
+            height: Number(height),
+            goalWeight: Number(goalWeight)
+        })
     }
     
     
@@ -54,11 +65,11 @@ export default function Tdee() {
     
     
     
-        
+    
     function calculation() {
         let bmr = Math.floor(66 + (13.7 * weight * 0.45359237) + (5 * height) - (6.8 * age))
         let tdee = Math.floor(bmr * 1.55)
-    
+        
         function loseWeight() {
             let cutCal = Math.floor(tdee - (tdee * .2))
             let protein = height;
@@ -86,9 +97,9 @@ export default function Tdee() {
     
     return (
         <div className="tdee-page-grid">    
-            <div className="bmr-calculation-container">
+            <div className="bmr-container bmr-grid">
                 <h3>BMR Calculation</h3>
-                <div className="widget">
+                <div className="widget bmr-calculation-widget-1">
                     <table>
                         <tbody>
                             <tr>
@@ -102,7 +113,17 @@ export default function Tdee() {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Weight</td>
+                                <td>Height</td>
+                                <td>
+                                    <input 
+                                        className="tdee-inputs"
+                                        type="text" 
+                                        name="height" 
+                                        onChange={e => setHeight(e.target.value)}/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Current Weight</td>
                                 <td>
                                     <input 
                                         className="tdee-inputs"
@@ -113,35 +134,46 @@ export default function Tdee() {
                             </tr>
                             
                             <tr>
-                                <td>Sedentary</td>
-                                <td>Lightly Active</td>
-                                <td>Moderately Active</td>
-                                <td>Very Active</td>
-                                <td>Extremely Active</td>
+                                <td>Goal Weight</td>
+                                <td>
+                                    <input 
+                                        className="tdee-inputs"
+                                        type="text" 
+                                        name="age" 
+                                        onChange={e => setGoalWeight(e.target.value)}/>
+                                </td>
                             </tr>
-        
                         </tbody> 
                     </table>
                     <button className="submitBtn" onClick={dataSubmit}>Submit</button>
                 </div>
+                    
+                <div className="bmr-calculation-widget-2">
+                    <div className="widget">
+                        <select>
+                            <option value="0">Sedentary</option>
+                            <option value="1">Lightly Active</option>
+                            <option value="2">Moderately Active</option>
+                            <option value="3">Very Active</option>
+                            <option value="4">Extremely Active</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            
-            
-            
 
             <div className="macros-container macros-grid">
-
+                <h3>Macros Breakdown</h3>
                 <div className="widget tdee-maintenance">
                     Maintenance
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Protein</p>
                         <p>{macrosState.maintain ? macrosState.maintain.protein : null}</p>
                     </div>
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Fats</p>
                         <p>{macrosState.maintain ? macrosState.maintain.fats : null}</p>
                     </div>
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Carbs</p>
                         <p>{macrosState.maintain ? macrosState.maintain.carbs : null}</p>
                     </div>
@@ -149,15 +181,15 @@ export default function Tdee() {
                 
                 <div className="widget tdee-protein">
                     Cutting
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Protein</p>
                         <p>{macrosState ? macrosState.cut.protein : null}</p>
                     </div>
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Fats</p>
                         <p>{macrosState ? macrosState.cut.fats : null}</p>
                     </div>
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Carbs</p>
                         <p>{macrosState ? macrosState.cut.carbs : null}</p>
                     </div>
@@ -165,15 +197,15 @@ export default function Tdee() {
                 
                 <div className="widget tdee-bulking">
                     Bulking
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Protein</p>
                         <p>{macrosState.bulk ? macrosState.bulk.protein : null}</p>
                     </div>
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Fats</p>
                         <p>{macrosState.bulk ? macrosState.bulk.fats : null}</p>
                     </div>
-                    <div className="data-two-column-container">
+                    <div className="tdee-suggested-row">
                         <p>Carbs</p>
                         <p>{macrosState.bulk ? macrosState.bulk.carbs : null}</p>
                     </div>

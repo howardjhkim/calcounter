@@ -9,17 +9,20 @@ import WeightLossTracker from "../Components/WeightLossTracker"
 export default function Home() {
     return (
         <div className="homepage-grid">
-            <div className="welcoming-text-container homepage-title">
+            <div className="homepage-grid-title-container">
                 <span className="welcoming-text">Welcome back, #</span>
+                <span className="sub-welcoming-text">Here's an overview of your progress</span>
+                <hr />
             </div>
             
             <div className="homepage-grid-1">
-                <FoodInputs />
+                <MacrosCard /> 
             </div>
 
             <div className="homepage-grid-2">
-                <MacrosCard /> 
+                <FoodInputs />
             </div>
+
 
             <div className="homepage-grid-3">
                 <WeightLossTracker /> 
