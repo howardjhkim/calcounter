@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect} from "react"
 import {Context} from "../Context/DataContext"
 
+
+
 import proteinIcon from "../Images/protein-icon.png"
 import carbIcon from "../Images/carb-icon.png"
 import fatsIcon from "../Images/fats-icon.png"
@@ -36,34 +38,28 @@ export default function MacrosCard() {
         proteinProgress = (macros.protein / tdeeMacros[0].cut.protein) * 100
     }
     
-    console.log(proteinProgress)
     
     
     
     
-    // const [progressValue, setProgressValue] = useState(0);
+    const [progressValue, setProgressValue] = useState(0);
 
-    // let progressEndValue = macros,
-    //     speed = 10000;
+    let progressEndValue = proteinProgress,
+        speed = 10000;
         
-    // useEffect(() => {
-    //     const progress = setInterval(() => {
-    //         setProgressValue((prevValue) => {
-    //         const nextValue = prevValue + 1;
-    //         if (nextValue >= progressEndValue) {
-    //             clearInterval(progress);
-    //         }
-    //         return nextValue;
-    //         });
-    //     }, speed);
-    //     return () => clearInterval(progress);
-    //     }, []);
+    useEffect(() => {
+        const progress = setInterval(() => {
+            setProgressValue((prevValue) => {
+            const nextValue = prevValue + 1;
+            if (nextValue == progressEndValue) {
+                clearInterval(progress);
+            }
+            return nextValue;
+            });
+        }, speed);
+        return () => clearInterval(progress);
+        }, []);
     
-
-
-
-
-
     
     return (
         
@@ -97,16 +93,15 @@ export default function MacrosCard() {
                     </div>
 
                     <div className="macros-card-progressbar-container">
-                        <div className="linear-progress"
-                        style={{"width": `${proteinProgress}100%`}}
+                        <div 
+                            className="linear-progress"
+                            style={{
+                                "width": `${progressValue}%`, 
+                                "background": `black`}}
                         >
-
-                        </div>
-
-                        <div>
-
                         </div>
                     </div>
+
 
                 </div>
                 
@@ -115,9 +110,31 @@ export default function MacrosCard() {
                         <span className="macros-card-macro-name">Carbs</span>
                         <img className="small-icon" src={carbIcon}/>
                     </div>
-                    <span className="macro-counter">
-                        {macros.carbs ? macros.carbs : 0} / {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0}
-                    </span>
+                    <div className="suggested-consumed-master-container">
+                        <div className="suggested-consumed-sub-container">
+                            <span>Consumed</span>
+                            <span className="macro-counter">
+                                {macros.carbs ? macros.carbs : 0}
+                            </span>
+                        </div>
+
+                        <div className="suggested-consumed-sub-container">
+                            <span>Suggested</span>
+                            <span className="macro-counter">
+                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="macros-card-progressbar-container">
+
+                        <div 
+                            className="linear-progress"
+                            style={{"width": `${progressValue}%`}}
+                        >
+
+                        </div>
+                    </div>
                 </div>
                 
                 <div className="widget card-3">
@@ -125,9 +142,31 @@ export default function MacrosCard() {
                         <span className="macros-card-macro-name">Fats</span>
                         <img className="small-icon" src={fatsIcon}/>
                     </div>
-                    <span className="macro-counter">
-                        {macros.fats ? macros.fats : 0} / {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fats : 0}
-                    </span>
+                    <div className="suggested-consumed-master-container">
+                        <div className="suggested-consumed-sub-container">
+                            <span>Consumed</span>
+                            <span className="macro-counter">
+                                {macros.fats ? macros.fats : 0}
+                            </span>
+                        </div>
+
+                        <div className="suggested-consumed-sub-container">
+                            <span>Suggested</span>
+                            <span className="macro-counter">
+                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fats : 0}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="macros-card-progressbar-container">
+
+                        <div 
+                            className="linear-progress"
+                            style={{"width": `${progressValue}%`}}
+                        >
+
+                        </div>
+                    </div>
                 </div>
                 
                 <div className="widget card-4">
@@ -135,7 +174,31 @@ export default function MacrosCard() {
                         <span className="macros-card-macro-name">Calories</span>
                         <img className="small-icon" src={caloriesIcon}/>
                     </div>
-                    <span className="macro-counter">{macros.calories ? macros.calories : 0} / 100</span>
+                    <div className="suggested-consumed-master-container">
+                        <div className="suggested-consumed-sub-container">
+                            <span>Consumed</span>
+                            <span className="macro-counter">
+                                {macros.protein ? macros.protein : 0}
+                            </span>
+                        </div>
+
+                        <div className="suggested-consumed-sub-container">
+                            <span>Suggested</span>
+                            <span className="macro-counter">
+                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="macros-card-progressbar-container">
+
+                        <div 
+                            className="linear-progress"
+                            style={{"width": `${progressValue}%`}}
+                        >
+
+                        </div>
+                    </div>
                 </div>         
             </div>
         </div>

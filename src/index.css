@@ -115,30 +115,30 @@ MacrosCard Component
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px
+  margin-top: 20px;
 
 }
 
 .linear-progress {
   position: relative;
-  border: 2px solid grey;
   height: 10px;
-  border-radius: 20px;
   width: 100%;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center; 
+  
+  border: 2px solid grey;
 }
 
 
 .linear-progress::before {
   content: "";
-  background: red;
   position: absolute;
   height: 9.253px;
-  border-radius: 20px;
   width: 100%;
-  background-color: red;
+  border-radius: 20px;
+  /* background-color: blue; */
 }
 
 
@@ -329,7 +329,6 @@ table > tbody > tr > td {
   background-color: yellow;
   width: 80%;
   padding: 0px 20px;
-  height: 100vh;
 }
 
 
@@ -342,29 +341,43 @@ table > tbody > tr > td {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
-  
+  height: 100vh;
+}
+
+.header {
+  grid-column: 2 / 11;
+
 }
 
 .navbar {
-  grid-column: 1 / 2;
-  grid-row: 1 / 4;
+  /* grid-column: 1 / 2; */
+  grid-row: 1 / -1;
   border-right: 2px solid #edede9;
-  padding: 2.25rem
+  height: 100%;
 }
 
 
-.header {
-  grid-column: 2 / -1;
-}
 
 
 .outlet {
-  grid-column: 2 / -1;
+  grid-column: 2 / 11;
+  grid-row: 1
 }
 
 .footer {
-  grid-column: 2 / -1;
+  grid-column: 2 / 11;
 }
+
+
+
+.profile-bar {
+  grid-column: 11 / -1;
+  grid-row: 1 / -1;
+  height: 100%;
+  border-left: 2px solid #edede9;
+  color: black;
+}
+
 
 
 /**********************Homepage Grid****************************/
@@ -382,15 +395,16 @@ table > tbody > tr > td {
 }
 
 .homepage-grid-1 {
-  grid-column: 4 / 10;
+  grid-column: 3 / 11;
 }
 
 .homepage-grid-2 {
-  grid-column: 1 / 7;
+  grid-column: 3 / 11;
+  /* grid-column: 1 / 7; */
 }
 
 .homepage-grid-3 {
-  grid-column: 7 / 13;
+  grid-column: 3 / 11;
 }
 
 .homepage-grid-4 {
@@ -486,6 +500,7 @@ table > tbody > tr > td {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 20px;
 }
 
 .vertical-nav-bar-sections {
@@ -549,7 +564,7 @@ table > tbody > tr > td {
 }
 
 .circular-progress::before {
-  content: "asdsad";
+  content: "";
   position: absolute;
   height: 13.125em;
   width: 13.125em;
@@ -559,4 +574,155 @@ table > tbody > tr > td {
 
 .progress-value {
   position: relative;
+}
+
+
+
+
+.progressBar {
+  border: 1px solid #ccc;
+  height: 20px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: 8px;
+  background-color: green;
+}
+
+
+/*******************Profile Bar Grid*******************************/
+
+
+.profile-bar-master-container{
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  /* border: 2px solid red; */
+}
+
+.profile-and-settings-container{
+}
+
+
+
+.profilepic-img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  
+}
+
+.profilepic-name-and-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+
+.weight-height-age-master-container {
+  border: 2px solid #edede9;
+  background: #edede9;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px
+  
+}
+
+.weight-height-age-sub-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+
+
+.goals-master-container {
+  /* border: 2px solid grey; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+
+.goals-sub-container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.goals{
+  /* border: 2px solid purple; */
+  border-radius: 5px;
+  gap: 20px;
+  height: 50px;
+  padding: 20px;
+}
+
+
+.goal-1 {
+  background-color: #efedff;
+}
+
+.goal-2 {
+  background-color: #f6f8e8
+}
+
+.goal-3 {
+  background-color: #e8f1f9
+}
+
+
+
+
+
+/*******************Profile Bar Grid*******************************/
+.tdee-page-grid{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 50px;
+}
+
+.bmr-calculation-container {
+  grid-column: 3 / 11;
+}
+
+
+
+.macros-container{
+  grid-column: 3 / 11
+}
+
+.macros-grid{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 10px;
+}
+
+
+.tdee-maintenance {
+  grid-column: 1 / 5
+}
+
+.tdee-protein {
+  grid-column: 5 / 9
+}
+
+
+.tdee-bulking {
+  grid-column: 9 / 13
 }

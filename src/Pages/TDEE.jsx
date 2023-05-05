@@ -85,8 +85,8 @@ export default function Tdee() {
     
     
     return (
-        <div>
-            <div className="component-container">
+        <div className="tdee-page-grid">    
+            <div className="bmr-calculation-container">
                 <h3>BMR Calculation</h3>
                 <div className="widget">
                     <table>
@@ -119,7 +119,7 @@ export default function Tdee() {
                                 <td>Very Active</td>
                                 <td>Extremely Active</td>
                             </tr>
-                            
+        
                         </tbody> 
                     </table>
                     <button className="submitBtn" onClick={dataSubmit}>Submit</button>
@@ -127,9 +127,11 @@ export default function Tdee() {
             </div>
             
             
+            
 
-            <div className=" component-container multi-columns">
-                <div className="widget three-columns">
+            <div className="macros-container macros-grid">
+
+                <div className="widget tdee-maintenance">
                     Maintenance
                     <div className="data-two-column-container">
                         <p>Protein</p>
@@ -145,7 +147,7 @@ export default function Tdee() {
                     </div>
                 </div>
                 
-                <div className="widget three-columns">
+                <div className="widget tdee-protein">
                     Cutting
                     <div className="data-two-column-container">
                         <p>Protein</p>
@@ -161,7 +163,7 @@ export default function Tdee() {
                     </div>
                 </div>
                 
-                <div className="widget three-columns">
+                <div className="widget tdee-bulking">
                     Bulking
                     <div className="data-two-column-container">
                         <p>Protein</p>
@@ -176,7 +178,9 @@ export default function Tdee() {
                         <p>{macrosState.bulk ? macrosState.bulk.carbs : null}</p>
                     </div>
                 </div>
+
             </div>
+            
         </div>
         
     )

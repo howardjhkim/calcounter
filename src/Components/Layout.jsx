@@ -4,6 +4,7 @@ import {Outlet} from "react-router-dom"
 import Header from "./Header"
 import Footer from "./Footer"
 import VerticalNavbar from "./VerticalNavbar"
+import ProfileBar from "./ProfileBar"
 
 export default function Layout() {
     return(
@@ -22,8 +23,13 @@ export default function Layout() {
                 <VerticalNavbar/>
             </div>
 
+
             <div className="header">
                 <Header />
+            </div>
+
+            <div className="profile-bar">
+                <ProfileBar/>
             </div>
 
             <div className="outlet">
@@ -33,6 +39,8 @@ export default function Layout() {
             <div className="footer">
                 <Footer />
             </div>
+
+
         </div>
     )
 }
