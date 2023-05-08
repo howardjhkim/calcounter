@@ -6,6 +6,7 @@ import workoutIcon from "../Images/workout-icon.png"
 import calculatorIcon from "../Images/calculator-icon.png"
 import settingsIcon from "../Images/settings-icon.png"
 import logo from "../Images/logo.png"
+import help from "../Images/help.svg"
 
 export default function VerticalNavbar() {
     
@@ -27,6 +28,11 @@ export default function VerticalNavbar() {
                     <NavLink to="/workouts" className="nav-links-and-icon-container">
                             <img className="small-icon" src={workoutIcon} />
                             <span className="nav-name">Workouts</span>
+                    </NavLink>
+
+                    <NavLink to="/help" className="nav-links-and-icon-container">
+                            <img className="small-icon" src={help} />
+                            <span className="nav-name">Help</span>
                     </NavLink>
                 </nav>
             </div>

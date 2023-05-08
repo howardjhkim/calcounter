@@ -11,19 +11,25 @@ import caloriesIcon from "../Images/calories-icon.png"
 
 export default function MacrosCard() {
     
-    const { tdeeMacros } = useContext(Context)
-    const { foodList } = useContext(Context)
+    /***************************************************
+                pull data from useContext
+    ***************************************************/  
+    const { tdeeMacros } = useContext(Context) //suggested macros from body info
+    const { foodList } = useContext(Context) // list of all foods inputed from home page
     
-    const { protein, carbs, fats } = foodList.reduce(
+
+    // food list destructured and each macro is accumulated
+    const { protein, carbs, fats, calories } = foodList.reduce(
         (acc, curr) => ({
           protein: acc.protein + curr.protein,
           carbs: acc.carbs + curr.carbs,
           fats: acc.fats + curr.fats,
+          calores: acc.calories + curr.calories
         }),
-        { protein: 0, carbs: 0, fats: 0 }
+        { protein: 0, carbs: 0, fats: 0 , calories: 0}
       );   
 
-
+    
     let eatenMacros = {
         protein: protein,
         carbs: carbs,
@@ -36,73 +42,21 @@ export default function MacrosCard() {
     
 
 
-
+    /***************************************************
+    calculate the percentage of eaten to suggested macros
+    ***************************************************/  
     let proteinCurrPercentage = 0;
+    let carbsCurrPercentage = 0;
+    let fatCurrPercentage = 0;
     
     if(tdeeMacros.length > 0 && foodList.length > 0) {
         proteinCurrPercentage = Math.floor(((eatenMacros.protein / tdeeMacros[0].cut.protein) * 100))
-        // console.log(proteinCurrPercentage)
-
+        carbsCurrPercentage = Math.floor(((eatenMacros.carbs / tdeeMacros[0].cut.carbs) * 100))
+        fatCurrPercentage = Math.floor(((eatenMacros.fats / tdeeMacros[0].cut.fats) * 100))
     }
     
 
 
-    
-    // const useProgressBar = (endValue) => {
-    //     const [value, setValue] = useState(0);
-    //     const speed = 50;
-    //     console.log("value is: "+value)
-    //     useEffect(() => {
-    //         const interval = setInterval(() => {
-    //             // setValue((prevValue) => {
-    //             //     const nextValue = prevValue + 1;
-    //             //     if (nextValue === endValue) {
-    //             //         clearInterval(interval);
-    //             //     }
-    //             // }, speed);
-    //             setValue((prevValue) => {
-    //                 let nextValue = prevValue + 1;
-    //                 if (nextValue === endValue) {
-    //                     clearInterval(interval);
-    //                 }
-    //             }, speed);
-
-    //         return () => clearInterval(interval);
-    //         }, []);
-    //     })
-       
-    // }
-
-    // const useProgressBar = (endValue) => {
-    //     const [value, setValue] = useState(0);
-    //     const speed = 1000;
-        
-    //     useEffect(() => {
-    //         const interval = setInterval(() => {
-            
-    //             setValue((prevValue => prevValue + 1));
-    //             if (value === endValue) {
-    //                 clearInterval(interval)
-    //             }
-    //         }, speed);
-        
-    //     }, [value])
-    // }
-    
-    // const proteinPercentage = useProgressBar(proteinCurrPercentage)
-    
-
-
-    //////////////////////////////////////
-
-
-
-    
-    
-
-    
-    // let endValue = 75;
-    
     const [macroPercent, setMacroPercent] = useState({
         protein: 0,
         carbs: 0,
@@ -111,32 +65,43 @@ export default function MacrosCard() {
     
 
     const useProgressBar = (macroName, endValue, setMacroPercent) => {
-        let speed = 1000;
+        let speed = 12;
         useEffect(() => {
             const progress = setInterval(() => {
-                setMacroPercent((prevValue) => {
-                    const nextValue = prevValue[macroName] + 1;
-                    if (nextValue === endValue) {
-                        clearInterval(progress);
-                    }
-
-                    return {
-                        ...prevValue,
-                        [macroName]: nextValue
-                    };
-                });
-                // return progress
+                if (endValue > 0) {
+                    setMacroPercent((prevValue) => {
+                        const nextValue = prevValue[macroName] + 1;
+                            
+                        if (nextValue === endValue) {
+                            clearInterval(progress);
+                        }
+    
+                        return {
+                            ...prevValue,
+                            [macroName]: nextValue
+                        };
+                        
+                        // if (nextValue === endValue) {
+                            //     clearInterval(progress);
+                            // }
+                            
+                            
+                    });
+                }
+                
             }, speed);
             return () => clearInterval(progress);
         }, [macroName, endValue, setMacroPercent]);
+        
     }
     
-    console.log(macroPercent["protein"])
     useProgressBar("protein", proteinCurrPercentage, setMacroPercent);
+    useProgressBar("carbs", carbsCurrPercentage, setMacroPercent);
+    useProgressBar("fat", fatCurrPercentage, setMacroPercent);
 
     
        
-
+    
 
 
 
@@ -158,19 +123,12 @@ export default function MacrosCard() {
 
 
     
-                
-
-
-
-
-
-    
-    
     return (
-        
-        <div className="component-container">
-            {proteinCurrPercentage}
-
+    <>
+        <div className="component-container">            
+            {`macroPercent: ${macroPercent.protein}${"\n"}end value: ${proteinCurrPercentage}`} 
+            
+            
             <div className="component-title-container">
                 <span className="component-title">Today's Milestone</span>
                 <span className="component-subtitle">Here's the breakdown of macronutrients you consumed today:</span>              
@@ -203,9 +161,18 @@ export default function MacrosCard() {
                         <div className="progress-container">
                             <div 
                                 className="linear-progress"
-                                style={{"width": `${macroPercent.protein}%`, "background": `#7CBF85`}}
+                                style={{
+                                    "width":`${
+                                        macroPercent.protein > 100 ? 100 : 
+                                        macroPercent.protein === 0 ? 0 : 
+                                        macroPercent.protein }%`, 
+                                    "background": `#7CBF85`,
+                                    }}
                             >
                             </div>
+                            <span className="percentage">
+                                {macroPercent.protein > 0 ? `${macroPercent.protein} %` : `0 %`}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -232,12 +199,19 @@ export default function MacrosCard() {
                     </div>
 
                     <div className="macros-card-progressbar-container">
-
-                        <div 
-                            className="linear-progress"
-                            // style={{"width": `${progressValue}%`}}
-                        >
-
+                        <div className="progress-container">
+                            <div 
+                                className="linear-progress"
+                                style={{"width": `${
+                                    macroPercent.carbs > 100 ? 100 : 
+                                    macroPercent.carbs === 0 ? 0 : 
+                                    macroPercent.carbs 
+                                }%`, "background": `#756CA3`}}
+                            >
+                            </div>
+                            <span className="percentage">
+                                {macroPercent.carbs > 0 ? `${macroPercent.carbs} %` : `0 %`}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -264,12 +238,19 @@ export default function MacrosCard() {
                     </div>
 
                     <div className="macros-card-progressbar-container">
-
-                        <div 
-                            className="linear-progress"
-                            // style={{"width": `${progressValue}%`}}
-                        >
-
+                        <div className="progress-container">
+                            <div 
+                                className="linear-progress"
+                                style={{"width": `${
+                                    macroPercent.fat > 100 ? 100 : 
+                                    macroPercent.fat === 0 ? 0 : 
+                                    macroPercent.fat 
+                                }%`, "background": `#8BAEC1`}}
+                            >
+                            </div>
+                            <span className="percentage">
+                                {macroPercent.fat > 0 ? `${macroPercent.fat} %` : `0 %`}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -296,17 +277,28 @@ export default function MacrosCard() {
                     </div>
 
                     <div className="macros-card-progressbar-container">
-
-                        <div 
-                            className="linear-progress"
-                            // style={{"width": `${progressValue}%`}}
-                        >
-
+                        <div className="progress-container">
+                            <div 
+                                className="linear-progress"
+                                style={{"width": `${
+                                    macroPercent.fat > 100 ? 100 : 
+                                    macroPercent.fat === 0 ? 0 : 
+                                    macroPercent.fat 
+                                }%`, "background": `#BEA794`}}>
+                            </div>
+                            <span className="percentage">
+                                {macroPercent.fat > 0 ? `${macroPercent.fat} %` : `0 %`}
+                            </span>
                         </div>
                     </div>
                 </div>         
             </div>
         </div>
-        
+
+
+
+
+
+    </>
     )
 }

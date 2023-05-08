@@ -161,16 +161,24 @@ MacrosCard Component
   width: 100%;
   border-radius: 20px;
   border: 2px solid grey;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
+
 .linear-progress {
   height: 10px;
   width: 100%;
   border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center; 
 }
 
+.percentage {
+  color: black;
+  font-size: .75rem;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+}
 
 
 
@@ -550,6 +558,7 @@ General Site Design
 
 
 
+
 .macros-card-macro-name {
   color: rgb(32,33,36);
   font-family: "Google Sans",Roboto,Arial,sans-serif;
@@ -816,7 +825,7 @@ a:hover {
 }
 
 .bmr-container{
-  grid-column: 3 / 11;
+  grid-column: 2 / 10;
 }
 
 .bmr-grid{
@@ -838,7 +847,7 @@ a:hover {
 
 
 .macros-container{
-  grid-column: 3 / 11;
+  grid-column: 2 / 10;
 }
 
 .macros-grid{
