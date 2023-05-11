@@ -3,64 +3,58 @@ import {Context} from "../Context/DataContext"
 
 
 
-import proteinIcon from "../Images/protein-icon.png"
-import carbIcon from "../Images/carb-icon.png"
-import fatsIcon from "../Images/fats-icon.png"
-import caloriesIcon from "../Images/calories-icon.png"
+import carbIcon from "../Images/carbIcon.svg"
+import fatsIcon from "../Images/fatIcon.svg"
+import caloriesIcon from "../Images/caloriesIcon.svg"
+import meatIcon from "../Images/meatIcon.svg"
 
 
 export default function MacrosCard() {
     
     /***************************************************
-                pull data from useContext
+                pulled data from useContext
     ***************************************************/  
     const { tdeeMacros } = useContext(Context) //suggested macros from body info
     const { foodList } = useContext(Context) // list of all foods inputed from home page
     
 
     // food list destructured and each macro is accumulated
-    const { protein, carbs, fats, calories } = foodList.reduce(
+    const { protein, carbs, fat, calories } = foodList.reduce(
         (acc, curr) => ({
           protein: acc.protein + curr.protein,
           carbs: acc.carbs + curr.carbs,
-          fats: acc.fats + curr.fats,
-          calores: acc.calories + curr.calories
+          fat: acc.fat + curr.fat,
+          calories: acc.calories + curr.calories
         }),
-        { protein: 0, carbs: 0, fats: 0 , calories: 0}
+        { protein: 0, carbs: 0, fat: 0 , calories: 0}
       );   
 
-    
-    let eatenMacros = {
-        protein: protein,
-        carbs: carbs,
-        fats: fats
-    }        
-    
-    
-    
-    
-    
-
+       
 
     /***************************************************
     calculate the percentage of eaten to suggested macros
     ***************************************************/  
-    let proteinCurrPercentage = 0;
-    let carbsCurrPercentage = 0;
-    let fatCurrPercentage = 0;
-    
-    if(tdeeMacros.length > 0 && foodList.length > 0) {
-        proteinCurrPercentage = Math.floor(((eatenMacros.protein / tdeeMacros[0].cut.protein) * 100))
-        carbsCurrPercentage = Math.floor(((eatenMacros.carbs / tdeeMacros[0].cut.carbs) * 100))
-        fatCurrPercentage = Math.floor(((eatenMacros.fats / tdeeMacros[0].cut.fats) * 100))
+   // let proteinCurrPercentage = 0;
+   let proteinCurrPercentage = 0;
+   let carbsCurrPercentage = 0;
+   let fatCurrPercentage = 0;
+   let caloriesCurrPercentage = 0;
+   
+    if (tdeeMacros.length > 0 && foodList.length > 0) {
+        proteinCurrPercentage = Math.floor(((protein / tdeeMacros[0].cut.protein) * 100))
+        carbsCurrPercentage = Math.floor(((carbs / tdeeMacros[0].cut.carbs) * 100))
+        fatCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.fat) * 100))
+        caloriesCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.calories) * 100))
     }
-    
-
-
+       
+       
+       // need state changes for progress bar increase effect
+       
     const [macroPercent, setMacroPercent] = useState({
         protein: 0,
         carbs: 0,
-        fat: 0
+        fat: 0,
+        calories: 0
     })
     
 
@@ -68,84 +62,71 @@ export default function MacrosCard() {
         let speed = 12;
         useEffect(() => {
             const progress = setInterval(() => {
-                if (endValue > 0) {
+                
+                if (endValue > macroPercent[macroName]) {
                     setMacroPercent((prevValue) => {
-                        const nextValue = prevValue[macroName] + 1;
-                            
+                        const nextValue = prevValue[macroName] + 1;                        
                         if (nextValue === endValue) {
                             clearInterval(progress);
-                        }
-    
+                        };
+                        
                         return {
                             ...prevValue,
                             [macroName]: nextValue
+                            
+                        };
+                    });
+                } else if (endValue < macroPercent[macroName]) {
+                    setMacroPercent((prevValue) => {
+                        const nextValue = prevValue[macroName] - 1;                        
+                        if (nextValue === endValue) {
+                            clearInterval(progress);
                         };
                         
-                        // if (nextValue === endValue) {
-                            //     clearInterval(progress);
-                            // }
+                        return {
+                            ...prevValue,
+                            [macroName]: nextValue
                             
-                            
+                        };
                     });
                 }
+            
                 
             }, speed);
             return () => clearInterval(progress);
-        }, [macroName, endValue, setMacroPercent]);
-        
+        }, [endValue, tdeeMacros, foodList]);
+        // }, [tdeeMacros, foodList]);
     }
-    
+
     useProgressBar("protein", proteinCurrPercentage, setMacroPercent);
     useProgressBar("carbs", carbsCurrPercentage, setMacroPercent);
     useProgressBar("fat", fatCurrPercentage, setMacroPercent);
-
-    
-       
-    
+    useProgressBar("calories", caloriesCurrPercentage, setMacroPercent);
 
 
 
 
-    
-    // const [progressValue, setProgressValue] = useState(0);
-    // let progressEndValue =  10;
-    // let speed = 5000;
-    
-
-    // const progress = setInterval(() => {
-    //     setProgressValue((prevValue) => prevValue + 1);
-    //     if (progressValue === progressEndValue) {
-    //         clearInterval(progress)
-    //     }
-    //     console.log("progressValue is "+progressValue)
-    // }, speed);
-    
-
-
-    
+  
     return (
     <>
-        <div className="component-container">            
-            {`macroPercent: ${macroPercent.protein}${"\n"}end value: ${proteinCurrPercentage}`} 
-            
-            
-            <div className="component-title-container">
+        
+            {/* <div className="component-title-container">
                 <span className="component-title">Today's Milestone</span>
                 <span className="component-subtitle">Here's the breakdown of macronutrients you consumed today:</span>              
-            </div>
-            
+            </div> */}
+
             <div className="macros-card-grid">
-                <div className="widget card-1">
+                <div className="card-1">
                     <div className="macro-name-with-icon-container">
                         <span className="macros-card-macro-name">Protein</span>
-                        <img className="small-icon" src={proteinIcon}/>
+                        <img className="macroscard-icon card-1-icon-bg" src={meatIcon}/>
                     </div>
 
                     <div className="suggested-consumed-master-container">
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Consumed</span>
                             <span className="macro-counter">
-                                {eatenMacros.protein ? eatenMacros.protein : 0}
+                                {protein ? protein : 0}
                             </span>
                         </div>
 
@@ -177,16 +158,16 @@ export default function MacrosCard() {
                     </div>
                 </div>
                 
-                <div className="widget card-2">
+                <div className="card-2">
                     <div className="macro-name-with-icon-container">
                         <span className="macros-card-macro-name">Carbs</span>
-                        <img className="small-icon" src={carbIcon}/>
+                        <img className="macroscard-icon card-2-icon-bg" src={carbIcon}/>
                     </div>
                     <div className="suggested-consumed-master-container">
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Consumed</span>
                             <span className="macro-counter">
-                                {eatenMacros.carbs ? eatenMacros.carbs : 0}
+                                {carbs ? carbs : 0}
                             </span>
                         </div>
 
@@ -216,23 +197,23 @@ export default function MacrosCard() {
                     </div>
                 </div>
                 
-                <div className="widget card-3">
+                <div className="card-3">
                     <div className="macro-name-with-icon-container">
-                        <span className="macros-card-macro-name">Fats</span>
-                        <img className="small-icon" src={fatsIcon}/>
+                        <span className="macros-card-macro-name">Fat</span>
+                        <img className="macroscard-icon card-3-icon-bg" src={fatsIcon}/>
                     </div>
                     <div className="suggested-consumed-master-container">
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Consumed</span>
                             <span className="macro-counter">
-                                {eatenMacros.fats ? eatenMacros.fats : 0}
+                                {fat ? fat : 0}
                             </span>
                         </div>
 
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Suggested</span>
                             <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fats : 0}
+                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fat : 0}
                             </span>
                         </div>
                     </div>
@@ -255,23 +236,23 @@ export default function MacrosCard() {
                     </div>
                 </div>
                 
-                <div className="widget card-4">
+                <div className="card-4">
                     <div className="macro-name-with-icon-container">
                         <span className="macros-card-macro-name">Calories</span>
-                        <img className="small-icon" src={caloriesIcon}/>
+                        <img className="macroscard-icon card-4-icon-bg" src={caloriesIcon}/>
                     </div>
                     <div className="suggested-consumed-master-container">
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Consumed</span>
                             <span className="macro-counter">
-                                {eatenMacros.protein ? eatenMacros.protein : 0}
+                                {calories ? calories : 0}
                             </span>
                         </div>
 
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Suggested</span>
                             <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0}
+                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.calories : 0}
                             </span>
                         </div>
                     </div>
@@ -281,23 +262,18 @@ export default function MacrosCard() {
                             <div 
                                 className="linear-progress"
                                 style={{"width": `${
-                                    macroPercent.fat > 100 ? 100 : 
-                                    macroPercent.fat === 0 ? 0 : 
-                                    macroPercent.fat 
+                                    macroPercent.calories > 100 ? 100 : 
+                                    macroPercent.calories === 0 ? 0 : 
+                                    macroPercent.calories 
                                 }%`, "background": `#BEA794`}}>
                             </div>
                             <span className="percentage">
-                                {macroPercent.fat > 0 ? `${macroPercent.fat} %` : `0 %`}
+                                {macroPercent.calories > 0 ? `${macroPercent.calories} %` : `0 %`}
                             </span>
                         </div>
                     </div>
                 </div>         
             </div>
-        </div>
-
-
-
-
 
     </>
     )

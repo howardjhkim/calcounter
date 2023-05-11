@@ -20,12 +20,10 @@ export default function FoodTable() {
     }
 
     return (
-        <div className="component-container">
+        <div className="widget">
             <div className="component-title-container">
                 <span className="component-title">Daily Breakdown</span>
             </div>
-            
-            <div className="widget ">
                 <table>
                     <thead>
                         <tr>
@@ -33,6 +31,7 @@ export default function FoodTable() {
                             <th>Servings</th>
                             <th>Grams</th>
                             <th>Carbs</th>
+                            <th>Fat</th>
                             <th>Protein</th>
                             <th>Total Calories</th>
                         </tr>
@@ -44,6 +43,7 @@ export default function FoodTable() {
                                 <td>{food.servings}</td>
                                 <td>{food.grams}</td>
                                 <td>{food.carbs}</td>
+                                <td>{food.fat}</td>
                                 <td>{food.protein}</td>
                                 <td>{}</td>
                                 <td>
@@ -55,7 +55,6 @@ export default function FoodTable() {
                         ))}
                     </tbody>
                 </table>
-            </div>
         </div>
     )
 }

@@ -1,12 +1,19 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, {useState, useEffect} from "react"
+import {Link} from "react-router-dom"
 
 import FoodInputs from "../Components/FoodInputs"
 import MacrosCard from "../Components/MacrosCard"
 import FoodTable from "../Components/FoodTable"
 import WeightLossTracker from "../Components/WeightLossTracker"
+import Banner from "../Components/Banner"
+import { ReactComponent as Art } from "../Images/art.svg"
+
+
 
 export default function Home() {
+
+
+
     return (
         <div className="homepage-grid">
             <div className="homepage-grid-title-container">
@@ -15,12 +22,17 @@ export default function Home() {
                 <hr />
             </div>
             
-            <div className="homepage-grid-2">
-                <FoodInputs />
+            <div className="homepage-grid-banner">
+                <Banner />
             </div>
-            
+
             <div className="homepage-grid-1">
                 <MacrosCard /> 
+                
+            </div>
+            
+            <div className="homepage-grid-2">
+                <FoodInputs />
             </div>
 
 

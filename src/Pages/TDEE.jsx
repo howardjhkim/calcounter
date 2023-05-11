@@ -20,19 +20,19 @@ export default function Tdee() {
     let macros = {
         cut:{
             protein: 0,
-            fats: 0,
+            fat: 0,
             carbs: 0,
             calories: 0
         },
         maintain:{
             protein: 0,
-            fats: 0,
+            fat: 0,
             carbs: 0,
             calories: 0
         },
         bulk:{
             protein: 0,
-            fats: 0,
+            fat: 0,
             carbs: 0,
             calories: 0
         }
@@ -70,28 +70,48 @@ export default function Tdee() {
         let bmr = Math.floor(66 + (13.7 * weight * 0.45359237) + (5 * height) - (6.8 * age))
         let tdee = Math.floor(bmr * 1.55)
         
+        
+        
+        
         function loseWeight() {
             let cutCal = Math.floor(tdee - (tdee * .2))
-            let protein = height;
-            let fats = .4 * weight;
+            let protein = weight;
+            let fat = Math.floor(.5 * weight);
             
             macros.cut.protein = protein
-            macros.cut.fats = fats
-            macros.cut.carbs = (cutCal - (protein * 4) - (fats * 9)) / 4
+            macros.cut.fat = fat
+            macros.cut.carbs = (cutCal - (protein * 4) - (fat * 9)) / 4
+            macros.cut.calories = cutCal
         }
         loseWeight();
         
         function maintainWeight() {
             let maintainCal = tdee
-            let protein = height;
-            let fats = .4 * weight;
+            let protein = Math.floor(1.207 * height);
+            let fat = Math.floor(.6 * weight);
             
             macros.maintain.protein = protein
-            macros.maintain.fats = fats
-            macros.maintain.carbs = (maintainCal - (protein * 4) - (fats * 9)) / 4
+            macros.maintain.fat = fat
+            macros.maintain.carbs = (maintainCal - (protein * 4) - (fat * 9)) / 4
+            macros.maintain.calories = tdee
         }
         maintainWeight();
-    
+        
+
+        function bulkWeight() {
+            let bulkCal = Math.floor(tdee + (tdee * .2))
+            let protein = Math.floor(1.41 * height);
+            let fat = Math.floor(.73 * weight);
+            
+            macros.bulk.protein = protein
+            macros.bulk.fat = fat
+            macros.bulk.carbs = (bulkCal - (protein * 4) - (fat * 9)) / 4
+            macros.bulk.calories = bulkCal
+        }
+        bulkWeight();
+
+        console.log("bmr: "+bmr)
+        console.log("tdee: "+tdee)
     }
     
     
@@ -163,6 +183,27 @@ export default function Tdee() {
 
             <div className="macros-container macros-grid">
                 <h3>Macros Breakdown</h3>
+                
+                <div className="widget tdee-cutting">
+                    Cutting
+                    <div className="tdee-suggested-row">
+                        <p>Protein</p>
+                        <p>{macrosState.cut ? macrosState.cut.protein : null}</p>
+                    </div>
+                    <div className="tdee-suggested-row">
+                        <p>Fat</p>
+                        <p>{macrosState.cut ? macrosState.cut.fat : null}</p>
+                    </div>
+                    <div className="tdee-suggested-row">
+                        <p>Carbs</p>
+                        <p>{macrosState.cut ? macrosState.cut.carbs : null}</p>
+                    </div>
+                    <div className="tdee-suggested-row">
+                        <p>Calories</p>
+                        <p>{macrosState.cut ? macrosState.cut.calories : null}</p>
+                    </div>
+                </div>
+
                 <div className="widget tdee-maintenance">
                     Maintenance
                     <div className="tdee-suggested-row">
@@ -170,28 +211,16 @@ export default function Tdee() {
                         <p>{macrosState.maintain ? macrosState.maintain.protein : null}</p>
                     </div>
                     <div className="tdee-suggested-row">
-                        <p>Fats</p>
-                        <p>{macrosState.maintain ? macrosState.maintain.fats : null}</p>
+                        <p>Fat</p>
+                        <p>{macrosState.maintain ? macrosState.maintain.fat : null}</p>
                     </div>
                     <div className="tdee-suggested-row">
                         <p>Carbs</p>
                         <p>{macrosState.maintain ? macrosState.maintain.carbs : null}</p>
                     </div>
-                </div>
-                
-                <div className="widget tdee-protein">
-                    Cutting
                     <div className="tdee-suggested-row">
-                        <p>Protein</p>
-                        <p>{macrosState ? macrosState.cut.protein : null}</p>
-                    </div>
-                    <div className="tdee-suggested-row">
-                        <p>Fats</p>
-                        <p>{macrosState ? macrosState.cut.fats : null}</p>
-                    </div>
-                    <div className="tdee-suggested-row">
-                        <p>Carbs</p>
-                        <p>{macrosState ? macrosState.cut.carbs : null}</p>
+                        <p>Calories</p>
+                        <p>{macrosState.maintain ? macrosState.maintain.calories : null}</p>
                     </div>
                 </div>
                 
@@ -202,18 +231,19 @@ export default function Tdee() {
                         <p>{macrosState.bulk ? macrosState.bulk.protein : null}</p>
                     </div>
                     <div className="tdee-suggested-row">
-                        <p>Fats</p>
-                        <p>{macrosState.bulk ? macrosState.bulk.fats : null}</p>
+                        <p>Fat</p>
+                        <p>{macrosState.bulk ? macrosState.bulk.fat : null}</p>
                     </div>
                     <div className="tdee-suggested-row">
                         <p>Carbs</p>
                         <p>{macrosState.bulk ? macrosState.bulk.carbs : null}</p>
                     </div>
+                    <div className="tdee-suggested-row">
+                        <p>Calories</p>
+                        <p>{macrosState.maintain ? macrosState.bulk.calories : null}</p>
+                    </div>
                 </div>
-
             </div>
-            
-        </div>
-        
+        </div>       
     )
 }

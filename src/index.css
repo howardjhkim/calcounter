@@ -17,19 +17,13 @@ textarea:focus, input:focus{
   outline: none;
 }
 
-/* .master-widget {
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  padding: 10px;
-} */
-
 
 .widget{
   border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  padding: 20px;
+  padding: 20px 25px 30px 25px;
+  margin: 35px 0px;
 }
 
 a:visited {
@@ -53,7 +47,7 @@ p {
 .component-title-container{
   display: flex;
   flex-direction: column;
-  margin: 20px 0px 10px 0px;
+  margin-bottom: 15px;
 }
 
 .component-title {
@@ -71,7 +65,6 @@ p {
   font-size: .875rem;
   letter-spacing: .0142857143em;
   font-weight: 400;
-  padding-bottom: 5px;
 }
 
 
@@ -99,6 +92,15 @@ p {
 .small-icon {
   height: 24px;
   width: 24px;
+}
+
+
+
+.macroscard-icon {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  padding: 10px;
 }
 
 .macro-name-with-icon-container {
@@ -430,14 +432,16 @@ General Site Design
 .site-wrapper-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
-  height: 100vh;
+  grid-template-rows: auto;
   
   grid-template-areas: 
-  "header header profile-bar"
+  /* "header header profile-bar"
     "navbar outlet profile-bar"
-    "navbar footer profile-bar";
+    "navbar footer profile-bar"; */
     
+    "header header header"
+    "navbar outlet outlet"
+    "navbar outlet outlet";
     
     
   }
@@ -447,11 +451,12 @@ General Site Design
     grid-column: 1 / 2;
     /* border-right: 2px solid #edede9; */
     width: 256px;
+    grid-row: 2 / -1;
   }
   
   .header {
     grid-area: header;
-    grid-column: 1 / 13;
+    grid-column: 1 / -1;
     margin-bottom: 20px;
   }
   
@@ -462,10 +467,10 @@ General Site Design
     /* background-color:#F8F5F0 */
   }
   
-  .footer {
+  /* .footer {
     grid-area: footer;
     grid-column: 2 / -1;
-  }
+  } */
   
   
   .profile-bar {
@@ -485,6 +490,7 @@ General Site Design
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
+  height: 100%;
   /* padding: 0 20px */
   /* justify-items: center; */
 }
@@ -494,25 +500,68 @@ General Site Design
   flex-direction: column;
   grid-column: 1 / 13;
   margin-left: 40px;
-  border-bottom: 1px solid rgb(218,220,224);
+  border-bottom: 2px solid rgb(218,220,224);
+}
+
+.homepage-grid-banner {
+  grid-column: 2 / 12;
 }
 
 
+.homepage-banner-container {
+
+  border-radius: 8px;
+  background-color: #FAEBE4;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 20px 25px 30px 25px;
+  margin: 35px 0px;
+
+  display: flex;
+  height: 400px;
+  position: relative;
+}
+
+
+.quote-container {
+  /* border: 2px solid black; */
+  /* position: absolute;
+  top: 30%;
+  left: 5%; */
+  vertical-align: center;
+  width: 50%;
+}
+
+.quote {
+  margin-top: 50%;
+}
+
+.art-container{
+  width: 100%;
+  /* border: 2px solid green; */
+  height: 100%;
+}
+
+.homepage-banner-art{
+  /* border: 2px solid red; */
+  height: 100%;
+  width: 100%;
+}
+
 .homepage-grid-1 {
-  grid-column: 2 / 10;
+  grid-column: 2 / 12;
 }
 
 .homepage-grid-2 {
-  grid-column: 2 / 10;
+  grid-column: 2 / 12;
   /* grid-column: 1 / 7; */
 }
 
 .homepage-grid-3 {
-  grid-column: 2 / 10;
+  grid-column: 2 / 12;
 }
 
 .homepage-grid-4 {
-  grid-column: 2 / 10;
+  grid-column: 2 / 12;
 }
 
 /**********************MacrosCard Grid****************************/
@@ -521,40 +570,62 @@ General Site Design
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
-  gap: 10px;
-  height: 100%;
+  gap: 25px;
+  margin: 30px 0px;
+
 }
 
-.card-1{
-  background-color: #EDFFEF;
+.card-1, .card-2, .card-3, .card-4{
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 20px 25px;
+}
+
+.card-1 {
   grid-column: 1/4;
   color: #7CBF85;
   font-weight: 600;
-  
+  /* background-color: #EDFFEF; */
 }
 
 .card-2{
-  background-color: #F4F2FF;
+  /* background-color: #F4F2FF; */
   grid-column: 4/7;
   color: #756CA3;
   font-weight: 600;
 }
 
 .card-3{
-  background-color: #ECFBFF;
+  /* background-color: #ECFBFF; */
   grid-column: 7/10;
   color: #8BAEC1;
   font-weight: 600;
 }
 
 .card-4{
-  background-color: #FFF2EC;
+  /* background-color: #FFF2EC; */
   grid-column: 10/13;
   color: #BEA794;
   font-weight: 600;
   
 }
 
+.card-1-icon-bg {
+  background-color: #F6D4D4
+
+}
+
+.card-2-icon-bg {
+  background-color: #F2DBB9
+}
+
+.card-3-icon-bg {
+  background-color: #EDFFEF
+}
+.card-4-icon-bg{
+  background-color: #EAF4FE;
+}
 
 
 
@@ -576,7 +647,6 @@ General Site Design
   flex-direction: column;
   align-items: left;
   height: 100%;
-  /* border: 2px solid red; */
 }
 
 .vertical-nav-bar-title {
@@ -665,7 +735,7 @@ a:hover {
 
 
 
-.container {
+.weightloss-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -858,14 +928,15 @@ a:hover {
 }
 
 
-.tdee-maintenance {
+
+.tdee-cutting {
   grid-column: 1 / 5
+
 }
 
-.tdee-protein {
+.tdee-maintenance {
   grid-column: 5 / 9
 }
-
 
 .tdee-bulking {
   grid-column: 9 / 13
