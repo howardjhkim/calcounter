@@ -2,8 +2,8 @@
 
 
 html, body {
-  background-color: #FFFFFF;
-  /* background-color: #F9FAFC; */
+  /* background-color: #FFFFFF; */
+  background-color: #F9FAFC;
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   padding: 0px;
@@ -387,10 +387,9 @@ table {
 }
 
 
-thead {
-  border-bottom: 1px solid grey;
-  border-top: 1px solid grey;
-}
+
+
+
 
 th:first-child, td:first-child {
   text-align: left;
@@ -440,8 +439,8 @@ General Site Design
     "navbar footer profile-bar"; */
     
     "header header header"
-    "navbar outlet outlet"
-    "navbar outlet outlet";
+    "navbar outlet profile-bar"
+    "navbar outlet profile-bar";
     
     
   }
@@ -462,7 +461,7 @@ General Site Design
   
   .outlet {
     grid-area: outlet;
-    grid-column: 2 / -1;
+    grid-column: 2 / 11;
     /* border: 2px solid blue; */
     /* background-color:#F8F5F0 */
   }
@@ -478,7 +477,7 @@ General Site Design
     grid-column: 11 / 13;
     color: black;
     grid-row: 2/13;
-    border-left: 2px solid #edede9;
+    /* border-left: 2px solid #edede9; */
   }
   
 
@@ -500,7 +499,7 @@ General Site Design
   flex-direction: column;
   grid-column: 1 / 13;
   margin-left: 40px;
-  border-bottom: 2px solid rgb(218,220,224);
+  /* border-bottom: 2px solid rgb(218,220,224); */
 }
 
 .homepage-grid-banner {
@@ -649,7 +648,7 @@ General Site Design
   height: 100%;
 }
 
-.vertical-nav-bar-title {
+.section-small-title {
   display: inline;
   text-align: left;
   align-items: left;
@@ -724,7 +723,7 @@ a:hover {
 
 
 
-.nav-name{
+.main-typography{
   font-size: .875rem;
   letter-spacing: .0178571429em;
   font-weight: 500;
@@ -788,15 +787,13 @@ a:hover {
 
 .profile-bar-master-container{
   height: 100%;
-  padding: 20px;
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 35px;
   /* border: 2px solid red; */
 }
 
-.profile-and-settings-container{
-}
 
 
 
@@ -842,7 +839,6 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 50px;
 }
 
 
@@ -859,6 +855,10 @@ a:hover {
   height: 50px;
   padding: 20px;
   background: #F4F7FE;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
 }
 
 
@@ -964,4 +964,106 @@ a:hover {
   background-color: rgb(218,220,224);
   height: 1px;
   margin: 19px 24px 20px;
+}
+
+
+hr {
+  width: 100%;
+}
+
+
+/******************/
+
+
+.profile-info-master-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+
+.profile-info-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.checkbox-master-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox{
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin-top: 10px;
+  padding: 0;
+}
+
+
+
+.small-title-grey {
+  display: inline;
+  text-align: left;
+  align-items: left;
+  letter-spacing: .0727272727em;
+  color: rgb(128,134,139);
+  font-weight: 500;
+  font-size: .675rem;
+  text-transform: uppercase;
+}
+
+.space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+
+table{
+  border-collapse: collapse;
+}
+
+
+thead  {
+  border-bottom: 2px solid rgb(218,220,224);
+}
+
+
+.addimage{
+  width: 50%;
+  display: block;
+  margin: auto;
+  padding: 10px 20px 10px 10px;
+}
+
+
+.addimage-texts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.addImage-header{
+  color: rgb(32,33,36);
+  font-family: Roboto,Arial,sans-serif;
+  line-height: 2.5rem;
+  font-size: 1.5rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+.addImage-subtext{
+  color: rgb(60,64,67);
+  font-family: Roboto,Arial,sans-serif;
+  line-height: 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: .00625em;
+  font-weight: 400;
 }

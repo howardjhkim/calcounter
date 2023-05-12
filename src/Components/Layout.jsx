@@ -27,9 +27,9 @@ export default function Layout() {
                 <Header />
             </div>
 
-            {/* <div className="profile-bar">
+            <div className="profile-bar">
                 <ProfileBar/>
-            </div> */}
+            </div>
 
             <div className="outlet">
                 <Outlet />

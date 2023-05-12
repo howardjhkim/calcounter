@@ -19,7 +19,6 @@ export default function Home() {
             <div className="homepage-grid-title-container">
                 <span className="welcoming-text">Welcome back, #</span>
                 <span className="sub-welcoming-text">Here's an overview of your progress</span>
-                <hr />
             </div>
             
             <div className="homepage-grid-banner">

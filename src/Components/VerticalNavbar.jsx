@@ -13,26 +13,26 @@ export default function VerticalNavbar() {
     return (
         <div className="vertical-nav-bar">
             <div className="vertical-nav-bar-sections">
-                <span className="vertical-nav-bar-title">Menu</span>
+                <span className="section-small-title">Menu</span>
                 <nav className="nav-links-container">
                     <NavLink to="/" className="nav-links-and-icon-container">
                             <img className="small-icon" src={homeIcon} />
-                            <span className="nav-name">Home</span>
+                            <span className="main-typography">Home</span>
                     </NavLink>
                 
                     <NavLink to="/tdee" className="nav-links-and-icon-container">
                             <img className="small-icon" src={calculatorIcon} />
-                            <span className="nav-name">TDEE</span>
+                            <span className="main-typography">TDEE</span>
                     </NavLink>
 
                     <NavLink to="/workouts" className="nav-links-and-icon-container">
                             <img className="small-icon" src={workoutIcon} />
-                            <span className="nav-name">Workouts</span>
+                            <span className="main-typography">Workouts</span>
                     </NavLink>
 
                     <NavLink to="/help" className="nav-links-and-icon-container">
                             <img className="small-icon" src={help} />
-                            <span className="nav-name">Help</span>
+                            <span className="main-typography">Help</span>
                     </NavLink>
                 </nav>
             </div>
@@ -40,21 +40,21 @@ export default function VerticalNavbar() {
             <div className="line-breaker"></div>
             
             <div className="vertical-nav-bar-sections">
-                <span className="vertical-nav-bar-title">Menu</span>
+                <span className="section-small-title">Menu</span>
                 <nav className="nav-links-container">
                     <NavLink to="/a" className="nav-links-and-icon-container">
                             <img className="small-icon" src={homeIcon} />
-                            <span className="nav-name">Home</span>
+                            <span className="main-typography">Home</span>
                     </NavLink>
                 
                     <NavLink to="/a" className="nav-links-and-icon-container">
                             <img className="small-icon" src={calculatorIcon} />
-                            <span className="nav-name">TDEE</span>
+                            <span className="main-typography">TDEE</span>
                     </NavLink>
 
                     <NavLink to="/a" className="nav-links-and-icon-container">
                             <img className="small-icon" src={workoutIcon} />
-                            <span className="nav-name">Workouts</span>
+                            <span className="main-typography">Workouts</span>
                     </NavLink>
                 </nav>
             </div>

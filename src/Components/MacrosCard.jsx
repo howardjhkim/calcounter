@@ -147,7 +147,7 @@ export default function MacrosCard() {
                                         macroPercent.protein > 100 ? 100 : 
                                         macroPercent.protein === 0 ? 0 : 
                                         macroPercent.protein }%`, 
-                                    "background": `#7CBF85`,
+                                    "background": `#F6D4D4`,
                                     }}
                             >
                             </div>
@@ -187,7 +187,7 @@ export default function MacrosCard() {
                                     macroPercent.carbs > 100 ? 100 : 
                                     macroPercent.carbs === 0 ? 0 : 
                                     macroPercent.carbs 
-                                }%`, "background": `#756CA3`}}
+                                }%`, "background": `#F2DBB9`}}
                             >
                             </div>
                             <span className="percentage">
@@ -226,7 +226,7 @@ export default function MacrosCard() {
                                     macroPercent.fat > 100 ? 100 : 
                                     macroPercent.fat === 0 ? 0 : 
                                     macroPercent.fat 
-                                }%`, "background": `#8BAEC1`}}
+                                }%`, "background": `#7CBF85`}}
                             >
                             </div>
                             <span className="percentage">
@@ -265,7 +265,7 @@ export default function MacrosCard() {
                                     macroPercent.calories > 100 ? 100 : 
                                     macroPercent.calories === 0 ? 0 : 
                                     macroPercent.calories 
-                                }%`, "background": `#BEA794`}}>
+                                }%`, "background": `#8BAEC1`}}>
                             </div>
                             <span className="percentage">
                                 {macroPercent.calories > 0 ? `${macroPercent.calories} %` : `0 %`}
