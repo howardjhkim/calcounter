@@ -1,6 +1,7 @@
 import React from "react"
-import {NavLink} from "react-router-dom"
+import {NavLink, Link} from "react-router-dom"
 import logo from "../Images/logo.png"
+import hamburger from "../Images/hamburger.png"
 import profilePicture from "../Images/profile-picture.png"
 import { ReactComponent as IconName } from '../Images/add.svg';
 export default function Header() {
@@ -8,9 +9,13 @@ export default function Header() {
     return(
         <header>
             <nav className="header-master-container">
-                <NavLink to="/">
-                    <img className="home-logo" src={logo} />
-                </NavLink>
+                
+                <div className="header-leftside-container">
+                    <img className="small-icon dropdown" src={hamburger} alt="" />
+                    <Link to="/">
+                        <img className="home-logo" src={logo} />
+                    </Link>
+                </div>
 
                 
                 <div className="header-rightside-container">

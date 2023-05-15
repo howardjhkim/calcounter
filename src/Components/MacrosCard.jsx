@@ -8,6 +8,7 @@ import fatsIcon from "../Images/fatIcon.svg"
 import caloriesIcon from "../Images/caloriesIcon.svg"
 import meatIcon from "../Images/meatIcon.svg"
 
+import macroscard from "../CSS/MacrosCard.css"
 
 export default function MacrosCard() {
     

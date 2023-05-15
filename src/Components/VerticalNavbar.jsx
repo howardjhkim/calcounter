@@ -17,22 +17,22 @@ export default function VerticalNavbar() {
                 <nav className="nav-links-container">
                     <NavLink to="/" className="nav-links-and-icon-container">
                             <img className="small-icon" src={homeIcon} />
-                            <span className="main-typography">Home</span>
+                            <span className="main-typography navlinks">Home</span>
                     </NavLink>
                 
                     <NavLink to="/tdee" className="nav-links-and-icon-container">
                             <img className="small-icon" src={calculatorIcon} />
-                            <span className="main-typography">TDEE</span>
+                            <span className="main-typography navlinks">TDEE</span>
                     </NavLink>
 
                     <NavLink to="/workouts" className="nav-links-and-icon-container">
                             <img className="small-icon" src={workoutIcon} />
-                            <span className="main-typography">Workouts</span>
+                            <span className="main-typography navlinks">Workouts</span>
                     </NavLink>
 
                     <NavLink to="/help" className="nav-links-and-icon-container">
                             <img className="small-icon" src={help} />
-                            <span className="main-typography">Help</span>
+                            <span className="main-typography navlinks">Help</span>
                     </NavLink>
                 </nav>
             </div>
@@ -44,17 +44,17 @@ export default function VerticalNavbar() {
                 <nav className="nav-links-container">
                     <NavLink to="/a" className="nav-links-and-icon-container">
                             <img className="small-icon" src={homeIcon} />
-                            <span className="main-typography">Home</span>
+                            <span className="main-typography navlinks">Home</span>
                     </NavLink>
                 
                     <NavLink to="/a" className="nav-links-and-icon-container">
                             <img className="small-icon" src={calculatorIcon} />
-                            <span className="main-typography">TDEE</span>
+                            <span className="main-typography navlinks">TDEE</span>
                     </NavLink>
 
                     <NavLink to="/a" className="nav-links-and-icon-container">
                             <img className="small-icon" src={workoutIcon} />
-                            <span className="main-typography">Workouts</span>
+                            <span className="main-typography navlinks">Workouts</span>
                     </NavLink>
                 </nav>
             </div>
