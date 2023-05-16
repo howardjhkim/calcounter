@@ -1,5 +1,8 @@
 import React, { useContext, useState, useEffect, useRef} from "react"
 import {Context} from "../Context/DataContext"
+import Axios from "axios"
+
+
 
 export default function FoodInputs() {
     //for using componentRef.currentd
@@ -19,10 +22,30 @@ export default function FoodInputs() {
     
 
 
+    const { foodDbList } = useContext(Context)
+    const { addFoodDbList } = useContext(Context)
 
 
-
-
+    const addFoodDb = () => {
+        Axios.post('http://localhost:3001/create', {
+            name: foodName, 
+            protein: Number(inputProtein),  
+            carbs: Number(inputCarbs),
+            fat: Number(inputFat),
+            calories: Number(inputCalPerServ)
+        })
+        addFoodDbList(
+            [
+                ...foodDbList, 
+                {
+                    name: foodName, 
+                    protein: Number(inputProtein),  
+                    carbs: Number(inputCarbs),
+                    fat: Number(inputFat),
+                    calories: Number(inputCalPerServ)
+                }
+            ])
+    }
 
 
 
@@ -101,6 +124,7 @@ export default function FoodInputs() {
             return
         } else {
             addFood(newFood)
+            addFoodDb()
             clearVals()
         }
     }

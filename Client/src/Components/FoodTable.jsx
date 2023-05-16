@@ -1,14 +1,24 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {Context} from "../Context/DataContext"
+import Axios from "axios"
+
 
 import trashIcon from "../Images/delete-icon.png"
 import { ReactComponent as Add } from "../Images/add.svg"
 import add from "../Images/add.png"
 
-export default function FoodTable() {    
+export default function FoodTable() {
+    
+
+    const { foodDbList } = useContext(Context)
+    const { addFoodDbList } = useContext(Context)
+    
+
+
     const { foodList } = useContext(Context)
     const { updateFood } = useContext(Context)
 
+    
 
     const inputRef = useRef(null)
 
@@ -21,13 +31,46 @@ export default function FoodTable() {
     }
 
 
-    console.log(foodList)
 
+
+
+    /////////////////////////// DATABASE //////////////////////////////////////
+    
+    Axios.get('http://localhost:3001/food').then((response) => {
+        addFoodDbList(response.data)
+    })
+    
+    
+       
+
+
+
+    const deleteFoodDb = (food) => {
+        Axios.delete(`http://localhost:3001/delete/${food}`)
+    }
+
+    
+    
+    
     return (
         <div className="widget">
             <div className="component-title-container">
                 <span className="component-title">Daily Breakdown</span>
             </div>
+
+            <div>
+                {foodDbList[0] ? foodDbList[0].map((el, key) => {
+                    return (
+                        <div key={key} className="testTable">
+                            <div className="testTable-element">
+                                {el.name} 
+                            </div>
+                            <button className="test-button" onClick={() => {deleteFoodDb(el.name)}}>Delete</button>
+                        </div>
+                    ); 
+                }) : null}
+            </div>
+
                 <table>
                     <thead >
                         <tr >

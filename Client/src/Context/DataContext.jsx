@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 
 
 
@@ -29,6 +29,13 @@ function ContextProvider({children}) {
     const addBodyInfo = (newBodyInfo) => {
         setBodyInfo([newBodyInfo])
     }
+
+    const [foodDbList, setFoodDbList] = useState([])
+    const addFoodDbList = (newFoodDb) => {
+        setFoodDbList([newFoodDb])
+    }
+
+    // console.log(foodDbList[0])
     
 
     return (
@@ -36,7 +43,8 @@ function ContextProvider({children}) {
             foodList, addFood, 
             tdeeMacros, addTdeeMacros, 
             updateFood, 
-            bodyInfo, addBodyInfo
+            bodyInfo, addBodyInfo,
+            foodDbList, addFoodDbList
         }}>
 
             {children}
