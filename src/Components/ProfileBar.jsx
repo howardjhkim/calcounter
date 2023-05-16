@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect} from "react"
 import {NavLink} from "react-router-dom"
 import {Context} from "../Context/DataContext"
-
+import Axios from 'axios'
 import Calendar from "./Calendar.jsx"
 
 
@@ -13,6 +13,8 @@ export default function ProfileBar() {
     const { tdeeMacros } = useContext(Context)
     const {bodyInfo} = useContext(Context)
 
+
+    
 
     
     return (
