@@ -9,7 +9,7 @@ import add from "../Images/add.png"
 
 export default function FoodTable() {
     
-
+    // Actual database 
     const { foodDbList } = useContext(Context)
     const { addFoodDbList } = useContext(Context)
     

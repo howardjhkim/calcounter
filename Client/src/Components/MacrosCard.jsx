@@ -12,6 +12,13 @@ import macroscard from "../CSS/MacrosCard.css"
 
 export default function MacrosCard() {
     
+
+    const { foodDbList } = useContext(Context)
+    const { addFoodDbList } = useContext(Context)
+
+    
+
+
     /***************************************************
                 pulled data from useContext
     ***************************************************/  
@@ -20,17 +27,33 @@ export default function MacrosCard() {
     
 
     // food list destructured and each macro is accumulated
-    const { protein, carbs, fat, calories } = foodList.reduce(
-        (acc, curr) => ({
-          protein: acc.protein + curr.protein,
-          carbs: acc.carbs + curr.carbs,
-          fat: acc.fat + curr.fat,
-          calories: acc.calories + curr.calories
-        }),
-        { protein: 0, carbs: 0, fat: 0 , calories: 0}
-      );   
+    
 
-       
+    let protein = 0;
+    let carbs = 0;
+    let fat = 0;
+    let calories = 0;
+  
+
+    // const { protein, carbs, fat, calories } = foodDbList[0].reduce(
+    //     (acc, curr) => ({
+    //         protein: acc.protein + curr.protein,
+    //         carbs: acc.carbs + curr.carbs,
+    //         fat: acc.fat + curr.fat,
+    //         calories: acc.calories + curr.calories
+    //     }),
+    //     { protein: 0, carbs: 0, fat: 0 , calories: 0}
+    // );
+        
+    
+    if (foodDbList[0]) {
+        protein = foodDbList[0].reduce((acc, curr) => acc + curr.protein, protein);
+        carbs = foodDbList[0].reduce((acc, curr) => acc + curr.carbs, carbs);
+        fat = foodDbList[0].reduce((acc, curr) => acc + curr.fat, fat);
+        calories = foodDbList[0].reduce((acc, curr) => acc + curr.calories, calories);
+    }
+
+        
 
     /***************************************************
     calculate the percentage of eaten to suggested macros
@@ -41,13 +64,16 @@ export default function MacrosCard() {
    let fatCurrPercentage = 0;
    let caloriesCurrPercentage = 0;
    
-    if (tdeeMacros.length > 0 && foodList.length > 0) {
+    if (tdeeMacros.length > 0 && foodDbList[0].length > 0) {
         proteinCurrPercentage = Math.floor(((protein / tdeeMacros[0].cut.protein) * 100))
         carbsCurrPercentage = Math.floor(((carbs / tdeeMacros[0].cut.carbs) * 100))
         fatCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.fat) * 100))
         caloriesCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.calories) * 100))
     }
        
+
+    
+
        
        // need state changes for progress bar increase effect
        
@@ -95,7 +121,7 @@ export default function MacrosCard() {
                 
             }, speed);
             return () => clearInterval(progress);
-        }, [endValue, tdeeMacros, foodList]);
+        }, [endValue, tdeeMacros, foodDbList]);
         // }, [tdeeMacros, foodList]);
     }
 

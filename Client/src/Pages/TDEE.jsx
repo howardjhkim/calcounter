@@ -1,11 +1,39 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import {Context} from "../Context/DataContext"
+import Axios from "axios"
 
 
 
 export default function Tdee() {
-        
+    
+
+    const { foodDbList } = useContext(Context)
+    const { addFoodDbList } = useContext(Context)
+
+    const addTdeeDb = () => {
+        Axios.post('http://localhost:3001/tdee', {
+            protein: macros.cut.protein,
+            carbs: macros.cut.carbs,
+            fat: macros.cut.fat,
+            calories: macros.cut.calories,  
+            
+        })
+        // addFoodDbList(
+        //     [
+        //         ...foodDbList, 
+        //         {
+        //             name: foodName, 
+        //             protein: Number(inputProtein),  
+        //             carbs: Number(inputCarbs),
+        //             fat: Number(inputFat),
+        //             calories: Number(inputCalPerServ)
+        //         }
+        //     ])
+    }
+
+
+
     const { addTdeeMacros } = useContext(Context);       
    
     const { addBodyInfo } = useContext(Context);
@@ -51,6 +79,7 @@ export default function Tdee() {
             height: Number(height),
             goalWeight: Number(goalWeight)
         })
+        addTdeeDb();
     }
     
     

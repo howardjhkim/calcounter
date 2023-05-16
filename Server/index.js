@@ -59,7 +59,25 @@ app.delete('/delete/:name', (req, res) => {
 })
 
 
+app.post("/tdee", (req, res) => {
+    const protein = req.body.protein;
+    const carbs = req.body.carbs;
+    const fat = req.body.fat;
+    const calories = req.body.calories;
 
+    const sqlInsert = 'INSERT INTO tdee (protein, carbs, fat, calories) VALUES (?,?,?,?)'
+    db.query(
+        sqlInsert, 
+        [protein, carbs, fat, calories], 
+        (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send("Values Inserted")
+            }
+        }
+    )
+})
 
 
 
@@ -69,3 +87,6 @@ app.delete('/delete/:name', (req, res) => {
 app.listen(3001, () => {
     console.log("Server working on port 3001")
 })
+
+
+
