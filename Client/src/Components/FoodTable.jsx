@@ -34,7 +34,7 @@ export default function FoodTable() {
 
 
 
-    /////////////////////////// DATABASE //////////////////////////////////////
+    /////////////////////////// ACTUAL DATABASE DATA //////////////////////////////////////
     
     Axios.get('http://localhost:3001/food').then((response) => {
         addFoodDbList(response.data)

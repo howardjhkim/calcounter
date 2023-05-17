@@ -8,8 +8,15 @@ import Axios from "axios"
 export default function Tdee() {
     
 
-    const { foodDbList } = useContext(Context)
-    const { addFoodDbList } = useContext(Context)
+    const { tdeeDbList } = useContext(Context)
+    const { addTdeeDbList } = useContext(Context)
+
+
+    const { personalDbList } = useContext(Context)
+    const { addPersonalDbList } = useContext(Context)
+
+    
+    const { addTdeeMacros } = useContext(Context);       
 
     const addTdeeDb = () => {
         Axios.post('http://localhost:3001/tdee', {
@@ -17,28 +24,69 @@ export default function Tdee() {
             carbs: macros.cut.carbs,
             fat: macros.cut.fat,
             calories: macros.cut.calories,  
-            
         })
-        // addFoodDbList(
-        //     [
-        //         ...foodDbList, 
-        //         {
-        //             name: foodName, 
-        //             protein: Number(inputProtein),  
-        //             carbs: Number(inputCarbs),
-        //             fat: Number(inputFat),
-        //             calories: Number(inputCalPerServ)
-        //         }
-        //     ])
+
+        addTdeeDbList(
+            [{
+                protein: macros.cut.protein,
+                carbs: macros.cut.carbs,
+                fat: macros.cut.fat,
+                calories: macros.cut.calories, 
+            }]
+        )
+    }
+
+
+    const addPersonalDb = () => {
+        Axios.post('http://localhost:3001/personal', {
+            weight: weight,
+            age: age,
+            height: height,
+        })
+
+        addPersonalDbList(
+            [{
+                weight: weight,
+                age: age,
+                height: height,
+            }]
+        )
     }
 
 
 
-    const { addTdeeMacros } = useContext(Context);       
-   
-    const { addBodyInfo } = useContext(Context);
-    const {bodyInfo} = useContext(Context);
+
+
+
+    /////////////////////////// ACTUAL DATABASE DATA //////////////////////////////////////
     
+    Axios.get('http://localhost:3001/tdee').then((response) => {
+        addTdeeDbList(response.data)
+    })
+    
+
+    Axios.get('http://localhost:3001/personal').then((response) => {
+        addPersonalDbList(response.data)
+    })
+
+
+    // const deleteFoodDb = (food) => {
+    //     Axios.delete(`http://localhost:3001/delete/${food}`)
+    // }
+
+
+
+
+   
+    
+
+
+
+
+
+
+
+
     let [age, setAge] = useState('')
     let [weight, setWeight] = useState('')
     let [height, setHeight] = useState('')
@@ -73,24 +121,20 @@ export default function Tdee() {
         calculation()
         setMacrosState(macros)
         addTdeeMacros(macrosState)
-        addBodyInfo({
-            age: Number(age),
-            weight: Number(weight),
-            height: Number(height),
-            goalWeight: Number(goalWeight)
-        })
+        
         addTdeeDb();
+        addPersonalDb();
     }
     
     
-    useEffect(() => {
-        const data = window.localStorage.getItem('MACROSSTATE');
-        setMacrosState(JSON.parse(data))
-    }, [])
+    // useEffect(() => {
+    //     const data = window.localStorage.getItem('MACROSSTATE');
+    //     setMacrosState(JSON.parse(data))
+    // }, [])
     
-    useEffect(() => {
-        window.localStorage.setItem('MACROSSTATE', JSON.stringify(macrosState))
-    }, [macrosState])
+    // useEffect(() => {
+    //     window.localStorage.setItem('MACROSSTATE', JSON.stringify(macrosState))
+    // }, [macrosState])
     
     
     
@@ -98,10 +142,8 @@ export default function Tdee() {
     function calculation() {
         let bmr = Math.floor(66 + (13.7 * weight * 0.45359237) + (5 * height) - (6.8 * age))
         let tdee = Math.floor(bmr * 1.55)
-        
-        
-        
-        
+ 
+
         function loseWeight() {
             let cutCal = Math.floor(tdee - (tdee * .2))
             let protein = weight;
@@ -114,6 +156,7 @@ export default function Tdee() {
         }
         loseWeight();
         
+
         function maintainWeight() {
             let maintainCal = tdee
             let protein = Math.floor(1.207 * height);
@@ -138,9 +181,6 @@ export default function Tdee() {
             macros.bulk.calories = bulkCal
         }
         bulkWeight();
-
-        console.log("bmr: "+bmr)
-        console.log("tdee: "+tdee)
     }
     
     

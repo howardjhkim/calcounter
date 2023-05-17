@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect} from "react"
 import {NavLink} from "react-router-dom"
 import {Context} from "../Context/DataContext"
-// import Axios from 'axios'
+import Axios from 'axios'
 import Calendar from "./Calendar.jsx"
 
 
@@ -13,8 +13,14 @@ export default function ProfileBar() {
     const { tdeeMacros } = useContext(Context)
     const {bodyInfo} = useContext(Context)
 
+    const {personalDbList} = useContext(Context)
+    const { addPersonalDbList } = useContext(Context)
 
-    
+
+    Axios.get('http://localhost:3001/personal').then((response) => {
+        addPersonalDbList(response.data)
+    })
+
 
     
     return (
@@ -28,7 +34,7 @@ export default function ProfileBar() {
                         Weight
                     </span>
                     <span>
-                        {bodyInfo.length > 0 && bodyInfo[0].weight} lbs
+                        {personalDbList.length > 0 && personalDbList[0][0].weight} lbs
                     </span>
                 </div>
 
@@ -37,7 +43,7 @@ export default function ProfileBar() {
                         Height
                     </span>
                     <span>
-                        {bodyInfo.length > 0 && bodyInfo[0].height} cm
+                        {personalDbList.length > 0 && personalDbList[0][0].height} cm
                     </span>
                 </div>
 
@@ -46,11 +52,11 @@ export default function ProfileBar() {
                         Age
                     </span>
                     <span>
-                        {bodyInfo.length > 0 && bodyInfo[0].age}
+                        {personalDbList.length > 0 && personalDbList[0][0].age}
                     </span>
                 </div>
                 
-                <div className="profile-info-container main-typography">
+                {/* <div className="profile-info-container main-typography">
                     <span>
                         TDEE
                     </span>
@@ -66,7 +72,7 @@ export default function ProfileBar() {
                     <span>
                         {bodyInfo.length > 0 && bodyInfo[0].age}
                     </span>
-                </div>
+                </div> */}
                 
             </div>
 

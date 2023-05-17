@@ -13,6 +13,12 @@ const db = mysql.createConnection({
     database: 'calcountdb',
 });
 
+
+
+
+///////////////////////// FOODINPUT DATA ONLY ////////////////////////////////////
+
+
 app.post("/create", (req, res) => {
     console.log(req.body)
     const name = req.body.name;
@@ -58,6 +64,7 @@ app.delete('/delete/:name', (req, res) => {
     })
 })
 
+///////////////////////// TDEE DATA ONLY ////////////////////////////////////
 
 app.post("/tdee", (req, res) => {
     const protein = req.body.protein;
@@ -80,7 +87,50 @@ app.post("/tdee", (req, res) => {
 })
 
 
+app.get('/tdee', (req, res) => {
+    db.query("SELECT * FROM tdee", (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
 
+
+
+
+///////////////////////// PERSONAL DATA ONLY ////////////////////////////////////
+
+app.post("/personal", (req, res) => {
+    const weight = req.body.weight;
+    const height = req.body.height;
+    const age = req.body.age;
+
+    const sqlInsert = 'INSERT INTO personal (weight, height, age) VALUES (?,?,?)'
+    db.query(
+        sqlInsert, 
+        [weight, height, age], 
+        (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send("Values Inserted")
+            }
+        }
+    )
+})
+
+
+app.get('/personal', (req, res) => {
+    db.query("SELECT * FROM personal", (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
 
 
 

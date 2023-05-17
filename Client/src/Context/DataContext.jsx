@@ -30,13 +30,29 @@ function ContextProvider({children}) {
         setBodyInfo([newBodyInfo])
     }
 
+
+
+
+
+
+
     const [foodDbList, setFoodDbList] = useState([])
     const addFoodDbList = (newFoodDb) => {
         setFoodDbList([newFoodDb])
     }
 
-    // console.log(foodDbList[0])
-    
+
+    const [tdeeDbList, setTdeeDbList] = useState([])
+    const addTdeeDbList = (newTdeeDb) => {
+        setTdeeDbList([newTdeeDb])
+    }
+
+    const [personalDbList, setPersonalDbList] = useState([])
+    const addPersonalDbList = (newPersonalDbList) => {
+        setPersonalDbList([newPersonalDbList])
+    }
+
+   
 
     return (
         <Context.Provider value={{
@@ -44,7 +60,9 @@ function ContextProvider({children}) {
             tdeeMacros, addTdeeMacros, 
             updateFood, 
             bodyInfo, addBodyInfo,
-            foodDbList, addFoodDbList
+            foodDbList, addFoodDbList,
+            tdeeDbList, addTdeeDbList,
+            personalDbList, addPersonalDbList,
         }}>
 
             {children}

@@ -7,6 +7,7 @@ import carbIcon from "../Images/carbIcon.svg"
 import fatsIcon from "../Images/fatIcon.svg"
 import caloriesIcon from "../Images/caloriesIcon.svg"
 import meatIcon from "../Images/meatIcon.svg"
+import Axios from 'axios'
 
 import macroscard from "../CSS/MacrosCard.css"
 
@@ -28,6 +29,19 @@ export default function MacrosCard() {
 
     // food list destructured and each macro is accumulated
     
+
+    const {tdeeDbList} = useContext(Context)
+    const { addTdeeDbList } = useContext(Context)
+
+
+    Axios.get('http://localhost:3001/tdee').then((response) => {
+        addTdeeDbList(response.data)
+    })
+
+
+
+
+
 
     let protein = 0;
     let carbs = 0;
@@ -64,19 +78,24 @@ export default function MacrosCard() {
    let fatCurrPercentage = 0;
    let caloriesCurrPercentage = 0;
    
-    if (tdeeMacros.length > 0 && foodDbList[0].length > 0) {
-        proteinCurrPercentage = Math.floor(((protein / tdeeMacros[0].cut.protein) * 100))
-        carbsCurrPercentage = Math.floor(((carbs / tdeeMacros[0].cut.carbs) * 100))
-        fatCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.fat) * 100))
-        caloriesCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.calories) * 100))
+    // if (tdeeMacros.length > 0 && foodDbList[0].length > 0) {
+    //     proteinCurrPercentage = Math.floor(((protein / tdeeMacros[0].cut.protein) * 100))
+    //     carbsCurrPercentage = Math.floor(((carbs / tdeeMacros[0].cut.carbs) * 100))
+    //     fatCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.fat) * 100))
+    //     caloriesCurrPercentage = Math.floor(((fat / tdeeMacros[0].cut.calories) * 100))
+    // }
+    if (tdeeDbList.length > 0 && foodDbList[0].length > 0) {
+        proteinCurrPercentage = Math.floor(((protein / tdeeDbList[0][0].protein) * 100))
+        carbsCurrPercentage = Math.floor(((carbs / tdeeDbList[0][0].carbs) * 100))
+        fatCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].fat) * 100))
+        caloriesCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].calories) * 100))
     }
        
 
     
-
-       
-       // need state changes for progress bar increase effect
-       
+    
+    // need state changes for progress bar increase effect
+    
     const [macroPercent, setMacroPercent] = useState({
         protein: 0,
         carbs: 0,
@@ -121,7 +140,7 @@ export default function MacrosCard() {
                 
             }, speed);
             return () => clearInterval(progress);
-        }, [endValue, tdeeMacros, foodDbList]);
+        }, [endValue]);
         // }, [tdeeMacros, foodList]);
     }
 
@@ -131,7 +150,7 @@ export default function MacrosCard() {
     useProgressBar("calories", caloriesCurrPercentage, setMacroPercent);
 
 
-
+    // console.log(macroPercent.protein)
 
   
     return (
@@ -160,7 +179,8 @@ export default function MacrosCard() {
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Suggested</span>
                             <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0}
+                                {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0} */}
+                                {tdeeDbList.length > 0 ? tdeeDbList[0][0].protein : 0}
                             </span>
                         </div>
                     </div>
@@ -201,7 +221,8 @@ export default function MacrosCard() {
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Suggested</span>
                             <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0}
+                                {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0} */}
+                                {tdeeDbList.length > 0 ? tdeeDbList[0][0].carbs : 0}
                             </span>
                         </div>
                     </div>
@@ -240,7 +261,8 @@ export default function MacrosCard() {
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Suggested</span>
                             <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fat : 0}
+                                {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fat : 0} */}
+                                {tdeeDbList.length > 0 ? tdeeDbList[0][0].fat : 0}
                             </span>
                         </div>
                     </div>
@@ -279,7 +301,8 @@ export default function MacrosCard() {
                         <div className="suggested-consumed-sub-container">
                             <span className="consumed-suggested-text">Suggested</span>
                             <span className="macro-counter">
-                                {tdeeMacros.length > 0 ? tdeeMacros[0].cut.calories : 0}
+                                {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.calories : 0} */}
+                                {tdeeDbList.length > 0 ? tdeeDbList[0][0].calories : 0}
                             </span>
                         </div>
                     </div>
