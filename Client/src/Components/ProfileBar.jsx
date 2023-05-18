@@ -1,22 +1,22 @@
 import React, { useContext, useState, useEffect} from "react"
-import {NavLink} from "react-router-dom"
 import {Context} from "../Context/DataContext"
 import Axios from 'axios'
-import Calendar from "./Calendar.jsx"
+// import Calendar from "./Calendar.jsx"
+import profilebar from "../CSS/ProfileBar.css"
 
 
-import profilePicture from "../Images/profile-picture.png"
 
 export default function ProfileBar() {
     
     
-    const { tdeeMacros } = useContext(Context)
     const {bodyInfo} = useContext(Context)
-
+    
+    ///////////// Database State Datas /////////////
     const {personalDbList} = useContext(Context)
     const { addPersonalDbList } = useContext(Context)
 
 
+    ///////////// Database GET & DELETE /////////////
     Axios.get('http://localhost:3001/personal').then((response) => {
         addPersonalDbList(response.data)
     })
@@ -25,32 +25,25 @@ export default function ProfileBar() {
     
     return (
         <div className="profile-bar-master-container">
-    
             <span className="small-title-grey">My Profile</span>
             
             <div className="profile-info-master-container">
                 <div className="profile-info-container main-typography">
-                    <span>
-                        Weight
-                    </span>
+                    <span>Weight</span>
                     <span>
                         {personalDbList.length > 0 && personalDbList[0][0].weight} lbs
                     </span>
                 </div>
 
                 <div className="profile-info-container main-typography">
-                    <span>
-                        Height
-                    </span>
+                    <span>Height</span>
                     <span>
                         {personalDbList.length > 0 && personalDbList[0][0].height} cm
                     </span>
                 </div>
 
                 <div className="profile-info-container main-typography">
-                    <span>
-                        Age
-                    </span>
+                    <span>Age</span>
                     <span>
                         {personalDbList.length > 0 && personalDbList[0][0].age}
                     </span>
@@ -89,15 +82,15 @@ export default function ProfileBar() {
                 <div className="goals-sub-container">
                     <div className="goals goal-1 component-subtitle">
                         <span className="goal-title">Goal Weight</span>
-                        <div>{bodyInfo.length > 0 && bodyInfo[0].goalWeight}</div>
+                        <div>{personalDbList.length > 0 && personalDbList[0][0].weight}</div>
                     </div>
                     <div className="goals component-subtitle">
                         <span className="goal-title">Bench PR</span>
-                        <div>{bodyInfo.length > 0 && bodyInfo[0].goalWeight}</div>
+                        <div>{personalDbList.length > 0 && personalDbList[0][0].weight}</div>
                     </div>
                     <div className="goals component-subtitle">
                         <span className="goal-title">Pull-Up Max</span>
-                        <div>{bodyInfo.length > 0 && bodyInfo[0].goalWeight}</div>
+                        <div>{personalDbList.length > 0 && personalDbList[0][0].weight}</div>
                     </div>
                 </div>
             </div>

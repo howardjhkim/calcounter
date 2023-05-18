@@ -3,19 +3,23 @@ import { ReactComponent as Art } from "../Images/art.svg"
 
 
 export default function Home() {
-
+    
+    ///////////// State for fetched quotes /////////////
     const [quotes, setQuotes] = useState([]);
     const [randomQuote, setRandomQuote] = useState(null);
     
+
+    ///////////// Fetched quotes from API /////////////
     useEffect(() => {
         fetch("https://type.fit/api/quotes")
             .then(res => res.json())
             .then((data) => {
                 setQuotes(data);
                 setRandomQuote(data[Math.floor(Math.random() * data.length)]);
-              })    
-              .catch((error) => console.error(error));
-    }, [])
+            })    
+            .catch((error) => console.error(error));
+        }, 
+    [])
 
     
     return (

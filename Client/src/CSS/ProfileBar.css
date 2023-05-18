@@ -1,0 +1,87 @@
+.profile-bar-master-container{
+    height: 100%;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    /* border: 2px solid red; */
+}
+
+
+.profile-info-master-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+}
+
+.profile-info-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.goals-master-container {
+    /* border: 2px solid grey; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.goals-sub-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.goals{
+    /* border: 2px solid purple; */
+    border-radius: 5px;
+    gap: 20px;
+    height: 50px;
+    padding: 20px;
+    background: #F4F7FE;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+}
+
+
+.goal-title{
+    background-color:#C7E6FB;
+    border-radius: 5px;
+    padding: 12px 10px
+}
+  
+
+/* .goal-1 {
+  background-color: #efedff;
+}
+
+.goal-2 {
+  background-color: #f6f8e8
+}
+
+.goal-3 {
+  background-color: #e8f1f9
+} */
+
+
+.checkbox-master-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.checkbox{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin-top: 10px;
+    padding: 0;
+}

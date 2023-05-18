@@ -108,73 +108,6 @@ p {
 
 
 
-/******************************* 
-Header Only
-********************************/
-
-header {
-  display: flex;
-  font-size: 1.175rem;
-  font-weight: 600;
-  height: 64px;
-  align-items: center;
-  margin-left: auto;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-}
-
-.header-master-container {
-  display: flex;
-  width: 100%;
-  padding: 0 12px;
-  align-items: center;
-  justify-content: space-between;
-}
-.header-rightside-container {
-  display: flex;
-  flex-direction: space-between;
-  gap: 40px;
-  /* border: 1px solid red; */
-  justify-content: center;
-  align-items: center;
-}
-
-
-.header-button{
-  margin-left: 12px;
-  margin-right: 16px;
-  background-color: rgb(26,115,232);
-  width: 101.45px;
-  height: 36px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  border-radius: 4px;
-  border: none;
-  transition: all 250ms;
-}
-
-
-
-.header-button:hover,
-.header-button:focus {
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.3) 0 4px 12px;
-  color: rgba(0, 0, 0, 0.65);
-  opacity: 2.5;
-}
-
-
-
-.header-button:hover {
-  transform: translateY(-1px);
-}
-
-
-/*  */
-
-
 nav > a {
   text-decoration: none;
   color: black;
@@ -479,12 +412,7 @@ General Site Design
 /**********************Vertical Side Nav Bar****************************/
 
 
-.vertical-nav-bar {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  height: 100%;
-}
+
 
 .section-small-title {
   display: inline;
@@ -515,49 +443,12 @@ a:hover {
 }
 
 
-.nav-links-and-icon-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 30px;
-  margin: 20px 0px;
-  padding: 8px 20px;
-}
-
-.vertical-nav-bar-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
 
-.home-logo {
-  text-decoration: none;
-  color: black;
-  width: 180px;
-  height: 15px;
-  margin: 0px;
-  padding: 0px;
-  background: white;
-  /* border: 1px solid red; */
-}
 
 
-/* header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.175rem;
-  font-weight: 600;
-  height: 5rem;
-  align-items: center;
-  margin-left: auto;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 
-} */
 
-/* header .navlinks {
-  padding: 0 10px;
-} */
 
 
 
@@ -623,24 +514,11 @@ a:hover {
 /*******************Profile Bar Grid*******************************/
 
 
-.profile-bar-master-container{
-  height: 100%;
-  padding: 0px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-  /* border: 2px solid red; */
-}
 
 
 
 
-.profilepic-img{
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  
-}
+
 
 .profilepic-name-and-info-container {
   display: flex;
@@ -672,51 +550,7 @@ a:hover {
 
 
 
-.goals-master-container {
-  /* border: 2px solid grey; */
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
-
-.goals-sub-container{
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.goals{
-  /* border: 2px solid purple; */
-  border-radius: 5px;
-  gap: 20px;
-  height: 50px;
-  padding: 20px;
-  background: #F4F7FE;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-}
-
-
-.goal-title{
-  background-color:#C7E6FB;
-  border-radius: 5px;
-  padding: 12px 10px
-}
-
-/* .goal-1 {
-  background-color: #efedff;
-}
-
-.goal-2 {
-  background-color: #f6f8e8
-}
-
-.goal-3 {
-  background-color: #e8f1f9
-} */
 
 
 
@@ -813,34 +647,10 @@ hr {
 /******************/
 
 
-.profile-info-master-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-}
 
 
-.profile-info-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 
 
-.checkbox-master-container{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.checkbox{
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  margin-top: 10px;
-  padding: 0;
-}
 
 
 
@@ -910,15 +720,7 @@ thead  {
 
 
 
-.header-leftside-container{
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
 
-.dropdown {
-  display: none;
-}
 
 .testTable{
   width: 100%;

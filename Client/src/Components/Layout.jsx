@@ -8,14 +8,7 @@ import ProfileBar from "./ProfileBar"
 
 export default function Layout() {
     return(
-        // <div className="site-wrapper">
-        //     <VerticalNavbar />
-        //     <div className="components">
-        //         <Header />
-        //         <Outlet />
-        //         <Footer />
-        //     </div>
-        // </div>
+       
 
 
         <div className="site-wrapper-grid">
