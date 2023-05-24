@@ -26,6 +26,19 @@ textarea:focus, input:focus{
   margin: 35px 0px;
 }
 
+
+.self-widget{
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 20px 25px 30px 25px;
+  margin: 10px 0px;
+}
+
+
+
+
+
 a:visited {
   text-decoration: none;
 }
@@ -35,6 +48,7 @@ p {
   font-size: 0.85rem;
   font-family: sans-serif;
   color: #8e8e8e;
+  margin: 10px 0px;
 }
 
 
@@ -66,6 +80,34 @@ p {
   letter-spacing: .0142857143em;
   font-weight: 400;
 }
+
+.outside-component-title-container{
+  display: block;
+  
+}
+
+.outside-component-title {
+  color: rgb(32,33,36);
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  line-height: 1.75rem;
+  font-size: 1.375rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.outside-component-subtitle {
+  color: rgb(128,134,139);
+  line-height: 1.25rem;
+  font-size: .875rem;
+  letter-spacing: .0142857143em;
+  font-weight: 400;
+  width: 100%;
+  margin: 0px;
+}
+
+
+
 
 
 
@@ -173,11 +215,11 @@ food inputs
   margin-top: 20px;
 }
 
-
-.tdee-inputs{
-  border: none;
-  border-bottom: 1px solid grey;
+.submitBtn:hover {
+  background-color: lightgrey;
+  opacity: 1;
 }
+
 
 
 .food-input-details-category {
@@ -287,18 +329,26 @@ General Site Design
     
   }
   
+  .header {
+    grid-area: header;
+    grid-column: 1 / -1;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+    background-color: white;
+  }
+  
   .navbar {
     grid-area: navbar;
     grid-column: 1 / 2;
     /* border-right: 2px solid #edede9; */
     width: 256px;
     grid-row: 2 / -1;
-  }
-  
-  .header {
-    grid-area: header;
-    grid-column: 1 / -1;
-    margin-bottom: 20px;
+    position: sticky;
+    top: 85px;
+    z-index: 2;
+    height: calc(100vh - 90px);  
   }
   
   .outlet {
@@ -319,6 +369,10 @@ General Site Design
     grid-column: 11 / 13;
     color: black;
     grid-row: 2/13;
+    position: sticky;
+    top: 85px;
+    z-index: 2;
+    height: calc(100vh - 90px);  
     /* border-left: 2px solid #edede9; */
   }
   
@@ -438,7 +492,7 @@ a.active {
 
 
 a:hover {
-  /* background: #F2F3F5; */
+  background: #F2F3F5;
   border-radius: 0 24px 24px 0;
 }
 
@@ -546,80 +600,6 @@ a:hover {
   flex-direction: column;
   align-items: center;
   padding: 30px;
-}
-
-
-
-
-
-
-
-
-
-/*******************Tdee Grid*******************************/
-.tdee-page-grid{
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  gap: 50px;
-  height: 100vh;
-
-}
-
-.bmr-container{
-  grid-column: 2 / 10;
-}
-
-.bmr-grid{
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
-  gap: 10px;
-}
-
-.bmr-calculation-widget-1{
-  grid-column: 1 / 7;
-}
-
-
-.bmr-calculation-widget-2{
-  grid-column: 7 / 13;
-}
-
-
-
-.macros-container{
-  grid-column: 2 / 10;
-}
-
-.macros-grid{
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
-  gap: 10px;
-}
-
-
-
-.tdee-cutting {
-  grid-column: 1 / 5
-
-}
-
-.tdee-maintenance {
-  grid-column: 5 / 9
-}
-
-.tdee-bulking {
-  grid-column: 9 / 13
-}
-
-
-.tdee-suggested-row{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
 }
 
 

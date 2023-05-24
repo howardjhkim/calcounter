@@ -6,6 +6,8 @@ import logo from "../Images/logo.png"
 import hamburger from "../Images/hamburger.png"
 import profilePicture from "../Images/profile-picture.png"
 import header from "../CSS/Header.css"
+// import toggle from "../CSS/Toggle.css"
+
 
 export default function Header() {
 
@@ -30,6 +32,14 @@ export default function Header() {
                     
                     </button>
                     <img className="profilepic-img" src={profilePicture} />
+                
+                    {/* <div className="container">
+                        <input type="checkbox" className="checkbox" id="checkbox" />
+                        <label className="switch" htmlFor="checkbox">
+                            <span className="slider"></span>
+                        </label>
+                    </div> */}
+                
                 </div>
             </nav>
         </header>

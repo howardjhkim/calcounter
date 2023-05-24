@@ -10,7 +10,8 @@ export default function WeightLossTracker() {
 
     let progressEndValue = 20,
         speed = 35;
-        
+    
+    ///////////// Visual graph incrementer /////////////
     useEffect(() => {
         const progress = setInterval(() => {
             setProgressValue((prevValue) => {

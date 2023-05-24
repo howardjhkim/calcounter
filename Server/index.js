@@ -103,14 +103,20 @@ app.get('/tdee', (req, res) => {
 ///////////////////////// PERSONAL DATA ONLY ////////////////////////////////////
 
 app.post("/personal", (req, res) => {
-    const weight = req.body.weight;
-    const height = req.body.height;
     const age = req.body.age;
+    const height = req.body.height;
+    const weight = req.body.weight;
+    const goalWeight = req.body.goalWeight;
+    const activity = req.body.activity;
+    const startDate = req.body.startDate;
+    const targetDate = req.body.targetDate;
+    const daysRemaining = req.body.daysRemaining;
 
-    const sqlInsert = 'INSERT INTO personal (weight, height, age) VALUES (?,?,?)'
+
+    const sqlInsert = 'INSERT INTO personal (age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining) VALUES (?,?,?,?,?,?,?,?)'
     db.query(
         sqlInsert, 
-        [weight, height, age], 
+        [age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining], 
         (err, result) => {
             if (err) {
                 console.log(err)

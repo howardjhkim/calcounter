@@ -21,7 +21,6 @@ export default function ProfileBar() {
         addPersonalDbList(response.data)
     })
 
-
     
     return (
         <div className="profile-bar-master-container">
@@ -31,30 +30,30 @@ export default function ProfileBar() {
                 <div className="profile-info-container main-typography">
                     <span>Weight</span>
                     <span>
-                        {personalDbList.length > 0 && personalDbList[0][0].weight} lbs
+                        {personalDbList?.[0]?.[0]?.weight || ''} lbs
                     </span>
                 </div>
 
                 <div className="profile-info-container main-typography">
                     <span>Height</span>
                     <span>
-                        {personalDbList.length > 0 && personalDbList[0][0].height} cm
+                        {personalDbList?.[0]?.[0]?.height || ''} cm
                     </span>
                 </div>
 
                 <div className="profile-info-container main-typography">
                     <span>Age</span>
                     <span>
-                        {personalDbList.length > 0 && personalDbList[0][0].age}
+                        {personalDbList?.[0]?.[0]?.age || ''}
                     </span>
                 </div>
                 
-                {/* <div className="profile-info-container main-typography">
+                <div className="profile-info-container main-typography">
                     <span>
-                        TDEE
+                        Goal Weight
                     </span>
                     <span>
-                        {bodyInfo.length > 0 && bodyInfo[0].age}
+                        {personalDbList?.[0]?.[0]?.goalWeight || ''} lbs
                     </span>
                 </div>
 
@@ -65,7 +64,7 @@ export default function ProfileBar() {
                     <span>
                         {bodyInfo.length > 0 && bodyInfo[0].age}
                     </span>
-                </div> */}
+                </div>
                 
             </div>
 
@@ -82,21 +81,20 @@ export default function ProfileBar() {
                 <div className="goals-sub-container">
                     <div className="goals goal-1 component-subtitle">
                         <span className="goal-title">Goal Weight</span>
-                        <div>{personalDbList.length > 0 && personalDbList[0][0].weight}</div>
+                        <div>{personalDbList[0] > 0 && personalDbList[0][0].weight}</div>
                     </div>
                     <div className="goals component-subtitle">
                         <span className="goal-title">Bench PR</span>
-                        <div>{personalDbList.length > 0 && personalDbList[0][0].weight}</div>
+                        <div>{personalDbList[0] > 0 && personalDbList[0][0].weight}</div>
                     </div>
                     <div className="goals component-subtitle">
                         <span className="goal-title">Pull-Up Max</span>
-                        <div>{personalDbList.length > 0 && personalDbList[0][0].weight}</div>
+                        <div>{personalDbList[0] > 0 && personalDbList[0][0].weight}</div>
                     </div>
                 </div>
             </div>
 
 
-            {/* <Calendar /> */}
 
             <hr />
 

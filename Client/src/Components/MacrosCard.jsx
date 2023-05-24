@@ -50,14 +50,14 @@ export default function MacrosCard() {
    
 
     ///////////// Calculates the macros percentage if TDEE AND food has been submitted /////////////
-    if (tdeeDbList.length > 0 && foodDbList[0].length > 0) {
+    if (foodDbList[0] && tdeeDbList[0]) {
         proteinCurrPercentage = Math.floor(((protein / tdeeDbList[0][0].protein) * 100))
         carbsCurrPercentage = Math.floor(((carbs / tdeeDbList[0][0].carbs) * 100))
         fatCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].fat) * 100))
         caloriesCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].calories) * 100))
     }
+    
        
-
     ///////////// State used to graphically display progress bar increment/decrements /////////////
     const [macroPercent, setMacroPercent] = useState({
         protein: 0,

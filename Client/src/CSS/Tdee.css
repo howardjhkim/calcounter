@@ -1,0 +1,112 @@
+.tdee-page-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(2, auto);
+    /* gap: 50px; */
+    height: 100%;
+    gap: 50px;
+}
+
+.bmr-master-container-1 {
+    display: grid;
+    grid-row: 1 / 2;
+    grid-column: 2 / 12;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+
+
+.bmr-calculation-widget-1{
+    grid-column: 1 / 2;
+}
+
+
+.bmr-calculation-widget-2{
+    grid-column: 2 / 3;
+    
+}
+
+
+.bmr-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.bmr-info-container-first {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    
+}
+
+.bmr-master-container-2 {
+    display: grid;
+    grid-row: 2 / 3;
+    grid-column: 2 / 12;
+    gap: 10px;
+}
+
+.macros-master-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tdee-inputs{
+    border: none;
+    border-bottom: 1px solid grey;
+    width: 150px;
+}
+
+
+.tdee-suggested-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+
+
+.macros-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+}
+   
+.tdee-cutting {
+    grid-column: 1 / 2
+
+}
+
+.tdee-maintenance {
+    grid-column: 2 / 3
+}
+
+.tdee-bulking {
+    grid-column: 3 / 4
+  
+}
+
+
+.bmr-info-title{
+    background-color: lightblue;
+}
+
+
+
+.bmr-info-row{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+.tested {
+    width: 150px;
+}
+

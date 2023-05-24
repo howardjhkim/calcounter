@@ -8,6 +8,7 @@ import WeightLossTracker from "../Components/WeightLossTracker"
 import Banner from "../Components/Banner"
 import { ReactComponent as Art } from "../Images/art.svg"
 
+import Dates from "../Components/Dates"
 
 
 export default function Home() {
@@ -20,6 +21,9 @@ export default function Home() {
                 <span className="welcoming-text">Welcome back, #</span>
                 <span className="sub-welcoming-text">Here's an overview of your progress</span>
             </div>
+
+
+            {/* <Dates /> */}
             
             <div className="homepage-grid-banner">
                 <Banner />
