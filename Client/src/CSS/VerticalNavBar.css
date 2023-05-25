@@ -30,3 +30,65 @@ nav > a {
     margin: 20px 0px;
     padding: 8px 20px;
   }
+
+
+
+
+
+  @media (max-width: 1007px) {
+    .navbar {
+        width: 72px;
+    }
+    
+    .navlinks {
+      display: none
+    }
+  
+    a.active {
+      background: rgb(232,240,254);
+      color: rgb(26,115,232);
+      width: 28px;
+    }
+  
+    
+  
+    .navbar {
+      grid-area: navbar;
+      grid-column: 1 / 2;
+      /* border-right: 2px solid #edede9; */
+      width: 72px;
+      grid-row: 2 / -1;
+      /* border: 2px solid red; */
+    }
+    
+   
+    .main-typography {
+        display: none;
+    }
+    
+  
+   
+  
+    .nav-links-and-icon-container{
+      width: 72px;
+      /* border: 2px solid green; */
+    }
+
+
+  
+    .dropdown {
+      display: flex;
+    }
+  
+  }
+
+  @media (max-width: 600px) {
+    
+    
+    .vertical-nav-bar-sections, .line-breaker{
+      display: none;
+    }
+  
+    
+  
+  }

@@ -86,16 +86,6 @@
   }
 
 
-
-
-
-
-
-
-
-
-
-
   .suggested-consumed-master-container {
     display: flex;
     flex-direction: column;
@@ -175,84 +165,52 @@
 
 
 
-  /***********MEDIA QUERIES****************/
 
-@media (max-width: 1007px) {
-  .navbar {
-      width: 72px;
-  }
-  
-  .navlinks {
-    display: none
-  }
 
-  a.active {
-    background: rgb(232,240,254);
-    color: rgb(26,115,232);
-    width: 28px;
-  }
 
-  .site-wrapper-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto;
-    grid-template-areas: 
-      
-      "header header header"
-      "navbar outlet outlet"
-      "navbar outlet outlet";
-      
+
+
+
+
+
+
+
+
+
+
+  @media (max-width: 1199px) {
+    .macros-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 15px;
+      margin: 0px;
     }
 
-  .navbar {
-    grid-area: navbar;
-    grid-column: 1 / 2;
-    /* border-right: 2px solid #edede9; */
-    width: 72px;
-    grid-row: 2 / -1;
-    /* border: 2px solid red; */
-  }
-  
-  .header {
-    grid-area: header;
-    grid-column: 1 / -1;
-    margin-bottom: 20px;
-  }
-  
-  .outlet {
-    grid-area: outlet;
-    grid-column: 2 / -1;
-    /* border: 2px solid blue; */
-    /* background-color:#F8F5F0 */
-  }
+    .card-1 {
+      grid-column: 1/2;
+    }
+    
+    .card-2{
+      grid-column: 2/3;
+    }
+    
+    .card-3{
+      grid-column: 1/2;
+    }
+    
+    .card-4{
+      grid-column: 2/3;  
+    }
 
-  .profile-bar {
-    display: none;
-  }
+    
 
-  .nav-links-and-icon-container{
-    width: 72px;
-    /* border: 2px solid green; */
   }
 
 
-  /* .macro-name-with-icon-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-    justify-content: start;
-    overflow: auto;
-  } */
-
-  .macroscard-icon {
-    height: 20px;
-    border-radius: 50%;
-    padding: 5px;
+  @media (max-width: 400px) {
+    .macros-card-grid {
+      display: flex;
+      flex-direction: column;
+    }
   }
-
-
-  .dropdown {
-    display: flex;
-  }
-
-}

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import { ReactComponent as Art } from "../Images/art.svg"
-
+import banner from "../CSS/Banner.css"
 
 export default function Home() {
     

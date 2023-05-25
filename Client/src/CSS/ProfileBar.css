@@ -85,3 +85,16 @@
     margin-top: 10px;
     padding: 0;
 }
+
+
+
+
+
+@media (max-width: 1535px) { 
+    .profile-bar-master-container {
+        display: none;
+    }
+}
+
+
+

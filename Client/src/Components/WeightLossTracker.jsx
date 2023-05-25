@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from "react"
 import {Context} from "../Context/DataContext"
-
+import weightLossTracker from "../CSS/WeightLossTracker.css"
 
 
 export default function WeightLossTracker() {

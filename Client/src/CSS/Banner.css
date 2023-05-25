@@ -1,0 +1,111 @@
+.homepage-banner-container {
+
+    border-radius: 8px;
+    background-color: #FAEBE4;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 20px 25px 30px 25px;
+    margin: 35px 0px;
+  
+    display: flex;
+    height: 400px;
+    position: relative;
+  }
+
+
+  .quote-container {
+    /* border: 2px solid black; */
+    /* position: absolute;
+    top: 30%;
+    left: 5%; */
+    vertical-align: center;
+    width: 50%;
+  }
+
+  
+.quote {
+    margin-top: 50%;
+  }
+
+
+  .art-container{
+    width: 100%;
+    /* border: 2px solid green; */
+    height: 100%;
+  }
+  
+  .homepage-banner-art{
+    /* border: 2px solid red; */
+    height: 100%;
+    width: 100%;
+  }
+
+
+
+  @media (max-width: 1535px) and (min-width: 1201px){
+    .homepage-banner-container {
+        height: 300px;
+    }
+
+
+    .quote {
+        margin-top: 30%;
+      }
+
+  }
+
+  @media (max-width: 1200px){
+    .homepage-banner-container {
+        height: 250px;
+    }
+
+
+    .quote {
+        margin-top: 30%;
+      }
+
+  }
+
+
+
+  @media (max-width: 600px){
+    .homepage-banner-container {
+        height: 200px;
+    }
+
+
+    .quote {
+        margin-top: 30%;
+      }
+
+  }
+
+
+  @media (max-width: 450px){
+    .homepage-banner-container {
+        height: 100px;
+    }
+
+
+    .quote-container {
+        border: 2px solid red;
+    
+    }
+
+
+    .quote-container h3 {
+        font-size: 0.85rem;
+        
+    }
+    .quote {
+        margin-top: 5%;
+      }
+    
+    .quote p:first-child {
+        font-size: 0.575rem;
+    }
+
+
+    .quote p:nth-child(2) {
+        font-size: 0.5rem;
+    }
+  }

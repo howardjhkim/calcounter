@@ -1,0 +1,54 @@
+.weightloss-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3.125em;
+  }
+
+  .circular-progress {
+    position: relative;
+    height: 15.625em; 
+    width: 15.625em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: conic-gradient(#752ae8 3.6deg) */
+  }
+
+  .circular-progress::before {
+    content: "";
+    position: absolute;
+    height: 13.125em;
+    width: 13.125em;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+  
+  .progress-value {
+    position: relative;
+  }
+
+
+
+  @media (max-width: 400px) {
+    .circular-progress {
+        position: relative;
+        height: 10em; 
+        width: 10em;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background: conic-gradient(#752ae8 3.6deg) */
+      }
+
+      .circular-progress::before {
+        content: "";
+        position: absolute;
+        height: 7em;
+        width: 7em;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+  }
