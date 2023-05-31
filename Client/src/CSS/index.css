@@ -9,7 +9,6 @@ html, body {
   margin: 0px;
   width: 100%;
   box-sizing: border-box;
-  border: 2px solid red;
 }
 
 /******************************* 
@@ -265,33 +264,6 @@ footer {
 Food Table
 ********************************/
 
-table {
-  width: 100%;
-  font-weight: 300;
-  font-size: 0.8rem;
-  font-family: sans-serif;
-  color: #8e8e8e;
-  /* background-color: lightgrey; */
-}
-
-
-
-
-
-
-th:first-child, td:first-child {
-  text-align: left;
-}
-
-th:last-child, td:last-child {
-  text-align: right;
-}
-
-table > tbody > tr > td {
-  text-align: center;
-  padding: 3px;
-  line-height: 30px;
-}
 
 /******************************* 
 General Site Design

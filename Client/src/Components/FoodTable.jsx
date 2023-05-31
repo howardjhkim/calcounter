@@ -30,61 +30,6 @@ export default function FoodTable() {
             <div className="component-title-container">
                 <span className="component-title">Daily Breakdown</span>
             </div>
-
-
-
-
-            <div>
-                <div className="table-header">
-                    <p>Food</p>
-                    <p>Protein</p>
-                    <p>Carbs</p>
-                    <p>Fat</p>
-                    <p>Grams</p>
-                    <p>Servings</p>
-                    <p>Total Calories</p>
-                </div>
-                <div>
-                    {foodDbList[0] ? (
-                    foodDbList[0].map((food, id) => (
-                    <div className="table-data-rows" key={id}>
-                        <p>{food.name}</p>
-                        <p>{food.protein}</p>
-                        <p>{food.carbs}</p>
-                        <p>{food.fat}</p>
-                        <p>{food.servings}</p>
-                        <p>{food.grams}</p>
-                        <p>{/* Placeholder for the missing data */}</p>
-                    <div>
-                        <div className="icon-container">
-                            <img
-                            className="trash-icon small-icon"
-                            src={trashIcon}
-                            ref={inputRef}
-                            onClick={() => {deleteFoodDb(food.name)}}
-                            />
-                        </div>
-                        </div>
-                    </div>
-                    ))
-                    ) : null}
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <table>
                     <thead >
                         <tr >

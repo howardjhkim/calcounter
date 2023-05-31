@@ -50,11 +50,11 @@ export default function MacrosCard() {
    
 
     ///////////// Calculates the macros percentage if TDEE AND food has been submitted /////////////
-    if (foodDbList[0] && tdeeDbList[0]) {
-        proteinCurrPercentage = Math.floor(((protein / tdeeDbList[0][0].protein) * 100))
-        carbsCurrPercentage = Math.floor(((carbs / tdeeDbList[0][0].carbs) * 100))
-        fatCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].fat) * 100))
-        caloriesCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].calories) * 100))
+    if (foodDbList[0] && tdeeDbList[0]?.[0]) {
+        proteinCurrPercentage = Math.floor(((protein / tdeeDbList[0][0].cutProtein) * 100))
+        carbsCurrPercentage = Math.floor(((carbs / tdeeDbList[0][0].cutCarbs) * 100))
+        fatCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].cutFat) * 100))
+        caloriesCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].cutCalories) * 100))
     }
     
        
@@ -130,7 +130,8 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0} */}
-                            {tdeeDbList.length > 0 ? tdeeDbList[0][0].protein : 0}
+                            {tdeeDbList?.[0]?.[0]?.cutProtein || 0}
+                            {/* {tdeeDbList.length > 0 ? tdeeDbList[0][0].cutProtein : 0} */}
                         </span>
                     </div>
                 </div>
@@ -172,7 +173,7 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0} */}
-                            {tdeeDbList.length > 0 ? tdeeDbList[0][0].carbs : 0}
+                            {tdeeDbList?.[0]?.[0]?.cutCarbs || 0}
                         </span>
                     </div>
                 </div>
@@ -212,7 +213,7 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fat : 0} */}
-                            {tdeeDbList.length > 0 ? tdeeDbList[0][0].fat : 0}
+                            {tdeeDbList?.[0]?.[0]?.cutFat || 0}
                         </span>
                     </div>
                 </div>
@@ -252,7 +253,7 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.calories : 0} */}
-                            {tdeeDbList.length > 0 ? tdeeDbList[0][0].calories : 0}
+                            {tdeeDbList?.[0]?.[0]?.cutCalories || 0}
                         </span>
                     </div>
                 </div>

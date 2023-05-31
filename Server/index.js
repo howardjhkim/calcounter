@@ -67,15 +67,25 @@ app.delete('/delete/:name', (req, res) => {
 ///////////////////////// TDEE DATA ONLY ////////////////////////////////////
 
 app.post("/tdee", (req, res) => {
-    const protein = req.body.protein;
-    const carbs = req.body.carbs;
-    const fat = req.body.fat;
-    const calories = req.body.calories;
+    const cutProtein = req.body.cutProtein;
+    const cutCarbs = req.body.cutCarbs;
+    const cutFat = req.body.cutFat;
+    const cutCalories = req.body.cutCalories;
+    
+    const maintainProtein = req.body.maintainProtein;
+    const maintainCarbs = req.body.maintainCarbs;
+    const maintainFat = req.body.maintainFat;
+    const maintainCalories = req.body.maintainCalories;
+    
+    const gainProtein = req.body.gainProtein;
+    const gainCarbs = req.body.gainCarbs;
+    const gainFat = req.body.gainFat;
+    const gainCalories = req.body.gainCalories;
 
-    const sqlInsert = 'INSERT INTO tdee (protein, carbs, fat, calories) VALUES (?,?,?,?)'
+    const sqlInsert = 'INSERT INTO tdee (cutProtein, cutCarbs, cutFat, cutCalories, maintainProtein, maintainCarbs, maintainFat, maintainCalories, gainProtein, gainCarbs, gainFat, gainCalories) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
     db.query(
         sqlInsert, 
-        [protein, carbs, fat, calories], 
+        [cutProtein, cutCarbs, cutFat, cutCalories, maintainProtein, maintainCarbs, maintainFat, maintainCalories, gainProtein, gainCarbs, gainFat, gainCalories], 
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -111,12 +121,13 @@ app.post("/personal", (req, res) => {
     const startDate = req.body.startDate;
     const targetDate = req.body.targetDate;
     const daysRemaining = req.body.daysRemaining;
+    const tdeeDb = req.body.tdeeDb;
+    const bmrDb = req.body.bmrDb;
 
-
-    const sqlInsert = 'INSERT INTO personal (age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining) VALUES (?,?,?,?,?,?,?,?)'
+    const sqlInsert = 'INSERT INTO personal (age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining, tdeeDb, bmrDb) VALUES (?,?,?,?,?,?,?,?,?,?)'
     db.query(
         sqlInsert, 
-        [age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining], 
+        [age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining, tdeeDb, bmrDb], 
         (err, result) => {
             if (err) {
                 console.log(err)

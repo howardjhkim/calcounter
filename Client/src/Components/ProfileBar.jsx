@@ -28,42 +28,29 @@ export default function ProfileBar() {
             
             <div className="profile-info-master-container">
                 <div className="profile-info-container main-typography">
-                    <span>Weight</span>
-                    <span>
-                        {personalDbList?.[0]?.[0]?.weight || ''} lbs
-                    </span>
+                    <span>Age</span>
+                    <span>{personalDbList?.[0]?.[0]?.age || ''}</span>
                 </div>
-
                 <div className="profile-info-container main-typography">
                     <span>Height</span>
-                    <span>
-                        {personalDbList?.[0]?.[0]?.height || ''} cm
-                    </span>
+                    <span>{personalDbList?.[0]?.[0]?.height || ''} cm</span>
+                </div>
+                <div className="profile-info-container main-typography">
+                    <span>Weight</span>
+                    <span>{personalDbList?.[0]?.[0]?.weight || ''} lbs</span>
+                </div>
+                <div className="profile-info-container main-typography">
+                    <span>Goal Weight</span>
+                    <span>{personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</span>
+                </div>
+                <div className="profile-info-container main-typography">
+                    <span>Remaining Weight</span>
+                    <span>{personalDbList?.[0]?.[0]?.weight - personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</span>
                 </div>
 
                 <div className="profile-info-container main-typography">
-                    <span>Age</span>
-                    <span>
-                        {personalDbList?.[0]?.[0]?.age || ''}
-                    </span>
-                </div>
-                
-                <div className="profile-info-container main-typography">
-                    <span>
-                        Goal Weight
-                    </span>
-                    <span>
-                        {personalDbList?.[0]?.[0]?.goalWeight || ''} lbs
-                    </span>
-                </div>
-
-                <div className="profile-info-container main-typography">
-                    <span>
-                        BMR
-                    </span>
-                    <span>
-                        {bodyInfo.length > 0 && bodyInfo[0].age}
-                    </span>
+                    <span>BMR</span>
+                    <span>{bodyInfo.length > 0 && bodyInfo[0].age}</span>
                 </div>
                 
             </div>
@@ -95,37 +82,32 @@ export default function ProfileBar() {
             </div>
 
 
-
             <hr />
 
-            
             <div className="checkbox-master-container">
                 
                 <span className="small-title-grey">Everyday Reminders</span>
                 <span>Did you..</span>
-                
-                
-
-
 
                 <ul className="checkbox main-typography">
                     <li>
                         <label className="" htmlFor="">
                             <input type="checkbox"/> Go to the gym?
                         </label>
-                        
                     </li>
+
+
                     <li>
                         <label className="" htmlFor="">
                             <input type="checkbox"/> Drink enough water?
-                        </label>
-                        
+                        </label> 
                     </li>
+
+
                     <li>
                         <label className="" htmlFor="">
                             <input type="checkbox"/> Sleep enough?
                         </label>
-                        
                     </li>
                 </ul>
 

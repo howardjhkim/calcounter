@@ -37,11 +37,44 @@
 .table-header{
     display: flex;
     justify-content: space-between;
+    text-align: left;
 }
 
 .table-data-rows{
     display: flex;
     justify-content: space-between;
+    text-align: left;
+}
+
+
+
+
+table {
+  width: 100%;
+  font-weight: 300;
+  font-size: 0.8rem;
+  font-family: sans-serif;
+  color: #8e8e8e;
+  /* background-color: lightgrey; */
+}
+
+
+
+
+
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+th:last-child, td:last-child {
+  text-align: right;
+}
+
+table > tbody > tr > td {
+  text-align: center;
+  padding: 3px;
+  line-height: 30px;
 }
 
 
@@ -51,34 +84,86 @@
 
 
 
-
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     table {
         width: 100%;
-        border: 2px solid blue;
+        font-size: .5em;
     }
 
 
     th, td {
-        display: block;
-        text-align: left;
-        border: 2px solid yellow;
+        /* display: block; */
+        border: 1px solid rgba(34,36,38,.15);
       }
       
-      th {
-        font-weight: bold;
-      }
       
-      td:before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        /* width: 80px; 
-        margin-right: 10px;  */
-      }
       
       .icon-container {
         display: flex;
         align-items: center;
+      }
+
+      .trash-icon{
+        width: 8px;
+        height: 8px;
+      }
+
+      th:first-child, th:last-child {
+        text-align: left;
+      }
+
+      td:first-child, td:last-child {
+        text-align: left;
+      }
+      
+      
+      thead {
+        background-color: #f9fafb;
+      }
+
+
+     tr {
+      margin: 0px;
+     }
+
+
+      table > tbody > tr > td {
+        text-align: left;
+        padding: 3px;
+        line-height: 0px;
+      }
+
+
+      tbody > tr {
+        padding: 10px;
+      }
+
+
+
+
+
+
+
+
+
+      .table {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid green;
+      }
+
+
+      .table-header {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        border: 1px solid orange;
+      }
+
+
+      .table-data-rows {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid teal;
       }
   }

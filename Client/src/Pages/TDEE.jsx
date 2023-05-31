@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import {Context} from "../Context/DataContext"
 import Axios from "axios"
 import tdee from "../CSS/Tdee.css"
-import DatePicker from "react-date-picker";
-
+// import DatePicker from "react-date-picker";
+// import Select from 'react-select'
 
 export default function Tdee() {
     
@@ -22,18 +22,38 @@ export default function Tdee() {
     
     const addTdeeDb = () => {
         Axios.post('http://localhost:3001/tdee', {
-            protein: macros.cut.protein,
-            carbs: macros.cut.carbs,
-            fat: macros.cut.fat,
-            calories: macros.cut.calories,  
+            cutProtein: macros.cut.protein,
+            cutCarbs: macros.cut.carbs,
+            cutFat: macros.cut.fat,
+            cutCalories: macros.cut.calories,  
+            
+            maintainProtein: macros.maintain.protein,
+            maintainCarbs: macros.maintain.carbs,
+            maintainFat: macros.maintain.fat,
+            maintainCalories: macros.maintain.calories,  
+            
+            gainProtein: macros.gain.protein,
+            gainCarbs: macros.gain.carbs,
+            gainFat: macros.gain.fat,
+            gainCalories: macros.gain.calories,  
         })
 
         addTdeeDbList(
             [{
-                protein: macros.cut.protein,
-                carbs: macros.cut.carbs,
-                fat: macros.cut.fat,
-                calories: macros.cut.calories, 
+                cutProtein: macros.cut.protein,
+                cutCarbs: macros.cut.carbs,
+                cutFat: macros.cut.fat,
+                cutCalories: macros.cut.calories, 
+
+                maintainProtein: macros.maintain.protein,
+                maintainCarbs: macros.maintain.carbs,
+                maintainFat: macros.maintain.fat,
+                maintainCalories: macros.maintain.calories,  
+                
+                gainProtein: macros.gain.protein,
+                gainCarbs: macros.gain.carbs,
+                gainFat: macros.gain.fat,
+                gainCalories: macros.gain.calories,
             }]
         )
     }
@@ -49,7 +69,9 @@ export default function Tdee() {
             activity: activity,
             startDate: startDate,
             targetDate: targetDate,
-            daysRemaining: daysRemaining
+            daysRemaining: daysRemaining,
+            tdeeDb: tdeeDb,
+            bmrDb: bmrDb
         })
 
         addPersonalDbList(
@@ -62,7 +84,9 @@ export default function Tdee() {
                 activity: activity,
                 startDate: startDate,
                 targetDate: targetDate,
-                daysRemaining: daysRemaining
+                daysRemaining: daysRemaining,
+                tdeeDb: tdeeDb,
+                bmrDb: bmrDb
             }]
         )
     }
@@ -84,9 +108,6 @@ export default function Tdee() {
     })
 
 
-    // const deleteFoodDb = (food) => {
-    //     Axios.delete(`http://localhost:3001/delete/${food}`)
-    // }
 
 
 
@@ -101,12 +122,23 @@ export default function Tdee() {
     let [targetDate, setTargetDate] = useState(new Date())
     let [daysRemaining, setDaysRemaining] = useState("")
 
+    let [bmrDb, setBmrDb] = useState(0);
+    let [tdeeDb, setTdeeDb] = useState(0);
+
+    let [gender, setGender] = useState('male')
+    
+    
+
+    
+
+
+
+
+
 
 
 
     
-    
-
     const calculateDifference = () => {
         const start = new Date(startDate);
         const end = new Date(targetDate);
@@ -115,14 +147,12 @@ export default function Tdee() {
         setDaysRemaining(differenceInDays);
     };
 
-
     useEffect(() => {
         calculateDifference();
     }, [targetDate, startDate]);
 
 
 
-    // console.log(targetDate)
 
 
     let [macrosState, setMacrosState] = useState('')
@@ -139,7 +169,7 @@ export default function Tdee() {
             carbs: 0,
             calories: 0
         },
-        bulk:{
+        gain:{
             protein: 0,
             fat: 0,
             carbs: 0,
@@ -149,104 +179,117 @@ export default function Tdee() {
     
 
     
+    useEffect(() => {
+        if(gender === 'male') {
+            let bmr = Math.floor(Math.round((4.536 * weight) + (15.88 * height) - (5 * age) + 5))
+            let tdee = Math.floor(bmr * 1.55)
+            setBmrDb(bmr)
+            setTdeeDb(tdee)
+        } else {
+            let bmr = Math.floor(Math.round((4.536 * weight) + (15.88 * height) - (5 * age) - 161))
+            let tdee = Math.floor(bmr * 1.55)
+            setTdeeDb(tdee)
+            setBmrDb(bmr)
+        }
+
+    }, [age, weight, height])
+    
+    
+    function calculation() {
+        // if (gender === "male") {
+        //     let bmr = Math.floor(Math.round((4.536 * weight) + (15.88 * height) - (5 * age) + 5))
+        //     let tdee = Math.floor(bmr * 1.55)
+        //     setTdeeDb(tdee)
+        //     setBmrDb(bmr)
+            
+        // } else {
+        //     let bmr = Math.floor(Math.round((4.536 * weight) + (15.88 * height) - (5 * age) - 161))
+        //     let tdee = Math.floor(bmr * 1.55)
+        //     setTdeeDb(tdee)
+        //     setBmrDb(bmr)
+        // }
+        
+
+        // let bmr = Math.floor(Math.round((4.536 * weight) + (15.88 * height) - (5 * age) + 5))
+        // let tdee = Math.floor(bmr * 1.55)
+        // setTdeeDb(tdee)
+        // setBmrDb(bmr)
+
+
+        
+        function cutWeight() {
+           
+            
+            // macros.cut.protein = weight
+            // macros.cut.carbs = (Math.floor(tdeeDb - (tdeeDb * .2))  - (weight * 4) - (Math.floor(.5 * weight) * 9)) / 4
+            // macros.cut.fat = Math.floor(.5 * weight);
+            // macros.cut.calories = Math.floor(tdeeDb - (tdeeDb * .2)) 
+            
+            let calories = Math.floor(tdeeDb - (tdeeDb * .2)) 
+
+
+            macros.cut.protein = Math.floor(calories * .215 / 4)
+            macros.cut.carbs = Math.floor(calories * .485 / 4)
+            macros.cut.fat = Math.floor(calories * .3 / 9)
+            macros.cut.calories = calories
+        }
+        cutWeight();
+        
+        
+        function maintainWeight() {
+        
+            
+            // macros.maintain.protein = Math.floor(1.207 * weight);
+            // macros.maintain.carbs = (macros.maintain.calories - (macros.maintain.protein * 4) - (macros.maintain.fat * 9)) / 4
+            // macros.maintain.fat = Math.floor(.6 * weight);
+            // macros.maintain.calories = tdeeDb
+            
+            let calories = tdeeDb
+
+
+            macros.maintain.protein = Math.floor(calories * .172 / 4)
+            macros.maintain.carbs = Math.floor(calories * .528 / 4)
+            macros.maintain.fat = Math.floor(calories * .3 / 9)
+            macros.maintain.calories = calories
+
+
+        }
+        maintainWeight();
+        
+        
+        function gainWeight() {
+            
+            let calories = tdeeDb + 500
+
+            macros.gain.protein = Math.floor(calories * .144 / 4)
+            macros.gain.carbs = Math.floor(calories * .556 / 4)
+            macros.gain.fat = Math.floor(calories * .3 / 9)
+            macros.gain.calories = calories
+
+        }
+        gainWeight();
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
     function dataSubmit(e) {
         e.preventDefault()
         calculation()
         setMacrosState(macros)
         addTdeeMacros(macrosState)
-        
         addTdeeDb();
         addPersonalDb();
     }
     
-    // console.log(daysRemaining)
-    // useEffect(() => {
-    //     const data = window.localStorage.getItem('MACROSSTATE');
-    //     setMacrosState(JSON.parse(data))
-    // }, [])
-    
-    // useEffect(() => {
-    //     window.localStorage.setItem('MACROSSTATE', JSON.stringify(macrosState))
-    // }, [macrosState])
     
     
     
-    function calculation() {
-        let bmr = Math.floor(66 + (13.7 * weight * 0.45359237) + (5 * height) - (6.8 * age))
-        let tdee = Math.floor(bmr * 1.55)
- 
-
-        function loseWeight() {
-            let cutCal = Math.floor(tdee - (tdee * .2))
-            let protein = weight;
-            let fat = Math.floor(.5 * weight);
-            
-            macros.cut.protein = protein
-            macros.cut.fat = fat
-            macros.cut.carbs = (cutCal - (protein * 4) - (fat * 9)) / 4
-            macros.cut.calories = cutCal
-        }
-        loseWeight();
-        
-
-        function maintainWeight() {
-            let maintainCal = tdee
-            let protein = Math.floor(1.207 * height);
-            let fat = Math.floor(.6 * weight);
-            
-            macros.maintain.protein = protein
-            macros.maintain.fat = fat
-            macros.maintain.carbs = (maintainCal - (protein * 4) - (fat * 9)) / 4
-            macros.maintain.calories = tdee
-        }
-        maintainWeight();
-        
-
-        function bulkWeight() {
-            let bulkCal = Math.floor(tdee + (tdee * .2))
-            let protein = Math.floor(1.41 * height);
-            let fat = Math.floor(.73 * weight);
-            
-            macros.bulk.protein = protein
-            macros.bulk.fat = fat
-            macros.bulk.carbs = (bulkCal - (protein * 4) - (fat * 9)) / 4
-            macros.bulk.calories = bulkCal
-        }
-        bulkWeight();
-    }
-    
-
-    /*/////////////////////////////////////////////////////
-    1. BMR: number of calories your body needs to maintain basic functions at rest.
-    
-    For men: BMR = 66 + (6.23 × weight in pounds) + (12.7 × height in inches) - (6.8 × age in years)
-    For women: BMR = 655 + (4.35 × weight in pounds) + (4.7 × height in inches) - (4.7 × age in years)
-    
-
-
-
-    2. TDEE: Total Daily Energy Expenditure
-    
-    Sedentary (little to no exercise): BMR × 1.2
-    Lightly active (light exercise/sports 1-3 days per week): BMR × 1.375
-    Moderately active (moderate exercise/sports 3-5 days per week): BMR × 1.55
-    Very active (hard exercise/sports 6-7 days per week): BMR × 1.725
-    Extra active (very hard exercise/sports and a physically demanding job): BMR × 1.9
-
-
-
-    *//////////////////////////////////////////////////////
-
-
-
-
-
-    // console.log(personalDbList[0])
-
-    
-
-
-    const separatorIndexes = [2, 4];
 
     return (
         <div className="tdee-page-grid">   
@@ -264,6 +307,24 @@ export default function Tdee() {
                         <span className="component-title">Daily Breakdown</span>
                     </div>
                 
+                    <div className="bmr-info-container-first">
+                        <p>Gender</p>
+                        <select 
+                            style={{ width: '152px' , border: 'none', borderBottom: '1px solid black'}} 
+                            onChange={(e) => setGender(e.target.value)} 
+                            value={gender}>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                        </select>
+                    
+                    
+                       
+                    
+                    
+                    </div>
+                    
+                    
+                    
                     <div className="bmr-info-container-first">
                         <p>Age</p>
                         <div>
@@ -314,7 +375,7 @@ export default function Tdee() {
 
                     <div className="bmr-info-container-first">
                         <p>Activity</p>
-                        <select style={{ width: '152px' }} onChange={e => setActivity(e.target.value)}>
+                        <select style={{ width: '152px' , border: 'none', borderBottom: '1px solid black'}} onChange={e => setActivity(e.target.value)}>
                             <option value="0">Sedentary</option>
                             <option value="1">Lightly Active</option>
                             <option value="2">Moderately Active</option>
@@ -356,9 +417,57 @@ export default function Tdee() {
                     
 
                     <div className="component-title-container">
-                        <span className="component-title">Daily Breakdown</span>
+                        <span className="component-title">Your Stats</span>
                     </div>
 
+                    <div className="bmr-info-container">
+                        <div className="bmr-info-title">Recommended Calorie Intake</div>
+                        <div className="bmr-info">
+                            <div className="bmr-info-row">
+                                <p>TDEE</p>
+                                <p>{personalDbList?.[0]?.[0]?.tdeeDb || ''} cal</p>
+                            </div>
+                            <div className="bmr-info-row">
+                                <p>BMR</p>
+                                <p>{personalDbList?.[0]?.[0]?.bmrDb || ''} cal</p>
+                            </div>
+                            <div className="bmr-info-row bmr-info-row-text">
+                                <p>{`TDEE (Total Daily Energy Expenditure): the total number of calories your body needs to sustain its energy requirements throughout the day, including physical activity.`}</p>
+                                <p>{`BMR (Basal Metabolic Rate): the amount of energy (calories) your body needs to maintain basic physiological functions while at rest.`}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div className="bmr-info-container">
+                        <div className="bmr-info-title">{`Calories By Activity Level`}</div>
+                        <div className="bmr-info">
+                            <div className="bmr-info-row">
+                                <p>No activity</p>
+                                <p>{personalDbList?.[0]?.[0]?.bmrDb || ''} cal</p>
+                            </div>
+                            <div className="bmr-info-row">
+                                <p>Sedentary</p>
+                                <p>{Math.floor(Math.round(personalDbList?.[0]?.[0]?.bmrDb * 1.2)) || ''} cal</p>
+                            </div>
+                            <div className="bmr-info-row">
+                                <p>Light</p>
+                                <p>{Math.floor(Math.round(personalDbList?.[0]?.[0]?.bmrDb * 1.375)) || ''} cal</p>
+                            </div>
+                            <div className="bmr-info-row">
+                                <p>Moderate</p>
+                                <p>{Math.floor(Math.round(personalDbList?.[0]?.[0]?.bmrDb * 1.55)) || ''} cal</p>
+                            </div>
+                            <div className="bmr-info-row">
+                                <p>Very</p>
+                                <p>{Math.floor(Math.round(personalDbList?.[0]?.[0]?.bmrDb * 1.725)) || ''} cal</p>
+                            </div>
+                            <div className="bmr-info-row">
+                                <p>Extreme</p>
+                                <p>{Math.floor(Math.round(personalDbList?.[0]?.[0]?.bmrDb * 1.9)) || ''} cal</p>
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="bmr-info-container">
                         <div className="bmr-info-title">Goal Weight Plan</div>
@@ -383,69 +492,9 @@ export default function Tdee() {
                     </div>
 
 
-                    <div className="bmr-info-container">
-                        <div className="bmr-info-title">Time to Goal</div>
-                        <div className="bmr-info">
-                            <div className="bmr-info-row">
-                                <p>Start Date</p>
-                                <p>{personalDbList?.[0]?.[0]?.startDate
-                                    ? new Date(personalDbList[0][0].startDate).toLocaleDateString("en-US", {
-                                        month: "2-digit",
-                                        day: "2-digit",
-                                        year: "numeric",
-                                        })
-                                    : ''}
-                                </p>
-                            </div>
-                            <div className="bmr-info-row">
-                                <p>Goal Date</p>
-                                <p>{personalDbList?.[0]?.[0]?.targetDate
-                                    ? new Date(personalDbList[0][0].targetDate).toLocaleDateString("en-US", {
-                                        month: "2-digit",
-                                        day: "2-digit",
-                                        year: "numeric",
-                                        })
-                                    : ''}
-                                </p>
-                            </div>
-                            <div className="bmr-info-row">
-                                <p>Days Remaining</p>
-                                <p>
-                                    {personalDbList?.[0]?.[0]?.daysRemaining || ''} days
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                
 
                     
-                    <div className="bmr-info-container">
-                        <div className="bmr-info-title">Recommended Calorie Intakes</div>
-                        <div className="bmr-info">
-                            <div className="bmr-info-row">
-                                <p>To maintain current weight</p>
-                                <p>{personalDbList?.[0]?.[0]?.weight || ''} lbs</p>
-                            </div>
-                            <div className="bmr-info-row">
-                                <p>To reach goal weight</p>
-                                <p>{personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                    <div className="bmr-info-container">
-                        <div className="bmr-info-title">{`BMR (Basal Metabolic Rate)`}</div>
-                        <div className="bmr-info">
-                            <div className="bmr-info-row">
-                                <p>TO maintain current weight</p>
-                                <p>{personalDbList?.[0]?.[0]?.weight || ''} lbs</p>
-                            </div>
-                            <div className="bmr-info-row">
-                                <p>To reach goal weight</p>
-                                <p>{personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -465,39 +514,55 @@ export default function Tdee() {
                         Cutting
                         <div className="tdee-suggested-row">
                             <p>Protein</p>
-                            <p>{tdeeDbList[0] ? tdeeDbList[0][0].protein : null}</p>
+                            {/* <p>{tdeeDbList[0] ? tdeeDbList[0][0].cutProtein : null}</p> */}
+                            <p>{tdeeDbList?.[0]?.[0]?.cutProtein|| null} g</p>
+                            
                         </div>
-                        <div className="tdee-suggested-row">
+                        <div className="tdee-suggested-row">  
                             <p>Fat</p>
-                            <p>{tdeeDbList[0] ? tdeeDbList[0][0].fat : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.cutFat || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Carbs</p>
-                            <p>{tdeeDbList[0] ? tdeeDbList[0][0].carbs : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.cutCarbs || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Calories</p>
-                            <p>{tdeeDbList[0] ? tdeeDbList[0][0].calories : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.cutCalories || null} cal</p>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <div className="self-widget tdee-maintenance">
                         Maintenance
                         <div className="tdee-suggested-row">
                             <p>Protein</p>
-                            <p>{macrosState.maintain ? macrosState.maintain.protein : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.maintainProtein || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Fat</p>
-                            <p>{macrosState.maintain ? macrosState.maintain.fat : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.maintainFat || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Carbs</p>
-                            <p>{macrosState.maintain ? macrosState.maintain.carbs : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.maintainCarbs || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Calories</p>
-                            <p>{macrosState.maintain ? macrosState.maintain.calories : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.maintainCalories || null} cal</p>
                         </div>
                     </div>
                     
@@ -505,19 +570,19 @@ export default function Tdee() {
                         Bulking
                         <div className="tdee-suggested-row">
                             <p>Protein</p>
-                            <p>{macrosState.bulk ? macrosState.bulk.protein : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.gainProtein || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Fat</p>
-                            <p>{macrosState.bulk ? macrosState.bulk.fat : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.gainFat || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Carbs</p>
-                            <p>{macrosState.bulk ? macrosState.bulk.carbs : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.gainCarbs || null} g</p>
                         </div>
                         <div className="tdee-suggested-row">
                             <p>Calories</p>
-                            <p>{macrosState.maintain ? macrosState.bulk.calories : null}</p>
+                            <p>{tdeeDbList?.[0]?.[0]?.gainCalories || null} cal</p>
                         </div>
                     </div>
                 </div>                          
