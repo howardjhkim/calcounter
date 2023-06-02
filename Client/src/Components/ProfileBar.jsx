@@ -16,11 +16,18 @@ export default function ProfileBar() {
     const { addPersonalDbList } = useContext(Context)
 
 
+    const {tdeeDbList} = useContext(Context)
+    const { addTdeeDbList } = useContext(Context)
+
     ///////////// Database GET & DELETE /////////////
     Axios.get('http://localhost:3001/personal').then((response) => {
         addPersonalDbList(response.data)
     })
 
+
+    Axios.get('http://localhost:3001/tdee').then((response) => {
+        addTdeeDbList(response.data)
+    })
     
     return (
         <div className="profile-bar-master-container">
@@ -35,6 +42,7 @@ export default function ProfileBar() {
                     <span>Height</span>
                     <span>{personalDbList?.[0]?.[0]?.height || ''} cm</span>
                 </div>
+                <hr />
                 <div className="profile-info-container main-typography">
                     <span>Weight</span>
                     <span>{personalDbList?.[0]?.[0]?.weight || ''} lbs</span>
@@ -47,18 +55,27 @@ export default function ProfileBar() {
                     <span>Remaining Weight</span>
                     <span>{personalDbList?.[0]?.[0]?.weight - personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</span>
                 </div>
-
+                <hr />
                 <div className="profile-info-container main-typography">
                     <span>BMR</span>
-                    <span>{bodyInfo.length > 0 && bodyInfo[0].age}</span>
+                    <span>{personalDbList?.[0]?.[0]?.bmrDb}</span>
                 </div>
                 
+
+                <div className="profile-info-container main-typography">
+                    <span>TDEE</span>
+                    <span>{personalDbList?.[0]?.[0]?.tdeeDb}</span>
+                </div>
+
+                <div className="profile-info-container main-typography">
+                    <span>Goals</span>
+                    <span>{personalDbList?.[0]?.[0]?.fitnessGoal}</span>
+                </div>
+
+                <hr />
+
             </div>
 
-
-
-
-            <hr />
 
             <div className="goals-master-container">
                 <div className="space-between">

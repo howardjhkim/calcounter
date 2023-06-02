@@ -109,6 +109,26 @@ app.get('/tdee', (req, res) => {
 
 
 
+app.delete('/delete/:name', (req, res) => {
+    const name = req.params.name;
+    const sqlUpdate = "UPDATE SET tdee WHERE name = ?";
+
+    db.query(sqlUpdate, name, (err, result) => {
+        if (err) {
+            console.log(err)
+        } 
+    })
+})
+
+
+
+
+
+
+
+
+
+
 
 ///////////////////////// PERSONAL DATA ONLY ////////////////////////////////////
 
@@ -123,11 +143,12 @@ app.post("/personal", (req, res) => {
     const daysRemaining = req.body.daysRemaining;
     const tdeeDb = req.body.tdeeDb;
     const bmrDb = req.body.bmrDb;
+    const fitnessGoal = req.body.fitnessGoal;
 
-    const sqlInsert = 'INSERT INTO personal (age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining, tdeeDb, bmrDb) VALUES (?,?,?,?,?,?,?,?,?,?)'
+    const sqlInsert = 'INSERT INTO personal (age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining, tdeeDb, bmrDb, fitnessGoal) VALUES (?,?,?,?,?,?,?,?,?,?,?)'
     db.query(
         sqlInsert, 
-        [age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining, tdeeDb, bmrDb], 
+        [age, height, weight, activity, goalWeight, startDate, targetDate, daysRemaining, tdeeDb, bmrDb, fitnessGoal], 
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -148,6 +169,17 @@ app.get('/personal', (req, res) => {
         }
     })
 })
+
+
+
+
+
+
+
+
+
+
+
 
 
 

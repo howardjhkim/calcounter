@@ -71,7 +71,8 @@ export default function Tdee() {
             targetDate: targetDate,
             daysRemaining: daysRemaining,
             tdeeDb: tdeeDb,
-            bmrDb: bmrDb
+            bmrDb: bmrDb,
+            fitnessGoal: fitnessGoal
         })
 
         addPersonalDbList(
@@ -86,7 +87,8 @@ export default function Tdee() {
                 targetDate: targetDate,
                 daysRemaining: daysRemaining,
                 tdeeDb: tdeeDb,
-                bmrDb: bmrDb
+                bmrDb: bmrDb,
+                fitnessGoal: fitnessGoal
             }]
         )
     }
@@ -127,7 +129,7 @@ export default function Tdee() {
 
     let [gender, setGender] = useState('male')
     
-    
+    let [fitnessGoal, setFitnessGoal] = useState('cut')
 
     
 
@@ -289,7 +291,6 @@ export default function Tdee() {
     
     
     
-    
 
     return (
         <div className="tdee-page-grid">   
@@ -408,6 +409,15 @@ export default function Tdee() {
                         </div>
                     </div>
 
+                    <div className="bmr-info-container-first">
+                        <p>Goals</p>
+                        <select style={{ width: '152px' , border: 'none', borderBottom: '1px solid black'}} onChange={e => setFitnessGoal(e.target.value)}>
+                            <option value="cut">Lose Weight</option>
+                            <option value="maintain">Maintain Weight</option>
+                            <option value="gain">Gain Weight</option>
+                            
+                        </select>
+                    </div>
 
                     <button className="submitBtn" onClick={dataSubmit}>Submit</button>       
                 </div>

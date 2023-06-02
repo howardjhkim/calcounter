@@ -20,9 +20,22 @@ export default function MacrosCard() {
     const { addTdeeDbList } = useContext(Context)
 
 
+    const {personalDbList} = useContext(Context)
+    const { addPersonalDbList } = useContext(Context)
+
+
+
+
+
     ///////////// Database GET & DELETE /////////////
     Axios.get('http://localhost:3001/tdee').then((response) => {
         addTdeeDbList(response.data)
+    })
+
+
+
+    Axios.get('http://localhost:3001/personal').then((response) => {
+        addPersonalDbList(response.data)
     })
 
 
@@ -130,7 +143,7 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.cutProtein || 0}
+                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Protein`] || 0}
                             {/* {tdeeDbList.length > 0 ? tdeeDbList[0][0].cutProtein : 0} */}
                         </span>
                     </div>
@@ -173,7 +186,7 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.cutCarbs || 0}
+                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Carbs`] || 0}
                         </span>
                     </div>
                 </div>
@@ -213,7 +226,7 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fat : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.cutFat || 0}
+                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Fat`] || 0}
                         </span>
                     </div>
                 </div>
@@ -253,7 +266,7 @@ export default function MacrosCard() {
                         <span className="consumed-suggested-text">Suggested</span>
                         <span className="macro-counter">
                             {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.calories : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.cutCalories || 0}
+                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Calories`] || 0}
                         </span>
                     </div>
                 </div>
