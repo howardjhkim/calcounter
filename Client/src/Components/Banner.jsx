@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from "react"
 import { ReactComponent as Art } from "../Images/art.svg"
 import banner from "../CSS/Banner.css"
+import {Link, NavLink} from "react-router-dom"
+
+
+
 
 export default function Home() {
     
@@ -33,6 +37,14 @@ export default function Home() {
                     </div>
                 )}
             </div>
+
+            <Link to="/tdee" >
+                    <span className="main-typography ">TDEE</span>
+            </Link>
+            
+            
+
+
             <div className="art-container">
                 <Art className="homepage-banner-art"/>
             </div>

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {Link} from "react-router-dom"
+import {Link, NavLink} from "react-router-dom"
 
 import FoodInputs from "../Components/FoodInputs"
 import MacrosCard from "../Components/MacrosCard"
@@ -28,6 +28,10 @@ export default function Home() {
             <div className="homepage-grid-banner">
                 <Banner />
             </div>
+            
+
+
+
 
             <div className="homepage-grid-1">
                 <MacrosCard /> 
@@ -37,6 +41,7 @@ export default function Home() {
             <div className="homepage-grid-2">
                 <FoodInputs />
             </div>
+
 
 
 

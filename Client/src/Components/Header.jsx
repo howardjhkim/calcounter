@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import {NavLink, Link} from "react-router-dom"
 import { ReactComponent as IconName } from '../Images/add.svg';
 
@@ -10,6 +10,22 @@ import header from "../CSS/Header.css"
 
 
 export default function Header() {
+
+
+
+
+
+    const [userNameReg, setUserNameReg] = useState('')
+    const [passwordReg, setPasswordReg] = useState('')
+
+
+
+
+
+
+
+
+
 
     return(
         <header>
@@ -32,14 +48,10 @@ export default function Header() {
                     
                     </button>
                     <img className="profilepic-img" src={profilePicture} />
-                
-                    {/* <div className="container">
-                        <input type="checkbox" className="checkbox" id="checkbox" />
-                        <label className="switch" htmlFor="checkbox">
-                            <span className="slider"></span>
-                        </label>
-                    </div> */}
-                
+                    <nav className="">
+                        <NavLink to="/login">Log In</NavLink>
+                        <NavLink to="/register">Register</NavLink>
+                    </nav>
                 </div>
             </nav>
         </header>
