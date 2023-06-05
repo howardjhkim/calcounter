@@ -203,7 +203,7 @@ export default function MacrosCard() {
                     <div className={`card-${index + 1}`} key={index}>
                         <div className="macro-name-with-icon-container">
                             <span className="macros-card-macro-name">{data.name}</span>
-                            <img className={`macroscard-icon ${data.iconClass}`} src={data.icon} alt={data.name} />
+                            <img style={{width: '40px', height: '40px'}}className={`macroscard-icon ${data.iconClass}`} src={data.icon} alt={data.name} />
                         </div>
             
                         <div className="suggested-consumed-master-container">
