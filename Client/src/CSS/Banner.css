@@ -82,12 +82,13 @@
 
   @media (max-width: 450px){
     .homepage-banner-container {
-        height: 100px;
+        /* height: 100px; */
+        display: none;
     }
 
 
     .quote-container {
-        border: 2px solid red;
+        /* border: 2px solid red; */
     
     }
 

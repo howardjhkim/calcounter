@@ -9,6 +9,14 @@ import Axios from 'axios'
 
 import macroscard from "../CSS/MacrosCard.css"
 
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+
+
+
+
+
 
 export default function MacrosCard() {
     
@@ -122,172 +130,151 @@ export default function MacrosCard() {
     useProgressBar("calories", caloriesCurrPercentage, setMacroPercent);
 
 
+
+
+    ///////////// Used for mapping cards dynamically /////////////
+    const macroData = [
+        {
+          name: 'Protein',
+          icon: meatIcon,
+          color: '#F6D4D4',
+          state: protein,
+          suggested: tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Protein`] || 0,
+          percent: macroPercent.protein,
+          iconClass: 'card-1-icon-bg',
+        },
+        {
+          name: 'Carbs',
+          icon: carbIcon,
+          color: '#F2DBB9',
+          state: carbs,
+          suggested: tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Carbs`] || 0,
+          percent: macroPercent.carbs,
+          iconClass: 'card-2-icon-bg',
+        },
+        {
+          name: 'Fat',
+          icon: fatsIcon,
+          color: '#7CBF85',
+          state: fat,
+          suggested: tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Fat`] || 0,
+          percent: macroPercent.fat,
+          iconClass: 'card-3-icon-bg',
+        },
+        {
+          name: 'Calories',
+          icon: caloriesIcon,
+          color: '#8BAEC1',
+          state: calories,
+          suggested: tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Calories`] || 0,
+          percent: macroPercent.calories,
+          iconClass: 'card-4-icon-bg',
+        },
+    ];
+
+
+
+
+
+
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        window.addEventListener('rezise', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [windowWidth])
+
+    const shouldRenderCarousel = windowWidth < 400;
+
+    
+
     return (
-
-        <div className="macros-card-grid">
-            <div className="card-1">
-                <div className="macro-name-with-icon-container">
-                    <span className="macros-card-macro-name">Protein</span>
-                    <img className="macroscard-icon card-1-icon-bg" src={meatIcon}/>
-                </div>
-
-                <div className="suggested-consumed-master-container">
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Consumed</span>
-                        <span className="macro-counter">
-                            {protein ? protein : 0}
-                        </span>
-                    </div>
-
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Suggested</span>
-                        <span className="macro-counter">
-                            {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.protein : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Protein`] || 0}
-                            {/* {tdeeDbList.length > 0 ? tdeeDbList[0][0].cutProtein : 0} */}
-                        </span>
-                    </div>
-                </div>
-
-                <div className="macros-card-progressbar-container">
-                    <div className="progress-container">
-                        <div 
-                            className="linear-progress"
-                            style={{
-                                "width":`${
-                                    macroPercent.protein > 100 ? 100 : 
-                                    macroPercent.protein === 0 ? 0 : 
-                                    macroPercent.protein }%`, 
-                                "background": `#F6D4D4`,
-                                }}
-                        >
+        <div>
+            {shouldRenderCarousel ? (
+                <Carousel showThumbs={false}>
+                    {macroData.map((data, index) => (
+                    <div className={`card-${index + 1}`} key={index}>
+                        <div className="macro-name-with-icon-container">
+                            <span className="macros-card-macro-name">{data.name}</span>
+                            <img className={`macroscard-icon ${data.iconClass}`} src={data.icon} alt={data.name} />
                         </div>
-                        <span className="percentage">
-                            {macroPercent.protein > 0 ? `${macroPercent.protein} %` : `0 %`}
-                        </span>
-                    </div>
-                </div>
-            </div>
             
-            <div className="card-2">
-                <div className="macro-name-with-icon-container">
-                    <span className="macros-card-macro-name">Carbs</span>
-                    <img className="macroscard-icon card-2-icon-bg" src={carbIcon}/>
-                </div>
-                <div className="suggested-consumed-master-container">
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Consumed</span>
-                        <span className="macro-counter">
-                            {carbs ? carbs : 0}
-                        </span>
-                    </div>
-
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Suggested</span>
-                        <span className="macro-counter">
-                            {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.carbs : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Carbs`] || 0}
-                        </span>
-                    </div>
-                </div>
-
-                <div className="macros-card-progressbar-container">
-                    <div className="progress-container">
-                        <div 
-                            className="linear-progress"
-                            style={{"width": `${
-                                macroPercent.carbs > 100 ? 100 : 
-                                macroPercent.carbs === 0 ? 0 : 
-                                macroPercent.carbs 
-                            }%`, "background": `#F2DBB9`}}
-                        >
-                        </div>
-                        <span className="percentage">
-                            {macroPercent.carbs > 0 ? `${macroPercent.carbs} %` : `0 %`}
-                        </span>
-                    </div>
-                </div>
-            </div>
+                        <div className="suggested-consumed-master-container">
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Consumed</span>
+                                <span className="macro-counter">{data.state || 0}</span>
+                            </div>
             
-            <div className="card-3">
-                <div className="macro-name-with-icon-container">
-                    <span className="macros-card-macro-name">Fat</span>
-                    <img className="macroscard-icon card-3-icon-bg" src={fatsIcon}/>
-                </div>
-                <div className="suggested-consumed-master-container">
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Consumed</span>
-                        <span className="macro-counter">
-                            {fat ? fat : 0}
-                        </span>
-                    </div>
-
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Suggested</span>
-                        <span className="macro-counter">
-                            {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.fat : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Fat`] || 0}
-                        </span>
-                    </div>
-                </div>
-
-                <div className="macros-card-progressbar-container">
-                    <div className="progress-container">
-                        <div 
-                            className="linear-progress"
-                            style={{"width": `${
-                                macroPercent.fat > 100 ? 100 : 
-                                macroPercent.fat === 0 ? 0 : 
-                                macroPercent.fat 
-                            }%`, "background": `#7CBF85`}}
-                        >
+                            <div className="suggested-consumed-sub-container">
+                                <span className="consumed-suggested-text">Suggested</span>
+                                <span className="macro-counter">{data.suggested}</span>
+                            </div>
                         </div>
-                        <span className="percentage">
-                            {macroPercent.fat > 0 ? `${macroPercent.fat} %` : `0 %`}
-                        </span>
-                    </div>
-                </div>
-            </div>
             
-            <div className="card-4">
-                <div className="macro-name-with-icon-container">
-                    <span className="macros-card-macro-name">Calories</span>
-                    <img className="macroscard-icon card-4-icon-bg" src={caloriesIcon}/>
-                </div>
-                <div className="suggested-consumed-master-container">
+                        <div className="macros-card-progressbar-container">
+                            <div className="progress-container">
+                                <div
+                                    className="linear-progress"
+                                    style={{
+                                        width: `${data.percent > 100 ? 100 : data.percent || 0}%`,
+                                        background: data.color,
+                                    }}>
+                                </div>
+                                <span className="percentage">
+                                    {data.percent > 0 ? `${data.percent} %` : '0 %'}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    ))}
+                </Carousel>
+            ) : (
+            <div className="macros-card-grid">
+                {macroData.map((data, index) => (
+                <div className={`card-${index + 1}`} key={index}>
+                    <div className="macro-name-with-icon-container">
+                    <span className="macros-card-macro-name">{data.name}</span>
+                    <img className={`macroscard-icon ${data.iconClass}`} src={data.icon} alt={data.name} />
+                    </div>
+        
+                    <div className="suggested-consumed-master-container">
                     <div className="suggested-consumed-sub-container">
                         <span className="consumed-suggested-text">Consumed</span>
-                        <span className="macro-counter">
-                            {calories ? calories : 0}
-                        </span>
+                        <span className="macro-counter">{data.state || 0}</span>
                     </div>
-
+        
                     <div className="suggested-consumed-sub-container">
                         <span className="consumed-suggested-text">Suggested</span>
-                        <span className="macro-counter">
-                            {/* {tdeeMacros.length > 0 ? tdeeMacros[0].cut.calories : 0} */}
-                            {tdeeDbList?.[0]?.[0]?.[`${personalDbList[0][0].fitnessGoal}Calories`] || 0}
-                        </span>
+                        <span className="macro-counter">{data.suggested}</span>
                     </div>
-                </div>
-
-                <div className="macros-card-progressbar-container">
+                    </div>
+        
+                    <div className="macros-card-progressbar-container">
                     <div className="progress-container">
-                        <div 
-                            className="linear-progress"
-                            style={{"width": `${
-                                macroPercent.calories > 100 ? 100 : 
-                                macroPercent.calories === 0 ? 0 : 
-                                macroPercent.calories 
-                            }%`, "background": `#8BAEC1`}}>
-                        </div>
+                        <div
+                        className="linear-progress"
+                        style={{
+                            width: `${data.percent > 100 ? 100 : data.percent || 0}%`,
+                            background: data.color,
+                        }}
+                        ></div>
                         <span className="percentage">
-                            {macroPercent.calories > 0 ? `${macroPercent.calories} %` : `0 %`}
+                        {data.percent > 0 ? `${data.percent} %` : '0 %'}
                         </span>
                     </div>
+                    </div>
                 </div>
-            </div>         
-        </div>
-
+                ))}
+            </div>
+            )}
+      </div>
+      
     )
 }

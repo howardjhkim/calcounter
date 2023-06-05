@@ -38,12 +38,6 @@ export default function Home() {
                 )}
             </div>
 
-            <Link to="/tdee" >
-                    <span className="main-typography ">TDEE</span>
-            </Link>
-            
-            
-
 
             <div className="art-container">
                 <Art className="homepage-banner-art"/>

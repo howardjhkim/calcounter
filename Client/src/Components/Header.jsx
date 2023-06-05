@@ -32,7 +32,7 @@ export default function Header() {
             <nav className="header-master-container">
                 
                 <div className="header-leftside-container">
-                    <img className="small-icon dropdown" src={hamburger} alt="" />
+                    {/* <img className="small-icon dropdown" src={hamburger} alt="" /> */}
                     <Link to="/">
                         <img className="home-logo" src={logo} />
                     </Link>
@@ -48,10 +48,10 @@ export default function Header() {
                     
                     </button>
                     <img className="profilepic-img" src={profilePicture} />
-                    <nav className="">
+                    {/* <nav className="">
                         <NavLink to="/login">Log In</NavLink>
                         <NavLink to="/register">Register</NavLink>
-                    </nav>
+                    </nav> */}
                 </div>
             </nav>
         </header>
