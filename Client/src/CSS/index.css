@@ -114,42 +114,10 @@ p {
 
 
 
-.welcoming-text {
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: rgb(32,33,36);
-  line-height: 1.75rem;
-}
-
-.sub-welcoming-text {
-  color: rgb(128,134,139);
-  font-family: Roboto,Arial,sans-serif;
-  line-height: 1.25rem;
-  font-size: .875rem;
-  letter-spacing: .0142857143em;
-  font-weight: 400;
-}
-
-
-
-
-
 .small-icon {
   height: 24px;
   width: 24px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -246,18 +214,9 @@ food inputs
 General Site Design
 ********************************/
 
-.site-wrapper {
-  display: flex;
-  flex-direction: row;
-  /* background-color: green; */
-}
 
 
-.components {
-  background-color: yellow;
-  width: 80%;
-  padding: 0px 20px;
-}
+
 
 
 
@@ -269,7 +228,8 @@ General Site Design
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
-  
+  width: 100%;
+  box-sizing: border-box;
   grid-template-areas: 
   
     
@@ -288,6 +248,8 @@ General Site Design
     top: 0px;
     z-index: 3;
     background-color: white;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .navbar {
@@ -299,7 +261,7 @@ General Site Design
     position: sticky;
     top: 85px;
     z-index: 2;
-    height: calc(100vh - 90px);  
+    height: calc(100vh - 95px);  
   }
   
   .outlet {
@@ -318,9 +280,9 @@ General Site Design
     color: black;
     grid-row: 2/13;
     position: sticky;
-    top: 85px;
+    top: 120px;
     z-index: 2;
-    height: calc(100vh - 90px);  
+    height: calc(100vh - 120px);  
     /* border-left: 2px solid #edede9; */
   }
   
@@ -329,46 +291,6 @@ General Site Design
   
 /**********************Homepage Grid****************************/
 
-.homepage-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
-  height: 100%;
-  /* padding: 0 20px */
-  /* justify-items: center; */
-}
-
-.homepage-grid-title-container{
-  display: flex;
-  flex-direction: column;
-  grid-column: 1 / 13;
-  margin-left: 40px;
-  /* border-bottom: 2px solid rgb(218,220,224); */
-}
-
-.homepage-grid-banner {
-  grid-column: 2 / 12;
-}
-
-
-
-
-.homepage-grid-1 {
-  grid-column: 2 / 12;
-}
-
-.homepage-grid-2 {
-  grid-column: 2 / 12;
-  /* grid-column: 1 / 7; */
-}
-
-.homepage-grid-3 {
-  grid-column: 2 / 12;
-}
-
-.homepage-grid-4 {
-  grid-column: 2 / 12;
-}
 
 
 
@@ -565,6 +487,7 @@ thead  {
 
 @media (max-width: 600px) {
   .site-wrapper-grid {
+    
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: auto;

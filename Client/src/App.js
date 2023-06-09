@@ -7,7 +7,8 @@ import TDEE from "./Pages/TDEE"
 import Workouts from "./Pages/Workouts"
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
-
+import Profile from "./Pages/Profile"
+import Help from "./Pages/Help"
 import Layout from "./Components/Layout"
 import {ContextProvider} from "./Context/DataContext"
 
@@ -23,6 +24,8 @@ function App() {
                       <Route path="workouts" element={<Workouts />} />
                       <Route path="login" element={<Login />} />
                       <Route path="register" element={<Register />} />
+                      <Route path="profile" element={<Profile />} />
+                      <Route path="help" element={<Help />} />
                   </Route>
               </Routes>
           </BrowserRouter>

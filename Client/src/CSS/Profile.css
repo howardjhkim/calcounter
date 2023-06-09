@@ -1,0 +1,16 @@
+.profile-page-grid {
+    margin: 20px;
+}
+
+
+
+.info-container-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    gap: 10px;
+}

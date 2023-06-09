@@ -196,46 +196,7 @@ export default function MacrosCard() {
     
 
     return (
-        <div>
-            {shouldRenderCarousel ? (
-                <Carousel showThumbs={false}>
-                    {macroData.map((data, index) => (
-                    <div className={`card-${index + 1}`} key={index}>
-                        <div className="macro-name-with-icon-container">
-                            <span className="macros-card-macro-name">{data.name}</span>
-                            <img style={{width: '40px', height: '40px'}}className={`macroscard-icon ${data.iconClass}`} src={data.icon} alt={data.name} />
-                        </div>
-            
-                        <div className="suggested-consumed-master-container">
-                            <div className="suggested-consumed-sub-container">
-                                <span className="consumed-suggested-text">Consumed</span>
-                                <span className="macro-counter">{data.state || 0}</span>
-                            </div>
-            
-                            <div className="suggested-consumed-sub-container">
-                                <span className="consumed-suggested-text">Suggested</span>
-                                <span className="macro-counter">{data.suggested}</span>
-                            </div>
-                        </div>
-            
-                        <div className="macros-card-progressbar-container">
-                            <div className="progress-container">
-                                <div
-                                    className="linear-progress"
-                                    style={{
-                                        width: `${data.percent > 100 ? 100 : data.percent || 0}%`,
-                                        background: data.color,
-                                    }}>
-                                </div>
-                                <span className="percentage">
-                                    {data.percent > 0 ? `${data.percent} %` : '0 %'}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    ))}
-                </Carousel>
-            ) : (
+      
             <div className="macros-card-grid">
                 {macroData.map((data, index) => (
                 <div className={`card-${index + 1}`} key={index}>
@@ -273,8 +234,5 @@ export default function MacrosCard() {
                 </div>
                 ))}
             </div>
-            )}
-      </div>
-      
     )
 }

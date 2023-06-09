@@ -77,29 +77,10 @@ export default function ProfileBar() {
             </div>
 
 
-            <div className="goals-master-container">
-                <div className="space-between">
-                    <span className="small-title-grey">Longterm Goals</span>
-                    <span className="small-title-grey">Edit</span>
-                </div>
-                <div className="goals-sub-container">
-                    <div className="goals goal-1 component-subtitle">
-                        <span className="goal-title">Goal Weight</span>
-                        <div>{personalDbList[0] > 0 && personalDbList[0][0].weight}</div>
-                    </div>
-                    <div className="goals component-subtitle">
-                        <span className="goal-title">Bench PR</span>
-                        <div>{personalDbList[0] > 0 && personalDbList[0][0].weight}</div>
-                    </div>
-                    <div className="goals component-subtitle">
-                        <span className="goal-title">Pull-Up Max</span>
-                        <div>{personalDbList[0] > 0 && personalDbList[0][0].weight}</div>
-                    </div>
-                </div>
-            </div>
+            
 
 
-            <hr />
+        
 
             <div className="checkbox-master-container">
                 

@@ -19,49 +19,30 @@ export default function Footer() {
             <nav className="footer-nav">
                 
                 
-                
-                
-                
-                
-                
-                
-                <Link to="/tdee" className="footer-elements-container">
+                <Link to="/help" className="footer-elements-container">
                     <img src={help} alt="" className="footer-icon"/>
-                    <p>
-                        Help
-                    </p>
+                    <p>Help</p>
                 </Link>
-                
-                
-                
                 
                 <Link to="/tdee" className="footer-elements-container">
                     <img src={tdee} alt="" className="footer-icon"/>
-                    <p>
-                        TDEE
-                    </p>
+                    <p>TDEE</p>
                 </Link>
                 
                 <Link to="/" className="footer-elements-container">
                     <img src={home} alt="" className="footer-icon"/>
-                    <p>
-                        Home
-                    </p>
+                    <p>Home</p>
                 </Link>
 
                 <Link to="/workouts" className="footer-elements-container">
                     <img src={workouts} alt="" className="footer-icon"/>
-                    <p>
-                        Workouts
-                    </p>
+                    <p>Workouts</p>
                 </Link>
 
 
-                <Link className="footer-elements-container">
+                <Link to="/profile" className="footer-elements-container">
                     <img src={profile} alt="" className="footer-icon"/>
-                    <p>
-                        Profile
-                    </p>
+                    <p>Profile</p>
                 </Link>
 
             </nav>

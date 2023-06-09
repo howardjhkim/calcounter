@@ -1,0 +1,59 @@
+
+.homepage-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    height: 100%;
+    margin: 0px 50px;
+    /* padding: 0 20px */
+    /* justify-items: center; */
+  }
+  
+  .homepage-grid-title-container{
+    display: flex;
+    flex-direction: column;
+    grid-column: 1 / -1;
+    /* border-bottom: 2px solid rgb(218,220,224); */
+  }
+  
+  .homepage-grid-banner {
+    grid-column: 1 / -1;
+  }
+  
+  
+  
+  
+  .homepage-grid-1,
+  .homepage-grid-2,
+  .homepage-grid-3,
+  .homepage-grid-4 {
+    grid-column: 1 / -1;
+  }
+  
+
+
+
+  .welcoming-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgb(32,33,36);
+    line-height: 1.75rem;
+  }
+  
+  .sub-welcoming-text {
+    color: rgb(128,134,139);
+    font-family: Roboto,Arial,sans-serif;
+    line-height: 1.25rem;
+    font-size: .875rem;
+    letter-spacing: .0142857143em;
+    font-weight: 400;
+  }
+
+
+  @media (max-width: 1200px) {
+    
+    .homepage-grid {
+        margin: 0px 20px;
+
+    }
+  }

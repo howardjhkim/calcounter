@@ -7,7 +7,7 @@ import FoodTable from "../Components/FoodTable"
 import WeightLossTracker from "../Components/WeightLossTracker"
 import Banner from "../Components/Banner"
 import { ReactComponent as Art } from "../Images/art.svg"
-
+import home from "../CSS/Home.css"
 import Dates from "../Components/Dates"
 
 
@@ -29,9 +29,6 @@ export default function Home() {
                 <Banner />
             </div>
             
-
-
-
 
             <div className="homepage-grid-1">
                 <MacrosCard /> 

@@ -1,0 +1,9 @@
+.help-page{
+    margin: 20px;
+}
+
+
+.sectioned-rows{
+    display: flex;
+    gap: 20px;
+}
