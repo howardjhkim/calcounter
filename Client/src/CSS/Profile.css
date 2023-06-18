@@ -1,7 +1,13 @@
 .profile-page-grid {
-    margin: 20px;
+    margin: 0px 20px;
 }
 
+
+.profile-master-container{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}   
 
 
 .info-container-row {
@@ -9,8 +15,23 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0px;
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-    gap: 10px;
+    /* padding: 20px 0px; */
+    border-bottom: 1px solid lightgrey;    
+}
+
+
+
+
+
+.profile-master-container > :last-child {
+    /* border-bottom:none; */
+}
+
+
+@media (max-width: 600px) {
+    .profile-master-container{
+        
+        gap: 25px;
+    }   
+    
 }

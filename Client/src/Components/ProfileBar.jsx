@@ -40,11 +40,11 @@ export default function ProfileBar() {
                 </div>
                 <div className="profile-info-container main-typography">
                     <span>Height</span>
-                    <span>{personalDbList?.[0]?.[0]?.height || ''} cm</span>
+                    <span>{personalDbList?.[0]?.[0]?.height || ''} in</span>
                 </div>
                 <hr />
                 <div className="profile-info-container main-typography">
-                    <span>Weight</span>
+                    <span>Current Weight</span>
                     <span>{personalDbList?.[0]?.[0]?.weight || ''} lbs</span>
                 </div>
                 <div className="profile-info-container main-typography">
@@ -56,20 +56,21 @@ export default function ProfileBar() {
                     <span>{personalDbList?.[0]?.[0]?.weight - personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</span>
                 </div>
                 <hr />
+                
+                <div className="profile-info-container main-typography">
+                    <span>TDEE</span>
+                    <span>{personalDbList?.[0]?.[0]?.tdeeDb} cal</span>
+                </div>
                 <div className="profile-info-container main-typography">
                     <span>BMR</span>
-                    <span>{personalDbList?.[0]?.[0]?.bmrDb}</span>
+                    <span>{personalDbList?.[0]?.[0]?.bmrDb} cal</span>
                 </div>
                 
 
-                <div className="profile-info-container main-typography">
-                    <span>TDEE</span>
-                    <span>{personalDbList?.[0]?.[0]?.tdeeDb}</span>
-                </div>
 
                 <div className="profile-info-container main-typography">
                     <span>Goals</span>
-                    <span>{personalDbList?.[0]?.[0]?.fitnessGoal}</span>
+                    <span>{personalDbList?.[0]?.[0]?.fitnessGoal[0].toUpperCase() + personalDbList?.[0]?.[0]?.fitnessGoal.slice(1)}</span>
                 </div>
 
                 <hr />

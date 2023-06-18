@@ -6,7 +6,7 @@ header {
   align-items: center;
   margin-left: auto;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-  padding: 25px 20px;
+  padding: 25px 0px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -19,7 +19,6 @@ header {
   justify-content: center;
   position: relative;
 
-  
 }
 
 
@@ -40,11 +39,20 @@ header {
 }
 
 
+.logo{
+  margin-left: 20px;
+}
+
+.logo:hover {
+  border-bottom: 3px solid rgb(232,240,254);
+  
+}
+
 .home-logo {
   text-decoration: none;
   color: black;
-  width: 180px;
-  height: 15px;
+  /* width: 180px; */
+  height: 25px;
   margin: 0px;
   padding: 0px;
   background: white;
@@ -52,18 +60,19 @@ header {
 }
 
 .header-searchbar{
-  width: 100%;
+  width: 50%;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  
+  /* margin: 0px 20px; */
 }
 
 
+
 .searchbar-input{
-  border: none;
+  border: 1px solid lightgrey;
   border-radius: 20px;
   width: 90%;
   margin: 0 auto;
@@ -72,6 +81,9 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
+.searchbar-input:hover {
+  border: 2px solid lightgrey;
+}
 
 .searchbar-input::placeholder {
   padding-left: 20px;
@@ -82,52 +94,35 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  margin-right: 20px;
   gap: 20px;
 }
 
+.header-right-container > a.active >p{
+
+  color: rgb(26,115,232);
+}
 
 
+.header-right-container > a.active {
+  background-color: rgb(232,240,254);
+  border-radius: 10px;
+  color: rgb(26,115,232);
+}
 
 
+.header-right-container > a:hover{
+  border-radius: 10px;
+  background-color: #F2F3F5;
+  color: rgb(26,115,232);
+}
 
-/* .header-button{
-  margin-left: 12px;
-  margin-right: 16px;
-  background-color: rgb(26,115,232);
-  width: 101.45px;
-  height: 36px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  border-radius: 4px;
-  border: none;
-  transition: all 250ms;
-} */
-
-/* 
-.profilepic-img{
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-} */
+.header-right-container > a:first-child {
+  margin-right: 20px;
+  
+}
 
 
-
-/* .header-button:hover,
-.header-button:focus {
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.3) 0 4px 12px;
-  color: rgba(0, 0, 0, 0.65);
-  opacity: 2.5;
-} */
-
-/* 
-
-.header-button:hover {
-  transform: translateY(-1px);
-} */
 
 .header-searchbar > img {
   position: absolute;
@@ -185,10 +180,10 @@ header {
   left: 50%;
   top: -110%;
   /* height: 700px; */
-  width: 100%;
+  width: 50%;
   padding: 5px;
   gap: 20px;
-
+  
 
 
 }
@@ -199,7 +194,7 @@ header {
 .contents-top-row{
   display: flex;
   align-items: center;
-  
+  padding: 0px 20px;
 }
 
 
@@ -231,10 +226,14 @@ header {
 
 
 .exit-btn {
-  margin: 5px 10px;
   border-radius: 50%;
   border: 1px solid grey;
   cursor: pointer;
+}
+
+
+.exit-btn:hover {
+  border: 2px solid grey;
 }
 
 
@@ -242,7 +241,7 @@ header {
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  padding: 20px 20px 20px 20px;
+  padding: 20px 30px;
   width: 95%;
   margin: 0 auto;
   /* margin: 35px 0px; */
@@ -256,6 +255,14 @@ header {
 }
 
 
+.header-widget > input:hover {
+  border: 1px solid #cdcdcd;
+  background-color: #f9f9fb;
+  transition: background-color 2s ease-out,border .9s ease-out;
+}
+
+
+
 .show-modal, .backdrop {
     opacity: 1;
     pointer-events: all;
@@ -265,12 +272,24 @@ header {
 
 
 
+.submit{
+  background-color: none;
+  margin: 10px 20px;
+  width: 15%;
+  height: 30px;
+  display: inline-block;
+  margin-left: auto;
+  align-items: flex-end;
+}
 
 
 
 
 
 
+.header-right-container > a {
+  padding: 0px 10px;
+}
 
 
 /********************** Media Queries **********************/
@@ -303,23 +322,35 @@ header {
     align-items: center;
   }
 
+  .header-searchbar {
+    width: 100%;    
+  }
   
-
 
   .header-searchbar > img {
     position: absolute;
     top: 50%;
-    left: 20px;
+    left: 35px;
     transform: translateY(-50%);
     width: 18px;
   }
 
   .searchbar-input{
     border-radius: 20px;
-    width: 95%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0 20px;
     height: 35px;
-    padding-left: 50px;
+    padding-left: 30px;
+
+  }
+
+
+  .contents-container{
+    width: 100%;
+  }
+  .header-right-container > a:first-child {
+    margin-right: 0px;
+    
   }
 
   

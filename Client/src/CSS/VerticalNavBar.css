@@ -7,6 +7,10 @@ nav > a {
 }
 
 
+nav > a:hover {
+  cursor: pointer;
+}
+
 
 .vertical-nav-bar {
     display: flex;
@@ -34,8 +38,22 @@ nav > a {
   }
 
 
+  .menu > a:hover {
+    background: #F2F3F5;
+    border-radius: 0 24px 24px 0;
+    cursor: pointer;
+  }
 
 
+  .menu > a.active {
+    background: rgb(232,240,254);
+    border-radius: 0 24px 24px 0;
+    color: rgb(26,115,232);
+  }
+
+ 
+
+  
 
   @media (max-width: 1007px) {
     .navbar {

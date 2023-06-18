@@ -34,10 +34,10 @@ export default function Footer() {
                     <p>Home</p>
                 </Link>
 
-                <Link to="/workouts" className="footer-elements-container">
+                {/* <Link to="/workouts" className="footer-elements-container">
                     <img src={workouts} alt="" className="footer-icon"/>
                     <p>Workouts</p>
-                </Link>
+                </Link> */}
 
 
                 <Link to="/profile" className="footer-elements-container">

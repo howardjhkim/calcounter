@@ -39,7 +39,7 @@ export default function FoodTable() {
                             <th>Fat</th>
                             <th>Grams</th>
                             <th>Servings</th>
-                            <th>Total Calories</th>
+                            <th>Calories</th>
                         </tr>
                     </thead>
                     
@@ -55,14 +55,14 @@ export default function FoodTable() {
                                 <td>{food.grams}</td>
                                 <td>{/* Placeholder for the missing data */}</td>
                                 <td>
-                                    <div className="icon-container">
+                                    <button className="icon-container">
                                         <img
                                         className="trash-icon small-icon"
                                         src={trashIcon}
                                         ref={inputRef}
                                         onClick={() => {deleteFoodDb(food.name)}}
                                         />
-                                    </div>
+                                    </button>
                                 </td>
                             </tr>
                             ))

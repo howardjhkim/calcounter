@@ -35,16 +35,19 @@ export default function Home() {
                 
             </div>
             
-            <div className="homepage-grid-2">
+
+            
+
+            {/* <div className="homepage-grid-2">
                 <FoodInputs />
-            </div>
+            </div> */}
 
-
-
-
-            <div className="homepage-grid-3">
+            {/* <div className="homepage-grid-3">
                 <WeightLossTracker /> 
-            </div>
+            </div> */}
+
+
+
 
             <div className="homepage-grid-4">
                 <FoodTable />
