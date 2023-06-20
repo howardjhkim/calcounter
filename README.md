@@ -3,7 +3,7 @@
 CALCOUNTER is a web application to help users track their daily calories and reach their weight goals.
 Built with React, JavaScript, and CSS.
 
-[Link demo](https://calcounter-v1.netlify.app/)
+[Live Site](https://calcounter-v1.netlify.app/)
 
 ## Project Status
 
