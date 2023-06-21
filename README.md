@@ -18,4 +18,4 @@ This project is constantly being updated to further enhance user experience.
 
 ## Reflection
 
-This is my first ever project as a self-taught developer. The goal of this project was to build a real-life applicable application to help myself and others reach their desired fitness & weight goals.
+The goal of this project was to build a real-life applicable application to help myself and others reach their desired fitness & weight goals.
