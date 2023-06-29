@@ -1,52 +1,95 @@
-import React, {useState} from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { db } from '../firebase';
+import { collection, getDocs, doc, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase"
 
 
-export default function Login() {
-    
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Perform form submission logic here
-        console.log('Form submitted:', { name, email, password });
-    };
-    
-    
-    
-    return (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <br />
-          <button type="submit">Register</button>
-        </form>
-      );
+
+export default function Login( {setIsAuth} ) {
+  const [newName, setNewName] = useState("");
+  const [newAge, setNewAge] = useState(0);
+  const [users, setUsers] = useState([]);
+
+  const usersCollectionRef = collection(db, "users");
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  useEffect(() => {
+    // Save users data to local storage whenever it changes
+    localStorage.setItem("usersData", JSON.stringify(users));
+  }, [users]);
+
+  const createUser = async () => {
+    await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
+    await getUsers();
+  };
+
+  const getUsers = async () => {
+    const data = await getDocs(usersCollectionRef);
+    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  const updateUser = async (id, age) => {
+    const userDoc = doc(db, "users", id);
+    const newFields = { age: age + 1 };
+    await updateDoc(userDoc, newFields);
+    getUsers();
+  };
+
+  const deleteUser = async (id) => {
+    const userDoc = doc(db, "users", id);
+    await deleteDoc(userDoc);
+    getUsers();
+  };
+
+
+
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+    .then((res) => {
+        const name = res.user.displayName;
+        const email = res.user.email;
+        const profilePic = res.user.photoURL
+
+        localStorage.setItem("isAuth", true)
+        setIsAuth(true)
+        
+        localStorage.setItem("name", name)
+        localStorage.setItem("email", email)
+        localStorage.setItem("profilePic", profilePic)
+    })
+    .catch((err) =>{
+        console.log(err)
+    })
+  }
+
+  return (
+    <>
+      <button onClick={signInWithGoogle}>Sign in with Google</button>
+
+      <div>
+        <input placeholder="Name" onChange={(e) => { setNewName(e.target.value) }} />
+        <input type="number" placeholder="Age" onChange={(e) => { setNewAge(e.target.value) }} />
+        <button onClick={createUser}>Create User</button>
+      </div>
+
+      <div className="test">
+        {users.map((user) => {
+          return (
+            <div key={user.id}>
+              <h1>Name: {user.name}</h1>
+              <h1>Age: {user.age}</h1>
+              <button onClick={() => { updateUser(user.id, user.age) }}>Update Age</button>
+              <button onClick={() => { deleteUser(user.id) }}>Delete</button>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
 }

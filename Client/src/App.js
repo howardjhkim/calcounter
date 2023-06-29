@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, NavLink, Outlet } from "react-router-dom";
 
@@ -12,8 +12,14 @@ import Help from "./Pages/Help"
 import Layout from "./Components/Layout"
 import {ContextProvider} from "./Context/DataContext"
 
+
 function App() {
     
+    const [isAuth, setIsAuth] = useState(false)
+    
+
+
+
     return (
       <ContextProvider>
           <BrowserRouter>

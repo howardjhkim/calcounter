@@ -3,6 +3,7 @@ import {Context} from "../Context/DataContext"
 import Axios from "axios"
 
 
+
 export default function FoodInputs() {
     ///////////// Component Ref /////////////
     const componentRef = useRef(null)
@@ -106,6 +107,9 @@ export default function FoodInputs() {
     }
     OpenContainer()
     
+
+
+
     
     return (
         <div className="widget">
@@ -125,6 +129,7 @@ export default function FoodInputs() {
                 <div className="food-input-details-container">
                     <div className="food-input-details-subcontainer">
                         <span className="food-input-details-category">Food Weight</span>
+                       
                         <div className="food-input-details">
                             <p>Calories per Serving</p>
                             <input 

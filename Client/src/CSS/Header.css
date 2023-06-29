@@ -270,26 +270,23 @@ header {
 
 
 
-
-
-.submit{
-  background-color: none;
-  margin: 10px 20px;
-  width: 15%;
-  height: 30px;
-  display: inline-block;
-  margin-left: auto;
-  align-items: flex-end;
-}
-
-
-
-
-
-
 .header-right-container > a {
   padding: 0px 10px;
 }
+
+
+.chooser {
+  display: flex;
+  justify-content: center;
+  gap: 50px
+}
+
+.chooser > div:hover {
+  color: red
+}
+
+
+
 
 
 /********************** Media Queries **********************/

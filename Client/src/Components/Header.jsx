@@ -14,6 +14,21 @@ import exit from "../Images/exit.svg"
 import newlogo from "../Images/newlogo.svg"
 
 
+
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import FilledInput from '@mui/material/FilledInput';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+
+
 // import toggle from "../CSS/Toggle.css"
 
 
@@ -125,6 +140,65 @@ export default function Header() {
         setIsOpen(!isOpen)
     }
 
+
+
+    const useStyles = ({
+        selectStyle: {
+          backgroundColor: '',
+          color: 'white',
+ 
+        },
+      });
+
+
+
+      const filledInput = [
+        {
+            name: 'Food Name',
+            value: foodName,
+            onChange: (e) => setFoodName(e.target.value),
+        },
+        {
+            name: 'Servings',
+            value: inputServings,
+            onChange: (e) => setInputServings(e.target.value),
+        },
+        {
+            name: 'Grams',
+            value: inputGrams,
+            onChange: (e) => setInputGrams(e.target.value),
+        },
+        {
+            name: 'Calories',
+            value: inputCalPerServ,
+            onChange: (e) => setInputCalPerServ(e.target.value),
+        },
+
+        
+        
+        ///////////Macros//////////
+        {
+            name: 'Protein',
+            value: inputProtein,
+            onChange: (e) => setInputProtein(e.target.value),
+        },
+        {
+            name: 'Carbs',
+            value: inputCarbs,
+            onChange: (e) => setInputCarbs(e.target.value),
+        },
+        {
+            name: 'Fat',
+            value: inputFat,
+            onChange: (e) => setInputFat(e.target.value),
+        },
+      ];
+
+
+      const [addNewFoodState, setAddNewFoodState] = useState(true)
+      const [recentlyAddedState, setRecentlyAddedState] = useState(false)
+
+      
     return(
         <header>
             <div className="header-master">
@@ -177,30 +251,73 @@ export default function Header() {
                             </div>
 
                             <div className="test header-widget">
-
-
-                                <h4>Basic Info</h4>
-
-                                <input type="text" placeholder="Food" value={foodName} onChange={e => setFoodName(e.target.value)}/>
-                                <input type="text" placeholder="Calories Per Serving" value={inputCalPerServ} onChange={e => setInputCalPerServ(e.target.value)}/>
-                                <input type="text" placeholder="Amount of Servings" value={inputServings} onChange={e => setInputServings(e.target.value)}/>
-                                <input type="text" placeholder="Grams" value={inputGrams} onChange={e => setInputGrams(e.target.value)}/>
-                                
-                                <h4>Macros</h4>
-                                
-                                <input type="text" placeholder="Protein" value={inputProtein} onChange={e => setInputProtein(e.target.value)}/>
-                                <input type="text" placeholder="Carbs" value={inputCarbs} onChange={e => setInputCarbs(e.target.value)}/>
-                                <input type="text" placeholder="Fat" value={inputFat} onChange={e => setInputFat(e.target.value)}/>
+                            <div className="chooser">
+                                <div onClick={() => { setAddNewFoodState(true); setRecentlyAddedState(false); }}>
+                                    Add New Food
+                                </div>
+                                <div onClick={() => { setAddNewFoodState(false); setRecentlyAddedState(true); }}>
+                                    Recently Added
+                                </div>
                             </div>
-                            
-                            {/* <div className="header-widget">
-                                <div>fill</div>
-                            </div> */}
 
-                            <button className="submit" onClick={dataSubmit}>Submit</button>
+                            {addNewFoodState && 
+                                <div>
+                                    <h4>Basic Info</h4>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    {
+                                        filledInput.slice(0, 3).map((el => 
+                                            (   
+                                                
+                                                <FormControl key={el.name} sx={{ m: 0, width: '50%' }} variant="filled">
+                                                    <FilledInput
+                                                        id="filled-adornment-weight"
+                                                        endAdornment={<InputAdornment position="end">per serving</InputAdornment>}
+                                                        aria-describedby="filled-weight-helper-text"
+                                                        inputProps={{'aria-label': 'weight',}}
+                                                        value={el.value}
+                                                        onChange={el.onChange}
+                                                        />
+                                                    <FormHelperText id="filled-weight-helper-text">{el.name}</FormHelperText>
+                                                </FormControl>
+                                            )
+                                        ))
+                                    }
+                                    </div>
+
+
+                                    <h4>Macronutrients</h4>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    {
+                                        
+                                        filledInput.slice(4).map((el => 
+                                            (
+                                                <FormControl key={el.name} sx={{ m: 0, width: '50%' }} variant="filled">
+                                                    <FilledInput
+                                                        id="filled-adornment-weight"
+                                                        endAdornment={<InputAdornment position="end">per serving</InputAdornment>}
+                                                        aria-describedby="filled-weight-helper-text"
+                                                        inputProps={{'aria-label': 'weight',}}
+                                                        value={el.value}
+                                                        onChange={el.onChange}
+                                                        />
+                                                    <FormHelperText id="filled-weight-helper-text">{el.name}</FormHelperText>
+                                                </FormControl>
+                                            )
+                                        ))
+                                    
+                                    }
+                                    </div>
+
+
+                                    <Button 
+                                        variant="contained" 
+                                        style={{marginLeft: `auto`, width: `15%`, marginTop:`20px`}}
+                                        >Submit
+                                    </Button>
+                                </div>}
+                            </div>
 
                         </div>
-
                     </div>
                 )}
             </div>
