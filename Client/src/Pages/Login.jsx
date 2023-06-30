@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { db } from '../firebase';
 import { collection, getDocs, doc, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../firebase"
+import { useNavigate } from "react-router-dom";
+import {Context} from "../Context/DataContext"
 
 
 
 export default function Login( {setIsAuth} ) {
+
+  const { isAuth } = useContext(Context)
+  const { addIsAuth } = useContext(Context)
+
+  let navigate = useNavigate()
+  
   const [newName, setNewName] = useState("");
   const [newAge, setNewAge] = useState(0);
   const [users, setUsers] = useState([]);
@@ -46,7 +54,7 @@ export default function Login( {setIsAuth} ) {
     getUsers();
   };
 
-
+  
 
 
   const signInWithGoogle = () => {
@@ -57,11 +65,12 @@ export default function Login( {setIsAuth} ) {
         const profilePic = res.user.photoURL
 
         localStorage.setItem("isAuth", true)
-        setIsAuth(true)
-        
+        addIsAuth(true)
+
         localStorage.setItem("name", name)
         localStorage.setItem("email", email)
         localStorage.setItem("profilePic", profilePic)
+        navigate("/")
     })
     .catch((err) =>{
         console.log(err)

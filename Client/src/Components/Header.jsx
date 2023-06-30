@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef} from "react"
 import {Context} from "../Context/DataContext"
 import Axios from "axios"
-import {NavLink, Link} from "react-router-dom"
+import {NavLink, Link, useNavigate} from "react-router-dom"
 import { ReactComponent as IconName } from '../Images/add.svg';
 
 import logo from "../Images/logo.png"
@@ -13,7 +13,8 @@ import exit from "../Images/exit.svg"
 
 import newlogo from "../Images/newlogo.svg"
 
-
+import { signOut } from "firebase/auth"
+import { auth } from "../firebase"
 
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -33,16 +34,10 @@ import Button from '@mui/material/Button';
 
 
 export default function Header() {
-
-    ///////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-
-
     ///////////// Component Ref /////////////
     const componentRef = useRef(null)
-
-    
+    const {isAuth} = useContext(Context)
+    const {addIsAuth} = useContext(Context)
     ///////////// States for inputs /////////////
     const [foodName, setFoodName] = React.useState("")
     const [inputCalPerServ, setInputCalPerServ] = React.useState("")
@@ -51,12 +46,10 @@ export default function Header() {
     const [inputCarbs, setInputCarbs] = React.useState("")
     const [inputProtein, setInputProtein] = React.useState("")
     const [inputFat, setInputFat] = React.useState("")
-
     
     ///////////// Database State & Add Function ///////////// 
     const { foodDbList } = useContext(Context)
     const { addFoodDbList } = useContext(Context)
-
 
     ///////////// Database GET & DELETE ///////////// 
     const addFoodDb = () => {
@@ -79,7 +72,6 @@ export default function Header() {
             ]
         )
     }
-
     
     ///////////// Data submission button /////////////
     function dataSubmit(e) {
@@ -107,7 +99,6 @@ export default function Header() {
         }
     }
 
-
     ///////////// clears all inputs /////////////
     function clearVals() {
         setFoodName('')
@@ -119,28 +110,13 @@ export default function Header() {
         setInputFat('')
     }
 
-
-
-
-    ///////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-
-
     const [userNameReg, setUserNameReg] = useState('')
     const [passwordReg, setPasswordReg] = useState('')
-
-
-
-
     const [isOpen, setIsOpen] = useState(false);
-
 
     function toggleModal() {
         setIsOpen(!isOpen)
     }
-
-
 
     const useStyles = ({
         selectStyle: {
@@ -148,57 +124,60 @@ export default function Header() {
           color: 'white',
  
         },
-      });
+    });
 
+    const filledInput = [
+    {
+        name: 'Food Name',
+        value: foodName,
+        onChange: (e) => setFoodName(e.target.value),
+    },
+    {
+        name: 'Servings',
+        value: inputServings,
+        onChange: (e) => setInputServings(e.target.value),
+    },
+    {
+        name: 'Grams',
+        value: inputGrams,
+        onChange: (e) => setInputGrams(e.target.value),
+    },
+    {
+        name: 'Calories',
+        value: inputCalPerServ,
+        onChange: (e) => setInputCalPerServ(e.target.value),
+    },
 
+    ///////////Macros//////////
+    {
+        name: 'Protein',
+        value: inputProtein,
+        onChange: (e) => setInputProtein(e.target.value),
+    },
+    {
+        name: 'Carbs',
+        value: inputCarbs,
+        onChange: (e) => setInputCarbs(e.target.value),
+    },
+    {
+        name: 'Fat',
+        value: inputFat,
+        onChange: (e) => setInputFat(e.target.value),
+    },
+    ];
 
-      const filledInput = [
-        {
-            name: 'Food Name',
-            value: foodName,
-            onChange: (e) => setFoodName(e.target.value),
-        },
-        {
-            name: 'Servings',
-            value: inputServings,
-            onChange: (e) => setInputServings(e.target.value),
-        },
-        {
-            name: 'Grams',
-            value: inputGrams,
-            onChange: (e) => setInputGrams(e.target.value),
-        },
-        {
-            name: 'Calories',
-            value: inputCalPerServ,
-            onChange: (e) => setInputCalPerServ(e.target.value),
-        },
+    const [addNewFoodState, setAddNewFoodState] = useState(true)
+    const [recentlyAddedState, setRecentlyAddedState] = useState(false)
+    
 
-        
-        
-        ///////////Macros//////////
-        {
-            name: 'Protein',
-            value: inputProtein,
-            onChange: (e) => setInputProtein(e.target.value),
-        },
-        {
-            name: 'Carbs',
-            value: inputCarbs,
-            onChange: (e) => setInputCarbs(e.target.value),
-        },
-        {
-            name: 'Fat',
-            value: inputFat,
-            onChange: (e) => setInputFat(e.target.value),
-        },
-      ];
+    let navigate = useNavigate()
+    const signUserOut = () => {
+        signOut(auth).then(() => {
+            localStorage.clear()
+            addIsAuth(false)
+        })
+    }
 
-
-      const [addNewFoodState, setAddNewFoodState] = useState(true)
-      const [recentlyAddedState, setRecentlyAddedState] = useState(false)
-
-      
     return(
         <header>
             <div className="header-master">
@@ -214,7 +193,7 @@ export default function Header() {
                                 <input className="searchbar-input" type="text" placeholder="What did you eat today?"/>
                             </div>
                             <nav className="header-right-container">
-                                <NavLink to="/login"><p>Login</p></NavLink>
+                                {!isAuth ? <NavLink to="/login"><p>Login</p></NavLink> : <Button onClick={signUserOut}>Sign Out</Button>}
                                 <NavLink to="/register"><p>Register</p></NavLink>
                             </nav>
                         </div>

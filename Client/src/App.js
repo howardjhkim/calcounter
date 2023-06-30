@@ -15,7 +15,6 @@ import {ContextProvider} from "./Context/DataContext"
 
 function App() {
     
-    const [isAuth, setIsAuth] = useState(false)
     
 
 

@@ -52,7 +52,10 @@ function ContextProvider({children}) {
         setPersonalDbList([newPersonalDbList])
     }
 
-   
+    const [isAuth, setIsAuth] = useState(false)
+    const addIsAuth = (newIsAuth) => {
+        setIsAuth(newIsAuth)
+    }
 
     return (
         <Context.Provider value={{
@@ -63,6 +66,7 @@ function ContextProvider({children}) {
             foodDbList, addFoodDbList,
             tdeeDbList, addTdeeDbList,
             personalDbList, addPersonalDbList,
+            isAuth, addIsAuth
         }}>
 
             {children}
