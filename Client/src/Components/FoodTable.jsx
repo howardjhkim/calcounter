@@ -4,24 +4,34 @@ import Axios from "axios"
 import trashIcon from "../Images/delete-icon.png"
 import add from "../Images/add.png"
 import foodTable from "../CSS/FoodTable.css"
+import { useParams } from "react-router-dom";
 
 export default function FoodTable() {
+    
+    let { id } = useParams();
+    
     ///////////// Input ref /////////////
     const inputRef = useRef(null)
     
-
     ///////////// Database State Datas /////////////
     const { foodDbList } = useContext(Context)
     const { addFoodDbList } = useContext(Context)
     
 
     ///////////// Database GET & DELETE /////////////
-    Axios.get('http://localhost:3001/food').then((response) => {
-        addFoodDbList(response.data)
-    })
     
-    const deleteFoodDb = (food) => {
-        Axios.delete(`http://localhost:3001/delete/${food}`)
+    
+    useEffect(() => {
+        Axios.get('http://localhost:3001/food').then((response) => {
+            addFoodDbList(response.data)
+        })
+    }, [foodDbList])
+
+ 
+    
+    
+    const deleteFoodDb = (id) => {
+        Axios.delete(`http://localhost:3001/food/${id}`)
     }
 
 

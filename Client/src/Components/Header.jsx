@@ -53,7 +53,7 @@ export default function Header() {
 
     ///////////// Database GET & DELETE ///////////// 
     const addFoodDb = () => {
-        Axios.post('http://localhost:3001/create', {
+        Axios.post('http://localhost:3001/food', {
             name: foodName, 
             protein: Number(inputProtein),  
             carbs: Number(inputCarbs),
@@ -291,6 +291,7 @@ export default function Header() {
                                     <Button 
                                         variant="contained" 
                                         style={{marginLeft: `auto`, width: `15%`, marginTop:`20px`}}
+                                        onClick={dataSubmit}
                                         >Submit
                                     </Button>
                                 </div>}

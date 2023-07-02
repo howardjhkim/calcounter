@@ -20,14 +20,18 @@ export default function ProfileBar() {
     const { addTdeeDbList } = useContext(Context)
 
     ///////////// Database GET & DELETE /////////////
-    Axios.get('http://localhost:3001/personal').then((response) => {
-        addPersonalDbList(response.data)
-    })
-
-
-    Axios.get('http://localhost:3001/tdee').then((response) => {
-        addTdeeDbList(response.data)
-    })
+    
+    useEffect(() => {
+        Axios.get('http://localhost:3001/personal').then((response) => {
+            addPersonalDbList(response.data)
+        })
+    
+    
+        Axios.get('http://localhost:3001/tdee').then((response) => {
+            addTdeeDbList(response.data)
+        })
+    }, [])
+    
     
     return (
         <div className="profile-bar-master-container">

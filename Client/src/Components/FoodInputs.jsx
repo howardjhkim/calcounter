@@ -26,7 +26,7 @@ export default function FoodInputs() {
 
     ///////////// Database GET & DELETE ///////////// 
     const addFoodDb = () => {
-        Axios.post('http://localhost:3001/create', {
+        Axios.post('http://localhost:3001/food', {
             name: foodName, 
             protein: Number(inputProtein),  
             carbs: Number(inputCarbs),

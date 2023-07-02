@@ -22,8 +22,7 @@ export default function Home() {
                 setRandomQuote(data[Math.floor(Math.random() * data.length)]);
             })    
             .catch((error) => console.error(error));
-        }, 
-    [])
+    },[])
 
     
     return (

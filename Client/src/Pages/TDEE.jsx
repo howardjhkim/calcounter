@@ -100,14 +100,19 @@ export default function Tdee() {
 
     /////////////////////////// ACTUAL DATABASE DATA //////////////////////////////////////
     
-    Axios.get('http://localhost:3001/tdee').then((response) => {
-        addTdeeDbList(response.data)
-    })
-    
 
-    Axios.get('http://localhost:3001/personal').then((response) => {
-        addPersonalDbList(response.data)
-    })
+    useEffect(() => {
+
+        Axios.get('http://localhost:3001/tdee').then((response) => {
+            addTdeeDbList(response.data)
+        })
+        
+    
+        Axios.get('http://localhost:3001/personal').then((response) => {
+            addPersonalDbList(response.data)
+        })
+
+    }, [])
 
 
 

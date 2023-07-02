@@ -36,15 +36,18 @@ export default function MacrosCard() {
 
 
     ///////////// Database GET & DELETE /////////////
-    Axios.get('http://localhost:3001/tdee').then((response) => {
-        addTdeeDbList(response.data)
-    })
-
-
-
-    Axios.get('http://localhost:3001/personal').then((response) => {
-        addPersonalDbList(response.data)
-    })
+    useEffect(() => {
+        Axios.get('http://localhost:3001/tdee').then((response) => {
+            addTdeeDbList(response.data)
+        })
+    
+    
+    
+        Axios.get('http://localhost:3001/personal').then((response) => {
+            addPersonalDbList(response.data)
+        })
+    }, [])
+    
 
 
     ///////////// Initial macros values /////////////
