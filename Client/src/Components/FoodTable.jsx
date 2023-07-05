@@ -9,31 +9,30 @@ import { useParams } from "react-router-dom";
 export default function FoodTable() {
     
     let { id } = useParams();
+    const [food, setFood] = useState([])
     
     ///////////// Input ref /////////////
     const inputRef = useRef(null)
     
     ///////////// Database State Datas /////////////
-    const { foodDbList } = useContext(Context)
-    const { addFoodDbList } = useContext(Context)
-    
+    const { foodDbList, addFoodDbList } = useContext(Context)
+
+
 
     ///////////// Database GET & DELETE /////////////
-    
-    
     useEffect(() => {
-        Axios.get('http://localhost:3001/food').then((response) => {
-            addFoodDbList(response.data)
+        Axios.get('http://localhost:3001/food').then((res) => {
+            setFood(res.data)
         })
     }, [foodDbList])
-
- 
     
-    
-    const deleteFoodDb = (id) => {
-        Axios.delete(`http://localhost:3001/food/${id}`)
+    const deleteFoodDb = (name) => {
+        Axios.delete(`http://localhost:3001/food/${name}`).then(() => {
+            setFood(food.filter((val) => {
+                return val.name != name;
+            }))
+        })
     }
-
 
     return (
         <div className="widget">
@@ -54,15 +53,15 @@ export default function FoodTable() {
                     </thead>
                     
                     <tbody>
-                        {foodDbList[0] ? (
-                            foodDbList[0].map((food, id) => (
+                        {food ? (
+                            food.map((foods, id) => (
                             <tr key={id}>
-                                <td>{food.name}</td>
-                                <td>{food.protein}</td>
-                                <td>{food.carbs}</td>
-                                <td>{food.fat}</td>
-                                <td>{food.servings}</td>
-                                <td>{food.grams}</td>
+                                <td>{foods.name}</td>
+                                <td>{foods.protein}</td>
+                                <td>{foods.carbs}</td>
+                                <td>{foods.fat}</td>
+                                <td>{foods.servings}</td>
+                                <td>{foods.grams}</td>
                                 <td>{/* Placeholder for the missing data */}</td>
                                 <td>
                                     <button className="icon-container">
@@ -70,7 +69,7 @@ export default function FoodTable() {
                                         className="trash-icon small-icon"
                                         src={trashIcon}
                                         ref={inputRef}
-                                        onClick={() => {deleteFoodDb(food.name)}}
+                                        onClick={() => {deleteFoodDb(foods.name)}}
                                         />
                                     </button>
                                 </td>
