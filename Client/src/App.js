@@ -12,13 +12,8 @@ import Help from "./Pages/Help"
 import Layout from "./Components/Layout"
 import {ContextProvider} from "./Context/DataContext"
 
-
 function App() {
     
-    
-
-
-
     return (
       <ContextProvider>
           <BrowserRouter>

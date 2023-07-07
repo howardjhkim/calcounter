@@ -21,6 +21,9 @@ const tdeeRouter = require('./routes/Tdee')
 app.use("/tdee", tdeeRouter)
 
 
+const usersRouter = require('./routes/Users')
+app.use("/users", usersRouter)
+
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {
         console.log("Server working on port 3001")
