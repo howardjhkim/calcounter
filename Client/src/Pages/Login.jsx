@@ -10,6 +10,7 @@ function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+  
   const navigate = useNavigate()
 
   const login = () => {
@@ -24,12 +25,25 @@ function Login() {
           username: res.data.username,
           id: res.data.id
         })
+
+        
+        localStorage.setItem('userContext', JSON.stringify({
+          username: res.data.username,
+          id: res.data.id
+        }));
+
+
+
         alert("login successful")
         addIsAuth(true)
         navigate("/")
       }
     })
   }
+    
+
+  
+
 
   useEffect(() => {
     axios.get("http://localhost:3001/users/auth", {headers: {accessToken: localStorage.getItem("accessToken")}}).then((res) => {
@@ -51,3 +65,7 @@ function Login() {
 }
 
 export default Login
+
+
+
+

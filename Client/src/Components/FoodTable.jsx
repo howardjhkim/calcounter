@@ -16,8 +16,7 @@ export default function FoodTable() {
     
     ///////////// Database State Datas /////////////
     const { foodDbList, addFoodDbList } = useContext(Context)
-
-
+    const {userContext} = useContext(Context)
 
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
@@ -34,6 +33,16 @@ export default function FoodTable() {
         })
     }
 
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
+
+
+
+
+  
+   
+    
+
     return (
         <div className="widget">
             <div className="component-title-container">
@@ -42,6 +51,7 @@ export default function FoodTable() {
                 <table>
                     <thead >
                         <tr >
+                            <th>UserId</th>
                             <th>Food</th>
                             <th>Protein</th>
                             <th>Carbs</th>
@@ -54,8 +64,11 @@ export default function FoodTable() {
                     
                     <tbody>
                         {food ? (
-                            food.map((foods, id) => (
-                            <tr key={id}>
+                            food
+                            .filter((foods) => foods.UserId === userContextData?.id)
+                            .map((foods, id) => (
+                                <tr key={id}>
+                                <td>{foods.UserId}</td>
                                 <td>{foods.name}</td>
                                 <td>{foods.protein}</td>
                                 <td>{foods.carbs}</td>
@@ -65,18 +78,21 @@ export default function FoodTable() {
                                 <td>{/* Placeholder for the missing data */}</td>
                                 <td>
                                     <button className="icon-container">
-                                        <img
+                                    <img
                                         className="trash-icon small-icon"
                                         src={trashIcon}
                                         ref={inputRef}
-                                        onClick={() => {deleteFoodDb(foods.name)}}
-                                        />
+                                        onClick={() => {
+                                        deleteFoodDb(foods.name);
+                                        }}
+                                    />
                                     </button>
                                 </td>
-                            </tr>
+                                </tr>
                             ))
                         ) : null}
                     </tbody>
+
                 </table>
                 
                 {foodDbList[0] && !foodDbList[0][0] &&(

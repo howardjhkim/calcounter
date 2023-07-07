@@ -263,12 +263,10 @@ export default function Header() {
                                     </Button>
                                 </div>}
                             </div>
-
                         </div>
                     </div>
                 )}
             </div>
-
 </header>
 )
 }
