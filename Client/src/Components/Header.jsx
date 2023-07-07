@@ -1,46 +1,34 @@
 import React, { useContext, useState, useEffect, useRef} from "react"
-import {Context} from "../Context/DataContext"
-import Axios from "axios"
 import {NavLink, Link, useNavigate, useParams} from "react-router-dom"
-import { ReactComponent as IconName } from '../Images/add.svg';
 
+import Axios from "axios"
+import {Context} from "../Context/DataContext"
+
+import { ReactComponent as IconName } from '../Images/add.svg';
 import logo from "../Images/logo.png"
-import hamburger from "../Images/hamburger.png"
-import profilePicture from "../Images/profile-picture.png"
-import header from "../CSS/Header.css"
 import Search from "../Images/Search.svg"
 import exit from "../Images/exit.svg"
-
 import newlogo from "../Images/newlogo.svg"
+import header from "../CSS/Header.css"
 
-import { signOut } from "firebase/auth"
-import { auth } from "../Archived/firebase"
 
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
 import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 
-
-// import toggle from "../CSS/Toggle.css"
 
 
 export default function Header() {
 
     const {userContext, addUserContext} = useContext(Context)
-
-
-
+    
+    
+    
     let {id} = useParams()
-
+    
     ///////////// Component Ref /////////////
     const componentRef = useRef(null)
     const {isAuth, addIsAuth} = useContext(Context)
@@ -55,23 +43,16 @@ export default function Header() {
     
     ///////////// Database State & Add Function ///////////// 
     const { foodDbList, addFoodDbList } = useContext(Context)
-
-
+    
+    const [isOpen, setIsOpen] = useState(false);
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-    ///////////// Database GET & DELETE ///////////// 
-
-    // useEffect(() => {
-    //     Axios.get("http://localhost:3001/users", {id: res.data.id}).then((res) => {
-    //         if (res.data.error) {
-    //             alert(res.data.error)
-    //         } else {
-    //             alert(`id:` + id)
-    //         }
-    //     })
-    // })
+    
+    const [addNewFoodState, setAddNewFoodState] = useState(true)
+    const [recentlyAddedState, setRecentlyAddedState] = useState(false)
 
 
+    ///////////// adds food the the database /////////////
     const addFoodDb = () => {
         const accessToken = localStorage.getItem("accessToken");
         if (!accessToken) {
@@ -85,13 +66,11 @@ export default function Header() {
             fat: Number(inputFat),
             calories: Number(inputCalPerServ)
         }, 
-        
         {
             headers: {
                 accessToken: accessToken,
             },
-        }
-        )
+        })
         .then((res) => {
             if (res.data.error) {
               console.log(res.data.error);
@@ -115,7 +94,7 @@ export default function Header() {
     ///////////// Data submission button /////////////
     function dataSubmit(e) {
         e.preventDefault();
-        
+
         if(foodName.length < 1) {
             alert("Please enter a food name")
             return
@@ -141,9 +120,6 @@ export default function Header() {
         setInputFat('')
     }
 
-    
-    const [isOpen, setIsOpen] = useState(false);
-
     function toggleModal() {
         setIsOpen(!isOpen)
     }
@@ -152,7 +128,6 @@ export default function Header() {
         selectStyle: {
           backgroundColor: '',
           color: 'white',
- 
         },
     });
 
@@ -162,28 +137,22 @@ export default function Header() {
         {name: 'Grams',value: inputGrams,onChange: (e) => setInputGrams(e.target.value)},
         {name: 'Calories',value: inputCalPerServ,onChange: (e) => setInputCalPerServ(e.target.value)},
 
-        ///////////Macros//////////
         {name: 'Protein',value: inputProtein,onChange: (e) => setInputProtein(e.target.value)},
         {name: 'Carbs',value: inputCarbs,onChange: (e) => setInputCarbs(e.target.value)},
         {name: 'Fat',value: inputFat,onChange: (e) => setInputFat(e.target.value)},
     ];
-
-    const [addNewFoodState, setAddNewFoodState] = useState(true)
-    const [recentlyAddedState, setRecentlyAddedState] = useState(false)
-    
-
+    ///////////// signs the user out /////////////
     const signUserOut = () => {
-        signOut(auth).then(() => {
-            localStorage.clear()
-            addIsAuth(false)
-        })
+        localStorage.clear()
+        addIsAuth(false)
     }
-
+    
+    ///////////// checks if a user is logged in /////////////
     useEffect(() => {
         if(localStorage.getItem("accessToken")) { 
-            setIsLoggedIn(true)
+            addIsAuth(true)
         } else {
-            setIsLoggedIn(false)
+            addIsAuth(false)
         }
     },[isLoggedIn])
 
