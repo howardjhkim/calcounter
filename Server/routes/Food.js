@@ -2,14 +2,16 @@
 const express = require('express')
 const router = express.Router()
 const { Food } = require("../models")
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
 
-
-router.post("/", async (req, res) => {
+router.post("/", validateToken, async (req, res) => {
     try {
         const { name, protein, carbs, fat, calories } = req.body;
+        req.body.UserId = req.user.id
+        UserId = req.body.UserId
         await Food.create(
-            { name, protein, carbs, fat, calories }
+            { name, protein, carbs, fat, calories, UserId }
         )
         res.send("Food info inserted")
     } catch (err) {
@@ -27,6 +29,13 @@ router.get("/", async (req, res) => {
         res.sendStatus(500)
     }
 })
+
+router.get("/byuserId/:id", async (req, res) => {
+    const id = req.params.id;
+    const listOfFoods = await Food.findAll({where: {UserId: id}})
+    res.json(listOfFoods)
+})
+
 
 router.delete('/:name', async (req, res) => {
     try {
