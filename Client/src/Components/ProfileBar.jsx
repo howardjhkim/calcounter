@@ -8,6 +8,10 @@ import profilebar from "../CSS/ProfileBar.css"
 
 export default function ProfileBar() {
     
+
+    const {userContext} = useContext(Context)
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
     
     const {bodyInfo} = useContext(Context)
     
@@ -31,64 +35,52 @@ export default function ProfileBar() {
             addTdeeDbList(response.data)
         })
     }, [])
+
+
     
     
+    
+    useEffect(() => {
+        console.log(personalDbList?.[0]?.filter((el)=> el.UserId===1))
+        console.log("filtered: " + filtered)
+        console.log(filtered)
+    })
+
+    const filtered = personalDbList?.[0]?.filter((el) => el.UserId === userContextData?.id)
+    
+    const obj = [
+        {name: "Age", title: `${filtered?.[0].age}`},
+        {name: "Height", title: `${filtered?.[0].height} cm`},
+        {name: "Current Weight", title: `${filtered?.[0].weight} lbs`},
+        {name: "Goal Weight", title: `${filtered?.[0].goalWeight} lbs`},
+        {name: "Remaining Weight", title: `${filtered?.[0].weight-filtered?.[0].goalWeight} lbs`},
+        {name: "TDEE", title: `${filtered?.[0].tdeeDb} cal`},
+        {name: "BMR", title: `${filtered?.[0].bmrDb} cal`},
+        {name: "Goals", title: `${filtered?.[0].fitnessGoal} weight`}
+    ]
     return (
         <div className="profile-bar-master-container">
             <span className="small-title-grey">My Profile</span>
             
-            <div className="profile-info-master-container">
-                <div className="profile-info-container main-typography">
-                    <span>Age</span>
-                    <span>{personalDbList?.[0]?.[0]?.age || ''}</span>
-                </div>
-                <div className="profile-info-container main-typography">
-                    <span>Height</span>
-                    <span>{personalDbList?.[0]?.[0]?.height || ''} in</span>
-                </div>
-                <hr />
-                <div className="profile-info-container main-typography">
-                    <span>Current Weight</span>
-                    <span>{personalDbList?.[0]?.[0]?.weight || ''} lbs</span>
-                </div>
-                <div className="profile-info-container main-typography">
-                    <span>Goal Weight</span>
-                    <span>{personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</span>
-                </div>
-                <div className="profile-info-container main-typography">
-                    <span>Remaining Weight</span>
-                    <span>{personalDbList?.[0]?.[0]?.weight - personalDbList?.[0]?.[0]?.goalWeight || ''} lbs</span>
-                </div>
-                <hr />
-                
-                <div className="profile-info-container main-typography">
-                    <span>TDEE</span>
-                    <span>{personalDbList?.[0]?.[0]?.tdeeDb} cal</span>
-                </div>
-                <div className="profile-info-container main-typography">
-                    <span>BMR</span>
-                    <span>{personalDbList?.[0]?.[0]?.bmrDb} cal</span>
-                </div>
-                
+            {filtered ? (
+                obj.map((el, id) => (
+                    <React.Fragment key={id}>
+                        <div className="profile-info-container main-typography">
+                            <span>{el.name}</span>
+                            <span>{el.title}</span>
+                        </div>
+                        {(id + 1) % 3 === 0 && id !== obj.length - 1 && <hr />} {/* Insert <hr> after every 3 elements */}
+                  </React.Fragment>
+                ))
+            ) : null}
 
 
-                <div className="profile-info-container main-typography">
-                    <span>Goals</span>
-                    <span>{personalDbList?.[0]?.[0]?.fitnessGoal[0].toUpperCase() + personalDbList?.[0]?.[0]?.fitnessGoal.slice(1)}</span>
-                </div>
-
-                <hr />
-
-            </div>
 
 
-            
+           
 
-
-        
 
             <div className="checkbox-master-container">
-                
                 <span className="small-title-grey">Everyday Reminders</span>
                 <span>Did you..</span>
 
@@ -98,22 +90,17 @@ export default function ProfileBar() {
                             <input type="checkbox"/> Go to the gym?
                         </label>
                     </li>
-
-
                     <li>
                         <label className="" htmlFor="">
                             <input type="checkbox"/> Drink enough water?
                         </label> 
                     </li>
-
-
                     <li>
                         <label className="" htmlFor="">
                             <input type="checkbox"/> Sleep enough?
                         </label>
                     </li>
                 </ul>
-
             </div>
         </div>
     )
