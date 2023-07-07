@@ -22,17 +22,14 @@ import Button from '@mui/material/Button';
 
 
 export default function Header() {
-
-    const {userContext, addUserContext} = useContext(Context)
-    
-    
-    
     let {id} = useParams()
-    
-    ///////////// Component Ref /////////////
-    const componentRef = useRef(null)
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////// Context /////////////
     const {isAuth, addIsAuth} = useContext(Context)
-    ///////////// States for inputs /////////////
+    const {userContext, addUserContext} = useContext(Context)
+    const {foodDbList, addFoodDbList} = useContext(Context)
+    
+    ///////////// Food input states /////////////
     const [foodName, setFoodName] = React.useState("")
     const [inputCalPerServ, setInputCalPerServ] = React.useState("")
     const [inputServings, setInputServings] = React.useState("")
@@ -41,17 +38,19 @@ export default function Header() {
     const [inputProtein, setInputProtein] = React.useState("")
     const [inputFat, setInputFat] = React.useState("")
     
-    ///////////// Database State & Add Function ///////////// 
-    const { foodDbList, addFoodDbList } = useContext(Context)
-    
+    ///////////// State for checking input bar state /////////////
     const [isOpen, setIsOpen] = useState(false);
     
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    
+    ///////////// To change windows between "Add New Food" and "Recently Added" /////////////
     const [addNewFoodState, setAddNewFoodState] = useState(true)
     const [recentlyAddedState, setRecentlyAddedState] = useState(false)
+    
+    ///////////// State for checking if user is logged in /////////////
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 
-
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////// adds food the the database /////////////
     const addFoodDb = () => {
         const accessToken = localStorage.getItem("accessToken");
@@ -124,12 +123,6 @@ export default function Header() {
         setIsOpen(!isOpen)
     }
 
-    const useStyles = ({
-        selectStyle: {
-          backgroundColor: '',
-          color: 'white',
-        },
-    });
 
     const filledInput = [
         {name: 'Food Name', value: foodName, onChange: (e) => setFoodName(e.target.value)},
@@ -155,6 +148,7 @@ export default function Header() {
             addIsAuth(false)
         }
     },[isLoggedIn])
+
 
     return(
         <header>
