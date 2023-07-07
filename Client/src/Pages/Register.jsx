@@ -16,17 +16,10 @@ export default function Register() {
       });
     
       const onSubmit = (data) => {
-        // axios.post("http://localhost:3001/auth"){
-        //   console.log(data);
-        // });
-
         axios.post('http://localhost:3001/users', {
             username: data.username, 
             password: data.password,  
-        
         })
-        console.log(data)
-        console.log(data.username, data.password)
       };
     
       return (

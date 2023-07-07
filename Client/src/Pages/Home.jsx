@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {Link, NavLink} from "react-router-dom"
 
-import FoodInputs from "../Components/FoodInputs"
+// import FoodInputs from "../Components/FoodInputs"
 import MacrosCard from "../Components/MacrosCard"
 import FoodTable from "../Components/FoodTable"
 import WeightLossTracker from "../Components/WeightLossTracker"
@@ -21,22 +21,11 @@ export default function Home() {
                 <span className="sub-welcoming-text">Here's an overview of your progress</span>
             </div>
 
-
-            {/* <Dates /> */}
             
-            <div className="homepage-grid-banner">
-                <Banner />
-            </div>
+            <div className="homepage-grid-banner"><Banner /></div>
+            <div className="homepage-grid-1"><MacrosCard /></div>
+            <div className="homepage-grid-4"><FoodTable /></div>
             
-
-            <div className="homepage-grid-1">
-                <MacrosCard /> 
-                
-            </div>
-            
-
-            
-
             {/* <div className="homepage-grid-2">
                 <FoodInputs />
             </div> */}
@@ -48,9 +37,6 @@ export default function Home() {
 
 
 
-            <div className="homepage-grid-4">
-                <FoodTable />
-            </div>
         </div>
     )
 }

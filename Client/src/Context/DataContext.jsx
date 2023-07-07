@@ -6,6 +6,11 @@ import React, {useState} from "react"
 const Context = React.createContext()
 
 function ContextProvider({children}) {
+
+    const [userContext, setUserContext] = React.useState([])
+    const addUserContext = (newUser) => {
+        setUserContext([newUser])
+    }
     
     const [foodList, setFoodList] = React.useState([])
     const addFood = (newFood) => {
@@ -66,7 +71,8 @@ function ContextProvider({children}) {
             foodDbList, addFoodDbList,
             tdeeDbList, addTdeeDbList,
             personalDbList, addPersonalDbList,
-            isAuth, addIsAuth
+            isAuth, addIsAuth, 
+            userContext, addUserContext
         }}>
 
             {children}

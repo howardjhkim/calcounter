@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef} from "react"
 import {Context} from "../Context/DataContext"
 import Axios from "axios"
-import {NavLink, Link, useNavigate} from "react-router-dom"
+import {NavLink, Link, useNavigate, useParams} from "react-router-dom"
 import { ReactComponent as IconName } from '../Images/add.svg';
 
 import logo from "../Images/logo.png"
@@ -14,7 +14,7 @@ import exit from "../Images/exit.svg"
 import newlogo from "../Images/newlogo.svg"
 
 import { signOut } from "firebase/auth"
-import { auth } from "../firebase"
+import { auth } from "../Archived/firebase"
 
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -34,10 +34,16 @@ import Button from '@mui/material/Button';
 
 
 export default function Header() {
+
+    const {userContext, addUserContext} = useContext(Context)
+
+
+
+    let {id} = useParams()
+
     ///////////// Component Ref /////////////
     const componentRef = useRef(null)
-    const {isAuth} = useContext(Context)
-    const {addIsAuth} = useContext(Context)
+    const {isAuth, addIsAuth} = useContext(Context)
     ///////////// States for inputs /////////////
     const [foodName, setFoodName] = React.useState("")
     const [inputCalPerServ, setInputCalPerServ] = React.useState("")
@@ -48,29 +54,62 @@ export default function Header() {
     const [inputFat, setInputFat] = React.useState("")
     
     ///////////// Database State & Add Function ///////////// 
-    const { foodDbList } = useContext(Context)
-    const { addFoodDbList } = useContext(Context)
+    const { foodDbList, addFoodDbList } = useContext(Context)
+
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     ///////////// Database GET & DELETE ///////////// 
+
+    // useEffect(() => {
+    //     Axios.get("http://localhost:3001/users", {id: res.data.id}).then((res) => {
+    //         if (res.data.error) {
+    //             alert(res.data.error)
+    //         } else {
+    //             alert(`id:` + id)
+    //         }
+    //     })
+    // })
+
+
     const addFoodDb = () => {
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) {
+            alert("You must be logged in");
+            return;
+        }
         Axios.post('http://localhost:3001/food', {
             name: foodName, 
             protein: Number(inputProtein),  
             carbs: Number(inputCarbs),
             fat: Number(inputFat),
             calories: Number(inputCalPerServ)
-        })
-        addFoodDbList(
-            [...foodDbList, 
-                {
-                    name: foodName, 
-                    protein: Number(inputProtein),  
-                    carbs: Number(inputCarbs),
-                    fat: Number(inputFat),
-                    calories: Number(inputCalPerServ)
-                }
-            ]
+        }, 
+        
+        {
+            headers: {
+                accessToken: accessToken,
+            },
+        }
         )
+        .then((res) => {
+            if (res.data.error) {
+              console.log(res.data.error);
+              alert(res.data.error)
+            } else {
+                addFoodDbList(
+                    [...foodDbList, 
+                        {
+                            name: foodName, 
+                            protein: Number(inputProtein),  
+                            carbs: Number(inputCarbs),
+                            fat: Number(inputFat),
+                            calories: Number(inputCalPerServ)
+                        }
+                    ]
+                )
+            }
+          });
     }
     
     ///////////// Data submission button /////////////
@@ -82,16 +121,8 @@ export default function Header() {
             return
         }
 
-        if (
-            (isNaN(Number(inputCalPerServ)) || 
-            (isNaN(Number(inputServings)) ||
-            (isNaN(Number(inputGrams)) || 
-            (isNaN(Number(inputCarbs)) ||
-            (isNaN(Number(inputFat)) ||
-            (isNaN(Number(inputProtein))))))))
-            )
-            {
-                alert("Please enter numbers only")
+        if ((isNaN(Number(inputCalPerServ)) || (isNaN(Number(inputServings)) || (isNaN(Number(inputGrams)) || (isNaN(Number(inputCarbs)) || (isNaN(Number(inputFat)) || (isNaN(Number(inputProtein))))))))) {
+            alert("Please enter numbers only")
             return
         } else {
             addFoodDb()
@@ -110,8 +141,7 @@ export default function Header() {
         setInputFat('')
     }
 
-    const [userNameReg, setUserNameReg] = useState('')
-    const [passwordReg, setPasswordReg] = useState('')
+    
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleModal() {
@@ -127,56 +157,35 @@ export default function Header() {
     });
 
     const filledInput = [
-    {
-        name: 'Food Name',
-        value: foodName,
-        onChange: (e) => setFoodName(e.target.value),
-    },
-    {
-        name: 'Servings',
-        value: inputServings,
-        onChange: (e) => setInputServings(e.target.value),
-    },
-    {
-        name: 'Grams',
-        value: inputGrams,
-        onChange: (e) => setInputGrams(e.target.value),
-    },
-    {
-        name: 'Calories',
-        value: inputCalPerServ,
-        onChange: (e) => setInputCalPerServ(e.target.value),
-    },
+        {name: 'Food Name', value: foodName, onChange: (e) => setFoodName(e.target.value)},
+        {name: 'Servings', value: inputServings, onChange: (e) => setInputServings(e.target.value)},
+        {name: 'Grams',value: inputGrams,onChange: (e) => setInputGrams(e.target.value)},
+        {name: 'Calories',value: inputCalPerServ,onChange: (e) => setInputCalPerServ(e.target.value)},
 
-    ///////////Macros//////////
-    {
-        name: 'Protein',
-        value: inputProtein,
-        onChange: (e) => setInputProtein(e.target.value),
-    },
-    {
-        name: 'Carbs',
-        value: inputCarbs,
-        onChange: (e) => setInputCarbs(e.target.value),
-    },
-    {
-        name: 'Fat',
-        value: inputFat,
-        onChange: (e) => setInputFat(e.target.value),
-    },
+        ///////////Macros//////////
+        {name: 'Protein',value: inputProtein,onChange: (e) => setInputProtein(e.target.value)},
+        {name: 'Carbs',value: inputCarbs,onChange: (e) => setInputCarbs(e.target.value)},
+        {name: 'Fat',value: inputFat,onChange: (e) => setInputFat(e.target.value)},
     ];
 
     const [addNewFoodState, setAddNewFoodState] = useState(true)
     const [recentlyAddedState, setRecentlyAddedState] = useState(false)
     
 
-    let navigate = useNavigate()
     const signUserOut = () => {
         signOut(auth).then(() => {
             localStorage.clear()
             addIsAuth(false)
         })
     }
+
+    useEffect(() => {
+        if(localStorage.getItem("accessToken")) { 
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
+    },[isLoggedIn])
 
     return(
         <header>
@@ -194,7 +203,7 @@ export default function Header() {
                             </div>
                             <nav className="header-right-container">
                                 {!isAuth ? <NavLink to="/login"><p>Login</p></NavLink> : <Button onClick={signUserOut}>Sign Out</Button>}
-                                <NavLink to="/register"><p>Register</p></NavLink>
+                                {!isAuth ? <NavLink to="/register"><p>Register</p></NavLink> : <NavLink to={`/profile/${id}`}><p>Profile</p></NavLink>}
                             </nav>
                         </div>
 
@@ -245,8 +254,7 @@ export default function Header() {
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
                                     {
                                         filledInput.slice(0, 3).map((el => 
-                                            (   
-                                                
+                                            ( 
                                                 <FormControl key={el.name} sx={{ m: 0, width: '50%' }} variant="filled">
                                                     <FilledInput
                                                         id="filled-adornment-weight"
@@ -267,7 +275,6 @@ export default function Header() {
                                     <h4>Macronutrients</h4>
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
                                     {
-                                        
                                         filledInput.slice(4).map((el => 
                                             (
                                                 <FormControl key={el.name} sx={{ m: 0, width: '50%' }} variant="filled">
@@ -283,11 +290,8 @@ export default function Header() {
                                                 </FormControl>
                                             )
                                         ))
-                                    
                                     }
                                     </div>
-
-
                                     <Button 
                                         variant="contained" 
                                         style={{marginLeft: `auto`, width: `15%`, marginTop:`20px`}}

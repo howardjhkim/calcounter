@@ -23,30 +23,50 @@ export default function FoodInputs() {
     const { foodDbList } = useContext(Context)
     const { addFoodDbList } = useContext(Context)
 
+    const accessToken = sessionStorage.getItem("accessToken");
+    console.log(accessToken)
 
     ///////////// Database GET & DELETE ///////////// 
     const addFoodDb = () => {
+        const accessToken = sessionStorage.getItem("accessToken");
+        if (!accessToken) {
+            alert("You must be logged in");
+            return;
+        }
         Axios.post('http://localhost:3001/food', {
             name: foodName, 
             protein: Number(inputProtein),  
             carbs: Number(inputCarbs),
             fat: Number(inputFat),
             calories: Number(inputCalPerServ)
-        })
-        addFoodDbList(
-            [...foodDbList, 
-                {
-                    name: foodName, 
-                    protein: Number(inputProtein),  
-                    carbs: Number(inputCarbs),
-                    fat: Number(inputFat),
-                    calories: Number(inputCalPerServ)
-                }
-            ]
+        }, 
+        
+        {
+            headers: {
+                accessToken: accessToken,
+            },
+        }
         )
+        .then((res) => {
+            if (res.data.error) {
+              console.log(res.data.error);
+              alert(res.data.error)
+            } else {
+                addFoodDbList(
+                    [...foodDbList, 
+                        {
+                            name: foodName, 
+                            protein: Number(inputProtein),  
+                            carbs: Number(inputCarbs),
+                            fat: Number(inputFat),
+                            calories: Number(inputCalPerServ)
+                        }
+                    ]
+                )
+            }
+          });
     }
 
-    
     ///////////// Data submission button /////////////
     function dataSubmit(e) {
         e.preventDefault();
@@ -81,31 +101,8 @@ export default function FoodInputs() {
     }
     
 
-    ///////////// Toggles the food input container /////////////
-    function OpenContainer() {        
-        useEffect(() => {
-            document.body.addEventListener('click', e => {
-                const foodInputDetailsContainer = document.querySelector(".food-input-details-container")
-                const linebreak = document.querySelector(".linebreak")
-                
-                if (componentRef.current) {
-                    if(
-                    e.target.classList.contains("food-input-container") 
-                    || e.target.classList.contains("food-input-starter")
-                    || e.target.classList.contains("food-input-details-container")  
-                    || e.target.classList.contains("food-input-details-subcontainer")
-                    || e.target.classList.contains("food-input-details-category")
-                    || e.target.classList.contains("food-input-details-input")
-                    || e.target.classList.contains("submitBtn")) {
-                        foodInputDetailsContainer.style.display = "flex";
-                    } else {
-                        foodInputDetailsContainer.style.display = "none";
-                    }
-                }
-            })
-        }, [])  
-    }
-    OpenContainer()
+
+    
     
 
 

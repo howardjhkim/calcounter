@@ -2,13 +2,14 @@ import React, { useContext, useState, useEffect} from "react"
 import {Context} from "../Context/DataContext"
 import Axios from 'axios'
 import profile from "../CSS/Profile.css"
-
+import {useParams} from "react-router-dom"
 
 
 
 
 export default function Profile() {
     
+    let {id} = useParams()
     
     const {personalDbList} = useContext(Context)
     const { addPersonalDbList } = useContext(Context)
@@ -17,6 +18,8 @@ export default function Profile() {
     const {tdeeDbList} = useContext(Context)
     const { addTdeeDbList } = useContext(Context)
 
+
+    const [username, setUsername] = useState("")
     ///////////// Database GET & DELETE /////////////
     
     useEffect(() => {
@@ -28,15 +31,29 @@ export default function Profile() {
         Axios.get('http://localhost:3001/tdee').then((response) => {
             addTdeeDbList(response.data)
         })
+
+        // Axios.get(`http://localhost:3001/users/basicinfo/${id}`).then((response) => {
+        //     setUsername(response.data)
+        //     console.log(response)
+        // })
     }, [])
     
-    
+
+    useEffect(() => {
+        Axios.get(`http://localhost:3001/users/basicinfo/${id}`).then((response) => {
+            setUsername(response.data.username)
+            console.log(response.data)
+        })
+    }, [id])
+
+  
     
     
     return (
         <div className="profile-page-grid">
             <div className="outside-component-title-container">
                 <p className="outside-component-title">Profile</p>
+                {username}
             </div>
             <div className="widget">
                 <div className="profile-master-container">
