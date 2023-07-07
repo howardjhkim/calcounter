@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    }, {
+    }, 
+    {
       tableName: "food", // specify the custom table name
     });
   

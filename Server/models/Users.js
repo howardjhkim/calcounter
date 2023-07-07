@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "users", // specify the custom table name
     });
   
-    // Users.associate = (models) => {
-    //   Users.hasMany(models.Posts, {
-    //     onDelete: "cascade",
-    //   });
-    // };
+    Users.associate = (models) => {
+      Users.hasMany(models.Food, {
+        onDelete: "cascade",
+      });
+    };
     return Users;
   };
