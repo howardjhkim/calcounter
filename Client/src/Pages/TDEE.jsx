@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect, useParams } from "react"
 import { Link } from "react-router-dom"
 import {Context} from "../Context/DataContext"
 import Axios from "axios"
@@ -9,18 +9,34 @@ import tdee from "../CSS/Tdee.css"
 export default function Tdee() {
     
 
-    const { tdeeDbList } = useContext(Context)
-    const { addTdeeDbList } = useContext(Context)
-
-
-    const { personalDbList } = useContext(Context)
-    const { addPersonalDbList } = useContext(Context)
+    const { 
+        tdeeDbList, personalDbList, 
+        addTdeeDbList, addPersonalDbList, addTdeeMacros,} = useContext(Context)
+    
+    ///////////// Checks if user is logged /////////////
+    const {userContext} = useContext(Context)
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
+    const id = userContextData?.id
+    
 
     
-    const { addTdeeMacros } = useContext(Context);       
-    
-    
+    /////////////////////////// Fetch database data //////////////////////////////////////
+    useEffect(() => {
+        Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
+            addTdeeDbList(res.data)
+        })
+        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((res) => {
+            addPersonalDbList(res.data)
+        })
+    }, [])
+
     const addTdeeDb = () => {
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) {
+            alert("You must be logged in");
+            return;
+        }
         Axios.post('http://localhost:3001/tdee', {
             cutProtein: macros.cut.protein,
             cutCarbs: macros.cut.carbs,
@@ -36,30 +52,45 @@ export default function Tdee() {
             gainCarbs: macros.gain.carbs,
             gainFat: macros.gain.fat,
             gainCalories: macros.gain.calories,  
+        },
+        {
+            headers: {
+                accessToken: accessToken,
+            },
         })
+        .then((res) => {
+            if (res.data.error) {
+              console.log(res.data.error);
+              alert(res.data.error)
+            } else {
+                addTdeeDbList(
+                    [{
+                        cutProtein: macros.cut.protein,
+                        cutCarbs: macros.cut.carbs,
+                        cutFat: macros.cut.fat,
+                        cutCalories: macros.cut.calories, 
 
-        addTdeeDbList(
-            [{
-                cutProtein: macros.cut.protein,
-                cutCarbs: macros.cut.carbs,
-                cutFat: macros.cut.fat,
-                cutCalories: macros.cut.calories, 
-
-                maintainProtein: macros.maintain.protein,
-                maintainCarbs: macros.maintain.carbs,
-                maintainFat: macros.maintain.fat,
-                maintainCalories: macros.maintain.calories,  
-                
-                gainProtein: macros.gain.protein,
-                gainCarbs: macros.gain.carbs,
-                gainFat: macros.gain.fat,
-                gainCalories: macros.gain.calories,
-            }]
-        )
-    }
-
-
+                        maintainProtein: macros.maintain.protein,
+                        maintainCarbs: macros.maintain.carbs,
+                        maintainFat: macros.maintain.fat,
+                        maintainCalories: macros.maintain.calories,  
+                        
+                        gainProtein: macros.gain.protein,
+                        gainCarbs: macros.gain.carbs,
+                        gainFat: macros.gain.fat,
+                        gainCalories: macros.gain.calories,
+                    }]
+                )
+            }
+        }
+    )}
+    
     const addPersonalDb = () => {
+        const accessToken = localStorage.getItem("accessToken")
+        if (!accessToken) {
+            alert("You must be logged in");
+            return;
+        }
         Axios.post('http://localhost:3001/personal', {
             weight: weight,
             age: age,
@@ -73,79 +104,54 @@ export default function Tdee() {
             tdeeDb: tdeeDb,
             bmrDb: bmrDb,
             fitnessGoal: fitnessGoal
+        },{
+            headers: {
+                accessToken: accessToken,
+            },
         })
+        .then((res) => {
+            if (res.data.error) {
+              console.log(res.data.error);
+              alert(res.data.error)
+            } else {
+                addPersonalDbList(
+                    [{
+                        weight: weight,
+                        age: age,
+                        height: height,
+                        goalWeight: goalWeight,
 
-        addPersonalDbList(
-            [{
-                weight: weight,
-                age: age,
-                height: height,
-                goalWeight: goalWeight,
-
-                activity: activity,
-                startDate: startDate,
-                targetDate: targetDate,
-                daysRemaining: daysRemaining,
-                tdeeDb: tdeeDb,
-                bmrDb: bmrDb,
-                fitnessGoal: fitnessGoal
-            }]
-        )
+                        activity: activity,
+                        startDate: startDate,
+                        targetDate: targetDate,
+                        daysRemaining: daysRemaining,
+                        tdeeDb: tdeeDb,
+                        bmrDb: bmrDb,
+                        fitnessGoal: fitnessGoal
+                    }]
+                )
+            }
+        })
     }
 
+   
 
-
-
-
-
-    /////////////////////////// ACTUAL DATABASE DATA //////////////////////////////////////
-    
-
-    useEffect(() => {
-
-        Axios.get('http://localhost:3001/tdee').then((response) => {
-            addTdeeDbList(response.data)
-        })
-        
-    
-        Axios.get('http://localhost:3001/personal').then((response) => {
-            addPersonalDbList(response.data)
-        })
-
-    }, [])
-
-
-
-
-
-
+    /////////////////////////// Info inputs //////////////////////////////////////
+    let [gender, setGender] = useState('male')
     let [age, setAge] = useState('')
-    let [weight, setWeight] = useState('')
     let [height, setHeight] = useState('')
+    let [weight, setWeight] = useState('')
     let [goalWeight, setGoalWeight] = useState('')
-    
     let [activity, setActivity] = useState('')
     let [startDate, setStartDate] = useState(new Date())
     let [targetDate, setTargetDate] = useState(new Date())
-    let [daysRemaining, setDaysRemaining] = useState("")
-
+    let [fitnessGoal, setFitnessGoal] = useState('cut')
+    
     let [bmrDb, setBmrDb] = useState(0);
     let [tdeeDb, setTdeeDb] = useState(0);
-
-    let [gender, setGender] = useState('male')
+    let [daysRemaining, setDaysRemaining] = useState("")
     
-    let [fitnessGoal, setFitnessGoal] = useState('cut')
-
-    
-
-
-
-
-
-
-
-
-    
+    /////////////////////////// Calculates difference in days //////////////////////////////////////
     const calculateDifference = () => {
         const start = new Date(startDate);
         const end = new Date(targetDate);
@@ -160,39 +166,14 @@ export default function Tdee() {
 
 
 
-
-
     let [macrosState, setMacrosState] = useState('')
     let macros = {
-        cut:{
-            protein: 0,
-            fat: 0,
-            carbs: 0,
-            calories: 0
-        },
-        maintain:{
-            protein: 0,
-            fat: 0,
-            carbs: 0,
-            calories: 0
-        },
-        gain:{
-            protein: 0,
-            fat: 0,
-            carbs: 0,
-            calories: 0
-        }
+        cut: {protein: 0, fat: 0, carbs: 0, calories: 0},
+        maintain: {protein: 0, fat: 0, carbs: 0, calories: 0},
+        gain: {protein: 0, fat: 0, carbs: 0, calories: 0}
     }
     
-
-    let activityLevel = {
-        'none': 1,
-        'sedentary': 1.2,
-        'light': 1.375,
-        'moderate': 1.55,
-        'very': 1.725,
-        'extreme': 1.9
-    }
+    let activityLevel = {'none': 1, 'sedentary': 1.2, 'light': 1.375, 'moderate': 1.55, 'very': 1.725, 'extreme': 1.9}
     
     useEffect(() => {
         if(gender === 'male') {
@@ -207,7 +188,6 @@ export default function Tdee() {
             setTdeeDb(tdee)
             setBmrDb(bmr)
         }
-
     }, [age, weight, height, activity])
     
 
@@ -221,8 +201,7 @@ export default function Tdee() {
             macros.cut.calories = calories
         }
         cutWeight();
-        
-        
+
         function maintainWeight() {
             let calories = tdeeDb
             macros.maintain.protein = Math.floor(calories * .172 / 4)
@@ -231,7 +210,6 @@ export default function Tdee() {
             macros.maintain.calories = calories
         }
         maintainWeight();
-        
         
         function gainWeight() {
             let calories = tdeeDb + 500
@@ -254,6 +232,66 @@ export default function Tdee() {
     }
     
 
+    ///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
+    const inputFields = [
+        { label: "Gender", type: "select", name: "gender", options: ["Male", "Female"], setter: setGender},
+        { label: "Age", type: "text", name: "age", setter: setAge},
+        { label: "Height", type: "text", name: "height", setter: setHeight},
+        { label: "Current Weight", type: "text", name: "weight", setter: setWeight},
+        { label: "Goal Weight", type: "text", name: "goalWeight", setter: setGoalWeight},
+        { label: "Activity", type: "select", name: "activity", options: ["No Activity", "Sedentary", "Light", "Moderate", "Very", "Extreme"] ,setter: setActivity},
+        { label: "Start Date", type: "date", name: "startDate" ,setter: setStartDate},
+        { label: "Target Date", type: "date", name: "targetDate" ,setter: setTargetDate},
+        { label: "Goals", type: "select", name: "fitnessGoal", options: ["Cut Weight", "Maintain Weight", "Gain Weight"] ,setter: setFitnessGoal}
+      ];
+   
+      console.log(age)
+      const renderInputField = (field) => {
+        if (field.type === "select") {
+          return (
+            <select
+              style={{ width: '152px', border: 'none', borderBottom: '1px solid black' }}
+              onChange={(e) => field.setter(e.target.value)}
+              value={field.options}
+            >
+              <option value="" disabled>Select an option</option>
+              {field.options.map((option, index) => (
+                <option key={index} value={option.toLowerCase()}>{option}</option>
+              ))}
+            </select>
+          );
+        } else if (field.type === "date") {
+          return (
+            <input
+              className="tdee-inputs"
+              type="date"
+              name={field.name}
+              onChange={(e) => field.setter(e.target.value)}
+              value={field.options}
+            />
+          ); 
+        } else {
+          return (
+            <input
+              className="tdee-inputs"
+              type="text"
+              name={field.name}
+              onChange={(e) => field.setter(e.target.value)}
+              value={field.options}
+            />
+          );
+        }
+      };
+      ///////////////////////////////////////////////////
+      ///////////////////////////////////////////////////
+      ///////////////////////////////////////////////////
+
+
+
+
+
     return (
         <div className="tdee-page-grid">   
 
@@ -269,115 +307,15 @@ export default function Tdee() {
                     <div className="component-title-container">
                         <span className="component-title">Daily Breakdown</span>
                     </div>
-                
-                    <div className="bmr-info-container-first">
-                        <p>Gender</p>
-                        <select 
-                            style={{ width: '152px' , border: 'none', borderBottom: '1px solid black'}} 
-                            onChange={(e) => setGender(e.target.value)} 
-                            value={gender}>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                        </select>
-                    </div>
-                    
-                    
-                    
-                    <div className="bmr-info-container-first">
-                        <p>Age</p>
-                        <div>
-                            <input 
-                                className="tdee-inputs"
-                                type="text" 
-                                name="age" 
-                                onChange={e => setAge(e.target.value)}/>
+
+
+
+                    {inputFields.map((field, index) => (
+                        <div className="bmr-info-container-first" key={index}>
+                            <p>{field.label}</p>
+                            <div>{renderInputField(field)}</div>
                         </div>
-                    </div>
-                    
-
-                    <div className="bmr-info-container-first">
-                        <p>Height</p>
-                        <div>
-                            <input 
-                                className="tdee-inputs"
-                                type="text" 
-                                name="height" 
-                                onChange={e => setHeight(e.target.value)}/>
-                        </div>
-                    </div>
-                        
-
-                    <div className="bmr-info-container-first">
-                        <p>Current Weight</p>
-                        <div>
-                            <input 
-                                className="tdee-inputs"
-                                type="text" 
-                                name="weight" 
-                                onChange={e => setWeight(e.target.value)}/>
-                        </div>
-                    </div>
-
-            
-                    <div className="bmr-info-container-first">
-                        <p>Goal Weight</p>
-                        <div>
-                            <input 
-                                className="tdee-inputs"
-                                type="text" 
-                                name="goalWeight" 
-                                onChange={e => setGoalWeight(e.target.value)}/>
-                        </div>
-                    </div>
-
-
-                    <div className="bmr-info-container-first">
-                        <p>Activity</p>
-                        <select style={{ width: '152px' , border: 'none', borderBottom: '1px solid black'}} onChange={e => setActivity(e.target.value)}>
-                            
-                            <option value="" disabled selected>Select an option</option>
-                            <option value="none">No Activity</option>
-                            <option value="sedentary">Sedentary</option>
-                            <option value="light">Light</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="very">Very</option>
-                            <option value="extreme">Extreme</option>
-                        </select>
-                    </div>
-                    
-                    
-                    <div className="bmr-info-container-first">
-                        <p>Start Date</p>
-                        <div>
-                            <input 
-                                className="tdee-inputs"
-                                type="date" 
-                                name="startDate" 
-                                onChange={e => setStartDate(e.target.value)}/>
-                        </div>                           
-                    </div>
-
-
-                    <div className="bmr-info-container-first">
-                        <p>Target Date</p>
-                        <div>
-                            <input 
-                                className="tdee-inputs"
-                                type="date" 
-                                name="startDate" 
-                                onChange={e => setTargetDate(e.target.value)}/>
-                        </div>
-                    </div>
-
-                    <div className="bmr-info-container-first">
-                        <p>Goals</p>
-                        <select style={{ width: '152px' , border: 'none', borderBottom: '1px solid black'}} onChange={e => setFitnessGoal(e.target.value)}>
-                            <option value="cut">Cut Weight</option>
-                            <option value="maintain">Maintain Weight</option>
-                            <option value="gain">Gain Weight</option>
-                            
-                        </select>
-                    </div>
+                    ))}
 
                     <button className="submitBtn" onClick={dataSubmit}>Submit</button>       
                 </div>

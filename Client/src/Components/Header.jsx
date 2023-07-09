@@ -166,7 +166,7 @@ export default function Header() {
                             </div>
                             <nav className="header-right-container">
                                 {!isAuth ? <NavLink to="/login"><p>Login</p></NavLink> : <Button onClick={signUserOut}>Sign Out</Button>}
-                                {/* {!isAuth ? <NavLink to="/register"><p>Register</p></NavLink> : <NavLink to={`/profile/${id}`}><p>Profile</p></NavLink>} */}
+                                {!isAuth ? <NavLink to="/register"><p>Register</p></NavLink> : <NavLink to={`/profile/${id}`}><p>Profile</p></NavLink>}
                             </nav>
                         </div>
 

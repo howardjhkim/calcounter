@@ -15,6 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     Users.associate = (models) => {
       Users.hasMany(models.Food, {
         onDelete: "cascade",
+      }),
+
+      Users.hasMany(models.Tdee, {
+        onDelete: "cascade",
+      }),
+
+      Users.hasMany(models.Personal, {
+        onDelete: "cascade",
       });
     };
     return Users;
