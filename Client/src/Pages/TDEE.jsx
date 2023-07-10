@@ -247,7 +247,6 @@ export default function Tdee() {
         { label: "Goals", type: "select", name: "fitnessGoal", options: ["Cut Weight", "Maintain Weight", "Gain Weight"] ,setter: setFitnessGoal}
       ];
    
-      console.log(age)
       const renderInputField = (field) => {
         if (field.type === "select") {
           return (
@@ -290,7 +289,9 @@ export default function Tdee() {
 
 
 
-
+    const updateBtn = () => {
+        alert("updated")
+    }
 
     return (
         <div className="tdee-page-grid">   
@@ -317,7 +318,10 @@ export default function Tdee() {
                         </div>
                     ))}
 
-                    <button className="submitBtn" onClick={dataSubmit}>Submit</button>       
+                    {tdeeDbList && personalDbList ? 
+                        <button className="submitBtn" onClick={updateBtn}>Update</button> :
+                        <button className="submitBtn" onClick={dataSubmit}>Submit</button>        
+                    }
                 </div>
                     
                 {/*////////////  2/2 1st half  ////////////*/}
