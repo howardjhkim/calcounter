@@ -134,10 +134,18 @@ export default function Header() {
         {name: 'Carbs',value: inputCarbs,onChange: (e) => setInputCarbs(e.target.value)},
         {name: 'Fat',value: inputFat,onChange: (e) => setInputFat(e.target.value)},
     ];
+    
+    const refreshPage = () => {
+        setTimeout(() => {
+            window.location.reload()
+        }, 5000)
+    }
+    
     ///////////// signs the user out /////////////
     const signUserOut = () => {
         localStorage.clear()
         addIsAuth(false)
+        window.location.reload()
     }
     
     ///////////// checks if a user is logged in /////////////
