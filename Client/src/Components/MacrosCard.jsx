@@ -31,20 +31,22 @@ export default function MacrosCard() {
     const {personalDbList} = useContext(Context)
     const { addPersonalDbList } = useContext(Context)
 
-
+    ///////////// Checks if user is logged /////////////
+    const {userContext} = useContext(Context)
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
+    const id = userContextData?.id
 
 
 
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
-        Axios.get('http://localhost:3001/tdee').then((response) => {
-            addTdeeDbList(response.data)
+        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((response) => {
+            addPersonalDbList(response.data)
         })
     
-    
-    
-        Axios.get('http://localhost:3001/personal').then((response) => {
-            addPersonalDbList(response.data)
+        Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
+            addTdeeDbList(res.data)
         })
     }, [])
     
