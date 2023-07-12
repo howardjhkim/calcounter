@@ -10,14 +10,13 @@ import Search from "../Images/Search.svg"
 import exit from "../Images/exit.svg"
 import newlogo from "../Images/newlogo.svg"
 import header from "../CSS/Header.css"
-
+import FoodInputModal from "./FoodInputModal";
 
 import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-
 
 
 
@@ -160,13 +159,21 @@ export default function Header() {
         }
     },[isLoggedIn])
 
+    ///////////// stops background from moving /////////////
+    useEffect(() => {
+        if (isOpen) {
+          document.body.classList.add("modal-open");
+        } else {
+          document.body.classList.remove("modal-open");
+        }
+      }, [isOpen]);
+
 
     return(
-        <header>
-            <div className="header-master">
+        <header className={isOpen ? "full-height" : ""}>
+            <div className={isOpen ? "full-height-header-master" : "header-master"}>
                 {!isOpen && (
                     <div className="header-master-container">
-
                         <div className="desktopview-master-container">
                             <nav className="logo">   
                                 <Link to="/"><img className="home-logo" src={newlogo} /> </Link>
@@ -184,28 +191,23 @@ export default function Header() {
                         <div className="mobileview-master-container">
                             <div className="mobileview-first-row">
                                 <nav className="logo">   
-                                    <Link to="/">
-                                        <img className="home-logo" src={newlogo} />
-                                    </Link>
+                                    <Link to="/"><img className="home-logo" src={newlogo} /></Link>
                                 </nav>
                                 <nav className="header-right-container">
                                     <NavLink to="/login"><p>Login</p></NavLink>
                                     <NavLink to="/register"><p>Register</p></NavLink>
                                 </nav>
                             </div>
-                            
                             <div className="header-searchbar" onClick={toggleModal}>
                                 <img src={Search} className="small-icon"></img>
                                 <input className="searchbar-input" type="text" placeholder="What did you eat today?"/>
                             </div>
-
                         </div>
                     </div>
                 )}
                 
                 {isOpen && (
-                    <div className="toggledInput" >
-                        <div className="backdrop"></div>
+                    <div className="backdrop">
                         <div className="contents-container">
                             <div className="contents-top-row">
                                 <img className="small-icon exit-btn" src={exit} alt="" onClick={toggleModal}/>

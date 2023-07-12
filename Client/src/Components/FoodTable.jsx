@@ -51,7 +51,6 @@ export default function FoodTable() {
                 <table>
                     <thead >
                         <tr >
-                            <th>UserId</th>
                             <th>Food</th>
                             <th>Protein</th>
                             <th>Carbs</th>
@@ -68,7 +67,6 @@ export default function FoodTable() {
                             .filter((foods) => foods.UserId === userContextData?.id)
                             .map((foods, id) => (
                                 <tr key={id}>
-                                <td>{foods.UserId}</td>
                                 <td>{foods.name}</td>
                                 <td>{foods.protein}</td>
                                 <td>{foods.carbs}</td>

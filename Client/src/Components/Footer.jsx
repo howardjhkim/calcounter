@@ -1,6 +1,7 @@
-import React from "react"
+import React, {useContext} from "react"
 import footer from "../CSS/Footer.css"
 import {NavLink, Link} from "react-router-dom"
+import {Context} from "../Context/DataContext"
 
 import profile from "../Images/Profile.svg"
 import tdee from "../Images/calculator-icon.png"
@@ -13,8 +14,16 @@ import home from "../Images/Home.svg"
 
 
 export default function Footer() {
+    
+    ///////////// Checks if user is logged /////////////
+    const {userContext, addUserContext} = useContext(Context)
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
+    const id = userContextData?.id
+    
+    
+    
     return (
-        // <footer>&#169; 2023 CALCOUNT</footer>
         <footer>
             <nav className="footer-nav">
                 
@@ -40,10 +49,10 @@ export default function Footer() {
                 </Link> */}
 
 
-                <Link to="/profile" className="footer-elements-container">
+                {id ? <Link to="/profile/:id" className="footer-elements-container">
                     <img src={profile} alt="" className="footer-icon"/>
                     <p>Profile</p>
-                </Link>
+                </Link> : null}
 
             </nav>
 
