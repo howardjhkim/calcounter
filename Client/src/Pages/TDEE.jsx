@@ -11,7 +11,8 @@ export default function Tdee() {
 
     const { 
         tdeeDbList, personalDbList, 
-        addTdeeDbList, addPersonalDbList, addTdeeMacros,} = useContext(Context)
+        addTdeeDbList, addPersonalDbList, addTdeeMacros,
+    } = useContext(Context)
     
     ///////////// Checks if user is logged /////////////
     const {userContext} = useContext(Context)
@@ -38,20 +39,9 @@ export default function Tdee() {
             return;
         }
         Axios.post('http://localhost:3001/tdee', {
-            cutProtein: macros.cut.protein,
-            cutCarbs: macros.cut.carbs,
-            cutFat: macros.cut.fat,
-            cutCalories: macros.cut.calories,  
-            
-            maintainProtein: macros.maintain.protein,
-            maintainCarbs: macros.maintain.carbs,
-            maintainFat: macros.maintain.fat,
-            maintainCalories: macros.maintain.calories,  
-            
-            gainProtein: macros.gain.protein,
-            gainCarbs: macros.gain.carbs,
-            gainFat: macros.gain.fat,
-            gainCalories: macros.gain.calories,  
+            cutProtein: macros.cut.protein, cutCarbs: macros.cut.carbs, cutFat: macros.cut.fat, cutCalories: macros.cut.calories,  
+            maintainProtein: macros.maintain.protein, maintainCarbs: macros.maintain.carbs, maintainFat: macros.maintain.fat, maintainCalories: macros.maintain.calories,  
+            gainProtein: macros.gain.protein, gainCarbs: macros.gain.carbs, gainFat: macros.gain.fat, gainCalories: macros.gain.calories,  
         },
         {
             headers: {
@@ -65,20 +55,9 @@ export default function Tdee() {
             } else {
                 addTdeeDbList(
                     [{
-                        cutProtein: macros.cut.protein,
-                        cutCarbs: macros.cut.carbs,
-                        cutFat: macros.cut.fat,
-                        cutCalories: macros.cut.calories, 
-
-                        maintainProtein: macros.maintain.protein,
-                        maintainCarbs: macros.maintain.carbs,
-                        maintainFat: macros.maintain.fat,
-                        maintainCalories: macros.maintain.calories,  
-                        
-                        gainProtein: macros.gain.protein,
-                        gainCarbs: macros.gain.carbs,
-                        gainFat: macros.gain.fat,
-                        gainCalories: macros.gain.calories,
+                        cutProtein: macros.cut.protein, cutCarbs: macros.cut.carbs, cutFat: macros.cut.fat, cutCalories: macros.cut.calories, 
+                        maintainProtein: macros.maintain.protein, maintainCarbs: macros.maintain.carbs, maintainFat: macros.maintain.fat, maintainCalories: macros.maintain.calories,  
+                        gainProtein: macros.gain.protein, gainCarbs: macros.gain.carbs, gainFat: macros.gain.fat, gainCalories: macros.gain.calories,
                     }]
                 )
             }
@@ -92,18 +71,8 @@ export default function Tdee() {
             return;
         }
         Axios.post('http://localhost:3001/personal', {
-            weight: weight,
-            age: age,
-            height: height,
-            goalWeight: goalWeight,
-            
-            activity: activity,
-            startDate: startDate,
-            targetDate: targetDate,
-            daysRemaining: daysRemaining,
-            tdeeDb: tdeeDb,
-            bmrDb: bmrDb,
-            fitnessGoal: fitnessGoal
+            weight: weight, age: age, height: height, goalWeight: goalWeight,
+            activity: activity, startDate: startDate, targetDate: targetDate, daysRemaining: daysRemaining, tdeeDb: tdeeDb, bmrDb: bmrDb, fitnessGoal: fitnessGoal
         },{
             headers: {
                 accessToken: accessToken,
@@ -116,18 +85,8 @@ export default function Tdee() {
             } else {
                 addPersonalDbList(
                     [{
-                        weight: weight,
-                        age: age,
-                        height: height,
-                        goalWeight: goalWeight,
-
-                        activity: activity,
-                        startDate: startDate,
-                        targetDate: targetDate,
-                        daysRemaining: daysRemaining,
-                        tdeeDb: tdeeDb,
-                        bmrDb: bmrDb,
-                        fitnessGoal: fitnessGoal
+                        weight: weight, age: age, height: height, goalWeight: goalWeight,
+                        activity: activity, startDate: startDate, targetDate: targetDate, daysRemaining: daysRemaining, tdeeDb: tdeeDb, bmrDb: bmrDb, fitnessGoal: fitnessGoal
                     }]
                 )
             }
@@ -135,7 +94,6 @@ export default function Tdee() {
     }
 
    
-
     /////////////////////////// Info inputs //////////////////////////////////////
     let [gender, setGender] = useState('male')
     let [age, setAge] = useState('')
@@ -246,16 +204,18 @@ export default function Tdee() {
         { label: "Target Date", type: "date", name: "targetDate" ,setter: setTargetDate},
         { label: "Goals", type: "select", name: "fitnessGoal", options: ["Cut Weight", "Maintain Weight", "Gain Weight"] ,setter: setFitnessGoal}
       ];
-   
+      
+      console.log(gender)
+      console.log(startDate)
+      
       const renderInputField = (field) => {
         if (field.type === "select") {
           return (
             <select
               style={{ width: '152px', border: 'none', borderBottom: '1px solid black' }}
               onChange={(e) => field.setter(e.target.value)}
-              value={field.options}
             >
-              <option value="" disabled>Select an option</option>
+              <option value="" >Select an option</option>
               {field.options.map((option, index) => (
                 <option key={index} value={option.toLowerCase()}>{option}</option>
               ))}
@@ -288,10 +248,13 @@ export default function Tdee() {
       ///////////////////////////////////////////////////
 
 
-
+    
     const updateBtn = () => {
         alert("updated")
     }
+
+    console.log("tdeeDbList: " + tdeeDbList)
+    console.log("personalDbList: " + personalDbList)
 
     return (
         <div className="tdee-page-grid">   
@@ -318,10 +281,11 @@ export default function Tdee() {
                         </div>
                     ))}
 
-                    {tdeeDbList && personalDbList ? 
+                    {/* {tdeeDbList && personalDbList ? 
                         <button className="submitBtn" onClick={updateBtn}>Update</button> :
-                        <button className="submitBtn" onClick={dataSubmit}>Submit</button>        
-                    }
+                        <button className="submitBtn" onClick={dataSubmit()}>Submit</button>        
+                    } */}
+                    <button className="submitBtn" onClick={dataSubmit}>Submit</button>   
                 </div>
                     
                 {/*////////////  2/2 1st half  ////////////*/}

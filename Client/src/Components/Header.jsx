@@ -22,11 +22,14 @@ import Button from '@mui/material/Button';
 
 
 export default function Header() {
-    let {id} = useParams()
+    ///////////// Checks if user is logged /////////////
+    const {userContext, addUserContext} = useContext(Context)
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
+    const id = userContextData?.id
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////// Context /////////////
     const {isAuth, addIsAuth} = useContext(Context)
-    const {userContext, addUserContext} = useContext(Context)
     const {foodDbList, addFoodDbList} = useContext(Context)
     
     ///////////// Food input states /////////////
@@ -173,8 +176,8 @@ export default function Header() {
                                 <input className="searchbar-input" type="text" placeholder="What did you eat today?"/>
                             </div>
                             <nav className="header-right-container">
-                                {!isAuth ? <NavLink to="/login"><p>Login</p></NavLink> : <Button onClick={signUserOut}>Sign Out</Button>}
                                 {!isAuth ? <NavLink to="/register"><p>Register</p></NavLink> : <NavLink to={`/profile/${id}`}><p>Profile</p></NavLink>}
+                                {!isAuth ? <NavLink to="/login"><p>Login</p></NavLink> : <Button onClick={signUserOut}>Sign Out</Button>}
                             </nav>
                         </div>
 
@@ -214,9 +217,9 @@ export default function Header() {
                                 <div onClick={() => { setAddNewFoodState(true); setRecentlyAddedState(false); }}>
                                     Add New Food
                                 </div>
-                                <div onClick={() => { setAddNewFoodState(false); setRecentlyAddedState(true); }}>
+                                {/* <div onClick={() => { setAddNewFoodState(false); setRecentlyAddedState(true); }}>
                                     Recently Added
-                                </div>
+                                </div> */}
                             </div>
 
                             {addNewFoodState && 
@@ -226,10 +229,10 @@ export default function Header() {
                                     {
                                         filledInput.slice(0, 3).map((el => 
                                             ( 
-                                                <FormControl key={el.name} sx={{ m: 0, width: '50%' }} variant="filled">
+                                                <FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
                                                     <FilledInput
                                                         id="filled-adornment-weight"
-                                                        endAdornment={<InputAdornment position="end">per serving</InputAdornment>}
+                                                        endAdornment={<InputAdornment position="end">grams per serving</InputAdornment>}
                                                         aria-describedby="filled-weight-helper-text"
                                                         inputProps={{'aria-label': 'weight',}}
                                                         value={el.value}
@@ -248,10 +251,10 @@ export default function Header() {
                                     {
                                         filledInput.slice(4).map((el => 
                                             (
-                                                <FormControl key={el.name} sx={{ m: 0, width: '50%' }} variant="filled">
+                                                <FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
                                                     <FilledInput
                                                         id="filled-adornment-weight"
-                                                        endAdornment={<InputAdornment position="end">per serving</InputAdornment>}
+                                                        endAdornment={<InputAdornment position="end">grams per serving</InputAdornment>}
                                                         aria-describedby="filled-weight-helper-text"
                                                         inputProps={{'aria-label': 'weight',}}
                                                         value={el.value}

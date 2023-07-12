@@ -1,7 +1,13 @@
 .profile-page-grid {
-    margin: 0px 20px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
 }
-
+.welcome-text{
+    grid-column: 2 / 12;    
+}
+.widget {
+    grid-column: 2 / 12;
+}
 
 .profile-master-container{
     display: flex;

@@ -149,7 +149,6 @@ header {
 /********************** Toggled View **********************/
 
 .toggledInput{
-  width: 100%;
   
 }
 
@@ -159,33 +158,32 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  border: 2px solid red;
+  height: 50vh;
   /* background: rgba(0, 0, 0, 0.6); */
   background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
   backdrop-filter: blur(10px);
   transition: all 0.2s ease-in-out;
   opacity: 0;
   pointer-events: none;
+  z-index: 2;
 }
 
 
 .contents-container{
   display: flex;
-  background: transparent;
+  background: none;
   flex-direction: column;
   position: absolute;
-  z-index: 2;
+  z-index: 500;
   transform: translateX(-50%);
   transition: all 0.2s ease-in-out;
   left: 50%;
   top: -110%;
   /* height: 700px; */
-  width: 50%;
+  width: 700px;
   padding: 5px;
   gap: 20px;
-  
-
-
 }
 
 
@@ -246,6 +244,7 @@ header {
   margin: 0 auto;
   /* margin: 35px 0px; */
   box-sizing: border-box;
+  
 }
 
 
@@ -304,6 +303,7 @@ header {
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    
   }
 
 
@@ -344,6 +344,7 @@ header {
 
   .contents-container{
     width: 100%;
+  
   }
   .header-right-container > a:first-child {
     margin-right: 0px;
@@ -358,4 +359,21 @@ header {
   .mobileview-master-container {
     display: none;
   }
+
+}
+
+@media (max-width:1007px) {
+  .header-right-container > a.active {
+    width: 100%;
+  }
+  header {
+    font-size: 1rem
+  }
+}
+
+@media (max-width: 600px) {
+  .contents-container{
+    
+  }
+  
 }

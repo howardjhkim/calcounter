@@ -9,51 +9,42 @@ import {useParams} from "react-router-dom"
 
 export default function Profile() {
     
-    let {id} = useParams()
+    ///////////// Checks if user is logged /////////////
+    const {userContext} = useContext(Context)
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
+    const id = userContextData?.id
     
-    const {personalDbList} = useContext(Context)
-    const { addPersonalDbList } = useContext(Context)
-
-
-    const {tdeeDbList} = useContext(Context)
-    const { addTdeeDbList } = useContext(Context)
-
-
+    ////////////// Other data/state /////////////
+    const {personalDbList, addPersonalDbList, tdeeDbList, addTdeeDbList} = useContext(Context)
     const [username, setUsername] = useState("")
+
     ///////////// Database GET & DELETE /////////////
-    
     useEffect(() => {
-        Axios.get('http://localhost:3001/personal').then((response) => {
-            addPersonalDbList(response.data)
+        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((res) => {
+            addPersonalDbList(res.data)
         })
     
-    
-        Axios.get('http://localhost:3001/tdee').then((response) => {
-            addTdeeDbList(response.data)
+        Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
+            addTdeeDbList(res.data)
         })
 
-        // Axios.get(`http://localhost:3001/users/basicinfo/${id}`).then((response) => {
-        //     setUsername(response.data)
-        //     console.log(response)
-        // })
+        
+        if (data) {
+            Axios.get(`http://localhost:3001/users/basicinfo/${id}`).then((response) => {
+                setUsername(response.data.username)
+            })
+        }
     }, [])
     
 
-    useEffect(() => {
-        Axios.get(`http://localhost:3001/users/basicinfo/${id}`).then((response) => {
-            setUsername(response.data.username)
-            console.log(response.data)
-        })
-    }, [id])
-
   
-    
     
     return (
         <div className="profile-page-grid">
-            <div className="outside-component-title-container">
+            <div className="outside-component-title-container welcome-text">
                 <p className="outside-component-title">Profile</p>
-                {username}
+                <p>Welcome back, {username || ""}!</p>
             </div>
             <div className="widget">
                 <div className="profile-master-container">
@@ -91,8 +82,6 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
-            
-            
         </div>
     )
 }
