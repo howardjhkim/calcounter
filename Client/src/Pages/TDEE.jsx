@@ -7,8 +7,6 @@ import tdee from "../CSS/Tdee.css"
 // import Select from 'react-select'
 
 export default function Tdee() {
-    
-
     const { 
         tdeeDbList, personalDbList, 
         addTdeeDbList, addPersonalDbList, addTdeeMacros,
@@ -19,8 +17,6 @@ export default function Tdee() {
     const data = localStorage.getItem('userContext')
     const userContextData = data ? JSON.parse(data) : null;
     const id = userContextData?.id
-    
-
     
     /////////////////////////// Fetch database data //////////////////////////////////////
     useEffect(() => {
@@ -93,7 +89,6 @@ export default function Tdee() {
         })
     }
 
-   
     /////////////////////////// Info inputs //////////////////////////////////////
     let [gender, setGender] = useState('male')
     let [age, setAge] = useState('')
@@ -122,8 +117,6 @@ export default function Tdee() {
         calculateDifference();
     }, [targetDate, startDate]);
 
-
-
     let [macrosState, setMacrosState] = useState('')
     let macros = {
         cut: {protein: 0, fat: 0, carbs: 0, calories: 0},
@@ -147,8 +140,6 @@ export default function Tdee() {
             setBmrDb(bmr)
         }
     }, [age, weight, height, activity])
-    
-
    
     function calculation() {
         function cutWeight() {
@@ -179,7 +170,6 @@ export default function Tdee() {
         gainWeight();
     }
 
-
     function dataSubmit(e) {
         e.preventDefault()
         calculation()
@@ -188,11 +178,7 @@ export default function Tdee() {
         addTdeeDb();
         addPersonalDb();
     }
-    
 
-    ///////////////////////////////////////////////////
-    ///////////////////////////////////////////////////
-    ///////////////////////////////////////////////////
     const inputFields = [
         { label: "Gender", type: "select", name: "gender", options: ["Male", "Female"], setter: setGender},
         { label: "Age", type: "text", name: "age", setter: setAge},
@@ -243,23 +229,9 @@ export default function Tdee() {
           );
         }
       };
-      ///////////////////////////////////////////////////
-      ///////////////////////////////////////////////////
-      ///////////////////////////////////////////////////
-
-
-    
-    const updateBtn = () => {
-        alert("updated")
-    }
-
-    console.log("tdeeDbList: " + tdeeDbList)
-    console.log("personalDbList: " + personalDbList)
 
     return (
         <div className="tdee-page-grid">   
-
-
             {/*////////////  1/2 1st half  ////////////*/} 
             <div className="bmr-master-container-1">
                 <div className="outside-component-title-container">
@@ -272,26 +244,17 @@ export default function Tdee() {
                         <span className="component-title">Daily Breakdown</span>
                     </div>
 
-
-
                     {inputFields.map((field, index) => (
                         <div className="bmr-info-container-first" key={index}>
                             <p>{field.label}</p>
                             <div>{renderInputField(field)}</div>
                         </div>
                     ))}
-
-                    {/* {tdeeDbList && personalDbList ? 
-                        <button className="submitBtn" onClick={updateBtn}>Update</button> :
-                        <button className="submitBtn" onClick={dataSubmit()}>Submit</button>        
-                    } */}
                     <button className="submitBtn" onClick={dataSubmit}>Submit</button>   
                 </div>
                     
                 {/*////////////  2/2 1st half  ////////////*/}
                 <div className="self-widget bmr-calculation-widget-2">
-                    
-
                     <div className="component-title-container">
                         <span className="component-title">Your Stats</span>
                     </div>
@@ -317,10 +280,6 @@ export default function Tdee() {
                             </div>
                         </div>
                     </div>
-
-
-                    
-
                     <div className="bmr-info-container">
                         <div className="bmr-info-title">{`Calories By Activity Level`}</div>
                         <div className="bmr-info">
@@ -351,7 +310,6 @@ export default function Tdee() {
                         </div>
                     </div>
 
-
                     <div className="bmr-info-container">
                         <div className="bmr-info-title">Recommended Calorie Intake</div>
                         <div className="bmr-info">
@@ -369,15 +327,8 @@ export default function Tdee() {
                             </div>
                         </div>
                     </div>
-
-                
-
-                    
                 </div>
             </div>
-
-
-
 
             {/*////////////  2nd half of page  ////////////*/}
             <div className="bmr-master-container-2">
@@ -387,7 +338,6 @@ export default function Tdee() {
                 </div>
         
                 <div className="macros-container">
-                
                     <div className="self-widget tdee-cutting" style={{backgroundColor: personalDbList?.[0]?.[0]?.fitnessGoal === 'cut' ? 'rgb(232,240,254)' : ''}}>
                         Cut
                         <div className="tdee-suggested-row">
@@ -408,8 +358,6 @@ export default function Tdee() {
                             <p>{tdeeDbList?.[0]?.[0]?.cutCalories || null} cal</p>
                         </div>
                     </div>
-
-
 
                     <div className="self-widget tdee-maintenance" style={{backgroundColor: personalDbList?.[0]?.[0]?.fitnessGoal === 'maintain' ? 'rgb(232,240,254)' : ''}}>
                         Maintain

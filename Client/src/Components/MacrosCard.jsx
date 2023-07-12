@@ -1,20 +1,14 @@
 import React, { useContext, useState, useEffect} from "react"
+import Axios from 'axios'
 import {Context} from "../Context/DataContext"
 
 import carbIcon from "../Images/carbIcon.svg"
 import fatsIcon from "../Images/fatIcon.svg"
 import caloriesIcon from "../Images/caloriesIcon.svg"
 import meatIcon from "../Images/meatIcon.svg"
-import Axios from 'axios'
-
 import macroscard from "../CSS/MacrosCard.css"
-
-import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
-
-
-
+import { Carousel } from 'react-responsive-carousel';
 
 
 
@@ -49,8 +43,6 @@ export default function MacrosCard() {
             addTdeeDbList(res.data)
         })
     }, [])
-    
-
 
     ///////////// Initial macros values /////////////
     let protein = 0;
@@ -58,7 +50,6 @@ export default function MacrosCard() {
     let fat = 0;
     let calories = 0;
 
-        
     ///////////// Accumulate total macros if food has been submitted /////////////
     if (foodDbList[0]) {
         protein = foodDbList[0].reduce((acc, curr) => acc + curr.protein, protein);
@@ -66,14 +57,12 @@ export default function MacrosCard() {
         fat = foodDbList[0].reduce((acc, curr) => acc + curr.fat, fat);
         calories = foodDbList[0].reduce((acc, curr) => acc + curr.calories, calories);
     }
-
         
     ///////////// Initial macros percentage values /////////////
     let proteinCurrPercentage = 0;
     let carbsCurrPercentage = 0;
     let fatCurrPercentage = 0;
     let caloriesCurrPercentage = 0;
-   
 
     ///////////// Calculates the macros percentage if TDEE AND food has been submitted /////////////
     if (foodDbList[0] && tdeeDbList[0]?.[0]) {
@@ -82,7 +71,6 @@ export default function MacrosCard() {
         fatCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].cutFat) * 100))
         caloriesCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].cutCalories) * 100))
     }
-    
        
     ///////////// State used to graphically display progress bar increment/decrements /////////////
     const [macroPercent, setMacroPercent] = useState({
@@ -92,13 +80,11 @@ export default function MacrosCard() {
         calories: 0
     })
     
-    
     ///////////// Progressbar function /////////////
     const useProgressBar = (macroName, endValue, setMacroPercent) => {
         let speed = 12;
         useEffect(() => {
             const progress = setInterval(() => {
-                
                 if (endValue > macroPercent[macroName]) {
                     setMacroPercent((prevValue) => {
                         const nextValue = prevValue[macroName] + 1;                        
@@ -133,9 +119,6 @@ export default function MacrosCard() {
     useProgressBar("carbs", carbsCurrPercentage, setMacroPercent);
     useProgressBar("fat", fatCurrPercentage, setMacroPercent);
     useProgressBar("calories", caloriesCurrPercentage, setMacroPercent);
-
-
-
 
     ///////////// Used for mapping cards dynamically /////////////
     const macroData = [
@@ -177,16 +160,9 @@ export default function MacrosCard() {
         },
     ];
 
-
-
-
-
-
-
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    useEffect(() => {
-        
+    useEffect(() => { 
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
@@ -196,12 +172,9 @@ export default function MacrosCard() {
         }
     }, [windowWidth])
 
-    const shouldRenderCarousel = windowWidth < 400;
-
-    
+    // const shouldRenderCarousel = windowWidth < 400;
 
     return (
-      
             <div className="macros-card-grid">
                 {macroData.map((data, index) => (
                 <div className={`card-${index + 1}`} key={index}>

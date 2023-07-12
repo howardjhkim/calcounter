@@ -1,12 +1,8 @@
 import React, {useState} from "react"
 
-
-
-
 const Context = React.createContext()
 
 function ContextProvider({children}) {
-
     const [userContext, setUserContext] = React.useState([])
     const addUserContext = (newUser) => {
         setUserContext([newUser])
@@ -18,34 +14,24 @@ function ContextProvider({children}) {
         setFoodList([...foodList, newFood]);
     }
 
-
     const updateFood = (updatedFood) => {
         setFoodList(updatedFood)
     }
-    
     
     const [tdeeMacros, setTdeeMacros] = React.useState([])
     const addTdeeMacros = (newTdeeMacros) => {
         setTdeeMacros([newTdeeMacros])
     }
-    
 
     const [bodyInfo, setBodyInfo] = React.useState([])
     const addBodyInfo = (newBodyInfo) => {
         setBodyInfo([newBodyInfo])
     }
 
-
-
-
-
-
-
     const [foodDbList, setFoodDbList] = useState([])
     const addFoodDbList = (newFoodDb) => {
         setFoodDbList([newFoodDb])
     }
-
 
     const [tdeeDbList, setTdeeDbList] = useState([])
     const addTdeeDbList = (newTdeeDb) => {
@@ -74,7 +60,6 @@ function ContextProvider({children}) {
             isAuth, addIsAuth, 
             userContext, addUserContext
         }}>
-
             {children}
         </Context.Provider>
     )

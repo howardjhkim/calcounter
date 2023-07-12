@@ -3,8 +3,6 @@ import {Context} from "../Context/DataContext"
 import Axios from 'axios'
 import profilebar from "../CSS/ProfileBar.css"
 
-
-
 export default function ProfileBar() {
     
     ///////////// Checks if user is logged /////////////
@@ -16,7 +14,6 @@ export default function ProfileBar() {
     ///////////// Database State Datas /////////////
     const {personalDbList, addPersonalDbList, tdeeDbList, addTdeeDbList} = useContext(Context)
 
-
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
         Axios.get(`http://localhost:3001/personal/getById/${id}`).then((response) => {
@@ -27,7 +24,6 @@ export default function ProfileBar() {
             addTdeeDbList(res.data)
         })
     }, [])
-
 
     const filtered = personalDbList?.[0]?.filter((el) => el.UserId === userContextData?.id)
     
@@ -41,10 +37,6 @@ export default function ProfileBar() {
         {name: "BMR", title: `${filtered?.[0]?.bmrDb || ""} cal`},
         {name: "Goals", title: `${filtered?.[0]?.fitnessGoal || ""} weight`}
     ]
-
-
-    
-
 
     return (
         <div className="profile-bar-master-container">

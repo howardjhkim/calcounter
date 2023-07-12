@@ -1,17 +1,13 @@
 import React, {useContext} from "react"
-import footer from "../CSS/Footer.css"
 import {NavLink, Link} from "react-router-dom"
 import {Context} from "../Context/DataContext"
+import footer from "../CSS/Footer.css"
 
 import profile from "../Images/Profile.svg"
-import tdee from "../Images/calculator-icon.png"
-import workouts from "../Images/workout-icon.png"
 import help from "../Images/help.svg"
 import home from "../Images/Home.svg"
-
-
-
-
+import tdee from "../Images/calculator-icon.png"
+import workouts from "../Images/workout-icon.png"
 
 export default function Footer() {
     
@@ -20,7 +16,6 @@ export default function Footer() {
     const data = localStorage.getItem('userContext')
     const userContextData = data ? JSON.parse(data) : null;
     const id = userContextData?.id
-    
     
     
     return (

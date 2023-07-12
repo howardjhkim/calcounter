@@ -1,8 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import {Context} from "../Context/DataContext"
 import axios from "axios"
-import { useNavigate } from 'react-router-dom'
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -18,9 +17,6 @@ function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  console.log(username)
-  console.log(password)
-  
   const navigate = useNavigate()
 
   const login = () => {
@@ -47,7 +43,6 @@ function Login() {
     })
   }
     
-
   useEffect(() => {
     axios.get("http://localhost:3001/users/auth", {headers: {accessToken: localStorage.getItem("accessToken")}}).then((res) => {
       if (res.data.error) {
@@ -57,8 +52,6 @@ function Login() {
       }
     })
   }, [])
-
-
 
   function Copyright(props) {
     return (

@@ -11,9 +11,6 @@ import home from "../CSS/Home.css"
 
 
 export default function Home() {
-
-
-
     return (
         <div className="homepage-grid">
             <div className="homepage-grid-title-container">
@@ -21,22 +18,12 @@ export default function Home() {
                 <span className="sub-welcoming-text">Here's an overview of your progress</span>
             </div>
 
-            
             <div className="homepage-grid-banner"><Banner /></div>
             <div className="homepage-grid-1"><MacrosCard /></div>
             <div className="homepage-grid-4"><FoodTable /></div>
             
-            {/* <div className="homepage-grid-2">
-                <FoodInputs />
-            </div> */}
-
-            {/* <div className="homepage-grid-3">
-                <WeightLossTracker /> 
-            </div> */}
-
-
-
-
+            {/* <div className="homepage-grid-2"><FoodInputs /></div> */}
+            {/* <div className="homepage-grid-3"><WeightLossTracker /></div> */}
         </div>
     )
 }

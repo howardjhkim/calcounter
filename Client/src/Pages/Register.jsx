@@ -1,7 +1,5 @@
 import React, {useState} from "react"
 import { Link } from "react-router-dom"
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import axios from "axios";
 import RegisterCSS from "../CSS/Register.css"
 
@@ -14,19 +12,15 @@ import Typography from '@mui/material/Typography';
 
 
 export default function Register() {
-    
   const [username, setUserName] = useState("")
   const [password, setPassword] = useState("")
   
-    
   const onSubmit = () => {
     axios.post('http://localhost:3001/users', {
         username: username, 
         password: password,  
     })
   };
-    
-
 
   function Copyright(props) {
     return (
@@ -40,8 +34,6 @@ export default function Register() {
       </Typography>
     );
   }
-
-
 
   return (
     <div className="register-master">

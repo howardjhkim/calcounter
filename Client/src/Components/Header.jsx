@@ -4,8 +4,8 @@ import {NavLink, Link, useNavigate, useParams} from "react-router-dom"
 import Axios from "axios"
 import {Context} from "../Context/DataContext"
 
-import { ReactComponent as IconName } from '../Images/add.svg';
 import logo from "../Images/logo.png"
+import { ReactComponent as IconName } from '../Images/add.svg';
 import Search from "../Images/Search.svg"
 import exit from "../Images/exit.svg"
 import newlogo from "../Images/newlogo.svg"
@@ -227,45 +227,37 @@ export default function Header() {
                                 <div>
                                     <h4>Basic Info</h4>
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    {
-                                        filledInput.slice(0, 3).map((el => 
-                                            ( 
-                                                <FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
-                                                    <FilledInput
-                                                        id="filled-adornment-weight"
-                                                        endAdornment={<InputAdornment position="end">grams per serving</InputAdornment>}
-                                                        aria-describedby="filled-weight-helper-text"
-                                                        inputProps={{'aria-label': 'weight',}}
-                                                        value={el.value}
-                                                        onChange={el.onChange}
-                                                        />
-                                                    <FormHelperText id="filled-weight-helper-text">{el.name}</FormHelperText>
-                                                </FormControl>
-                                            )
-                                        ))
-                                    }
+                                        {filledInput.slice(0, 3).map((el => 
+                                            (<FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
+                                                <FilledInput
+                                                    id="filled-adornment-weight"
+                                                    endAdornment={<InputAdornment position="end">grams per serving</InputAdornment>}
+                                                    aria-describedby="filled-weight-helper-text"
+                                                    inputProps={{'aria-label': 'weight',}}
+                                                    value={el.value}
+                                                    onChange={el.onChange}
+                                                    />
+                                                <FormHelperText id="filled-weight-helper-text">{el.name}</FormHelperText>
+                                            </FormControl>)
+                                        ))}
                                     </div>
 
 
                                     <h4>Macronutrients</h4>
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    {
-                                        filledInput.slice(4).map((el => 
-                                            (
-                                                <FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
-                                                    <FilledInput
-                                                        id="filled-adornment-weight"
-                                                        endAdornment={<InputAdornment position="end">grams per serving</InputAdornment>}
-                                                        aria-describedby="filled-weight-helper-text"
-                                                        inputProps={{'aria-label': 'weight',}}
-                                                        value={el.value}
-                                                        onChange={el.onChange}
-                                                        />
-                                                    <FormHelperText id="filled-weight-helper-text">{el.name}</FormHelperText>
-                                                </FormControl>
-                                            )
-                                        ))
-                                    }
+                                        {filledInput.slice(4).map((el => 
+                                            (<FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
+                                                <FilledInput
+                                                    id="filled-adornment-weight"
+                                                    endAdornment={<InputAdornment position="end">grams per serving</InputAdornment>}
+                                                    aria-describedby="filled-weight-helper-text"
+                                                    inputProps={{'aria-label': 'weight',}}
+                                                    value={el.value}
+                                                    onChange={el.onChange}
+                                                    />
+                                                <FormHelperText id="filled-weight-helper-text">{el.name}</FormHelperText>
+                                            </FormControl>)
+                                        ))}
                                     </div>
                                     <Button 
                                         variant="contained" 
@@ -279,6 +271,6 @@ export default function Header() {
                     </div>
                 )}
             </div>
-</header>
-)
+        </header>
+    )
 }

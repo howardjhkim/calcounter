@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useParams } from "react-router-dom";
 import {Context} from "../Context/DataContext"
 import Axios from "axios"
-import trashIcon from "../Images/delete-icon.png"
-import add from "../Images/add.png"
 import foodTable from "../CSS/FoodTable.css"
-import { useParams } from "react-router-dom";
+
+import add from "../Images/add.png"
+import trashIcon from "../Images/delete-icon.png"
 
 export default function FoodTable() {
     
@@ -35,13 +36,6 @@ export default function FoodTable() {
 
     const data = localStorage.getItem('userContext')
     const userContextData = data ? JSON.parse(data) : null;
-
-
-
-
-  
-   
-    
 
     return (
         <div className="widget">

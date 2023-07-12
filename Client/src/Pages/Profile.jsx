@@ -1,11 +1,8 @@
 import React, { useContext, useState, useEffect} from "react"
+import {useParams} from "react-router-dom"
 import {Context} from "../Context/DataContext"
 import Axios from 'axios'
 import profile from "../CSS/Profile.css"
-import {useParams} from "react-router-dom"
-
-
-
 
 export default function Profile() {
     
@@ -28,7 +25,6 @@ export default function Profile() {
         Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
             addTdeeDbList(res.data)
         })
-
         
         if (data) {
             Axios.get(`http://localhost:3001/users/basicinfo/${id}`).then((response) => {
@@ -36,9 +32,6 @@ export default function Profile() {
             })
         }
     }, [])
-    
-
-  
     
     return (
         <div className="profile-page-grid">
