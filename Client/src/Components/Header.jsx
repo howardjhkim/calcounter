@@ -10,7 +10,6 @@ import Search from "../Images/Search.svg"
 import exit from "../Images/exit.svg"
 import newlogo from "../Images/newlogo.svg"
 import header from "../CSS/Header.css"
-import FoodInputModal from "./FoodInputModal";
 
 import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
