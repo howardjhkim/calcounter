@@ -78,7 +78,7 @@ th:first-child, td:first-child {
   text-align: left;
 }
 
-th:last-child, td:last-child {
+th:last-child, td:nth-last-child(2), td:last-child {
   text-align: right;
 }
 
