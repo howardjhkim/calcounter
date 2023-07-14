@@ -8,34 +8,41 @@ import add from "../Images/add.png"
 import trashIcon from "../Images/delete-icon.png"
 
 export default function FoodTable() {
-    
-    let { id } = useParams();
     const [food, setFood] = useState([])
+    
+    ///////////// Checks if user is logged /////////////
+    const {userContext} = useContext(Context)
+    const data = localStorage.getItem('userContext')
+    const userContextData = data ? JSON.parse(data) : null;
+    const id = userContextData?.id
+
     
     ///////////// Input ref /////////////
     const inputRef = useRef(null)
     
     ///////////// Database State Datas /////////////
     const { foodDbList, addFoodDbList } = useContext(Context)
-    const {userContext} = useContext(Context)
-
+    
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
-        Axios.get('http://localhost:3001/food').then((res) => {
+        Axios.get(`http://localhost:3001/food/getById/${id}`).then((res) => {
             setFood(res.data)
         })
     }, [foodDbList])
     
-    const deleteFoodDb = (name) => {
-        Axios.delete(`http://localhost:3001/food/${name}`).then(() => {
+    const deleteFoodDb = (foodId) => {
+        Axios.delete(`http://localhost:3001/food/${foodId}`).then(() => {
             setFood(food.filter((val) => {
-                return val.name != name;
+                return val.id != foodId;
             }))
         })
+        addFoodDbList(food.filter((val) => {
+            return val.id != foodId;
+        }))
     }
 
-    const data = localStorage.getItem('userContext')
-    const userContextData = data ? JSON.parse(data) : null;
+
+    
 
     return (
         <div className="widget">
@@ -49,35 +56,29 @@ export default function FoodTable() {
                             <th>Protein</th>
                             <th>Carbs</th>
                             <th>Fat</th>
-                            <th>Grams</th>
-                            <th>Servings</th>
                             <th>Calories</th>
                         </tr>
                     </thead>
                     
                     <tbody>
                         {food ? (
-                            food
-                            .filter((foods) => foods.UserId === userContextData?.id)
-                            .map((foods, id) => (
+                            food.map((foods, id) => (
                                 <tr key={id}>
                                 <td>{foods.name}</td>
-                                <td>{foods.protein}</td>
-                                <td>{foods.carbs}</td>
-                                <td>{foods.fat}</td>
-                                <td>{foods.servings}</td>
-                                <td>{foods.grams}</td>
-                                <td>{/* Placeholder for the missing data */}</td>
+                                <td>{foods.protein} g</td>
+                                <td>{foods.carbs} g</td>
+                                <td>{foods.fat} g</td>
+                                <td>{foods.calories} cal</td>
                                 <td>
                                     <button className="icon-container">
-                                    <img
-                                        className="trash-icon small-icon"
-                                        src={trashIcon}
-                                        ref={inputRef}
-                                        onClick={() => {
-                                        deleteFoodDb(foods.name);
-                                        }}
-                                    />
+                                        <img
+                                            className="trash-icon small-icon"
+                                            src={trashIcon}
+                                            ref={inputRef}
+                                            onClick={() => {
+                                            deleteFoodDb(foods.id);
+                                            }}
+                                        />
                                     </button>
                                 </td>
                                 </tr>
