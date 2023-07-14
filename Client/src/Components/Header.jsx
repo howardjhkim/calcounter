@@ -32,12 +32,12 @@ export default function Header() {
     
     ///////////// Food input states /////////////
     const [foodName, setFoodName] = React.useState("")
-    const [inputCalPerServ, setInputCalPerServ] = React.useState("")
     const [inputServings, setInputServings] = React.useState("")
     const [inputGrams, setInputGrams] = React.useState("")
     const [inputCarbs, setInputCarbs] = React.useState("")
     const [inputProtein, setInputProtein] = React.useState("")
     const [inputFat, setInputFat] = React.useState("")
+    const [calories, setCalories] = React.useState("")
     
     ///////////// State for checking input bar state /////////////
     const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +64,7 @@ export default function Header() {
             protein: Number(inputProtein),  
             carbs: Number(inputCarbs),
             fat: Number(inputFat),
-            calories: Number(inputCalPerServ)
+            calories: Number((inputProtein * 4) + (inputCarbs * 4) + (inputFat * 9))
         }, 
         {
             headers: {
@@ -83,7 +83,7 @@ export default function Header() {
                             protein: Number(inputProtein),  
                             carbs: Number(inputCarbs),
                             fat: Number(inputFat),
-                            calories: Number(inputCalPerServ)
+                            calories: Number((inputProtein * 4) + (inputCarbs * 4) + (inputFat * 9))
                         }
                     ]
                 )
@@ -94,13 +94,12 @@ export default function Header() {
     ///////////// Data submission button /////////////
     function dataSubmit(e) {
         e.preventDefault();
-
         if(foodName.length < 1) {
             alert("Please enter a food name")
             return
         }
 
-        if ((isNaN(Number(inputCalPerServ)) || (isNaN(Number(inputServings)) || (isNaN(Number(inputGrams)) || (isNaN(Number(inputCarbs)) || (isNaN(Number(inputFat)) || (isNaN(Number(inputProtein))))))))) {
+        if (((isNaN(Number(inputServings)) || (isNaN(Number(inputGrams)) || (isNaN(Number(inputCarbs)) || (isNaN(Number(inputFat)) || (isNaN(Number(inputProtein))))))))) {
             alert("Please enter numbers only")
             return
         } else {
@@ -112,7 +111,6 @@ export default function Header() {
     ///////////// clears all inputs /////////////
     function clearVals() {
         setFoodName('')
-        setInputCalPerServ('')
         setInputServings('')
         setInputGrams('')
         setInputProtein('')
@@ -129,8 +127,7 @@ export default function Header() {
         {name: 'Food Name', value: foodName, onChange: (e) => setFoodName(e.target.value)},
         {name: 'Servings', value: inputServings, onChange: (e) => setInputServings(e.target.value)},
         {name: 'Grams',value: inputGrams,onChange: (e) => setInputGrams(e.target.value)},
-        {name: 'Calories',value: inputCalPerServ,onChange: (e) => setInputCalPerServ(e.target.value)},
-
+        
         {name: 'Protein',value: inputProtein,onChange: (e) => setInputProtein(e.target.value)},
         {name: 'Carbs',value: inputCarbs,onChange: (e) => setInputCarbs(e.target.value)},
         {name: 'Fat',value: inputFat,onChange: (e) => setInputFat(e.target.value)},
@@ -227,7 +224,7 @@ export default function Header() {
                                 <div>
                                     <h4>Basic Info</h4>
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                                        {filledInput.slice(0, 3).map((el => 
+                                        {filledInput.slice(0, 2).map((el => 
                                             (<FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
                                                 <FilledInput
                                                     id="filled-adornment-weight"
@@ -245,7 +242,7 @@ export default function Header() {
 
                                     <h4>Macronutrients</h4>
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                                        {filledInput.slice(4).map((el => 
+                                        {filledInput.slice(3).map((el => 
                                             (<FormControl key={el.name} sx={{ m: 0, width: '100%' }} variant="filled">
                                                 <FilledInput
                                                     id="filled-adornment-weight"
