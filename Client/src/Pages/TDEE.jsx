@@ -188,11 +188,8 @@ export default function Tdee() {
         { label: "Activity", type: "select", name: "activity", options: ["No Activity", "Sedentary", "Light", "Moderate", "Very", "Extreme"] ,setter: setActivity},
         { label: "Start Date", type: "date", name: "startDate" ,setter: setStartDate},
         { label: "Target Date", type: "date", name: "targetDate" ,setter: setTargetDate},
-        { label: "Goals", type: "select", name: "fitnessGoal", options: ["Cut Weight", "Maintain Weight", "Gain Weight"] ,setter: setFitnessGoal}
+        { label: "Goals", type: "select", name: "fitnessGoal", options: ["Cut", "Maintain", "Gain"] ,setter: setFitnessGoal}
       ];
-      
-      console.log(gender)
-      console.log(startDate)
       
       const renderInputField = (field) => {
         if (field.type === "select") {
