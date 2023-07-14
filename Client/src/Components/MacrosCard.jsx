@@ -31,18 +31,23 @@ export default function MacrosCard() {
     const userContextData = data ? JSON.parse(data) : null;
     const id = userContextData?.id
 
-
+    const [food, setFood] = useState([])
 
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
-        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((response) => {
-            addPersonalDbList(response.data)
+        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((res) => {
+            addPersonalDbList(res.data)
         })
     
         Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
             addTdeeDbList(res.data)
         })
-    }, [])
+
+        Axios.get(`http://localhost:3001/food/getById/${id}`).then((res) => {
+            setFood(res.data)
+        })
+    }, [foodDbList])
+    
 
     ///////////// Initial macros values /////////////
     let protein = 0;
@@ -51,11 +56,11 @@ export default function MacrosCard() {
     let calories = 0;
 
     ///////////// Accumulate total macros if food has been submitted /////////////
-    if (foodDbList[0]) {
-        protein = foodDbList[0].reduce((acc, curr) => acc + curr.protein, protein);
-        carbs = foodDbList[0].reduce((acc, curr) => acc + curr.carbs, carbs);
-        fat = foodDbList[0].reduce((acc, curr) => acc + curr.fat, fat);
-        calories = foodDbList[0].reduce((acc, curr) => acc + curr.calories, calories);
+    if (food[0]) {
+        protein = food.reduce((acc, curr) => acc + curr.protein, protein);
+        carbs = food.reduce((acc, curr) => acc + curr.carbs, carbs);
+        fat = food.reduce((acc, curr) => acc + curr.fat, fat);
+        calories = food.reduce((acc, curr) => acc + curr.calories, calories);
     }
         
     ///////////// Initial macros percentage values /////////////
@@ -65,11 +70,12 @@ export default function MacrosCard() {
     let caloriesCurrPercentage = 0;
 
     ///////////// Calculates the macros percentage if TDEE AND food has been submitted /////////////
-    if (foodDbList[0] && tdeeDbList[0]?.[0]) {
-        proteinCurrPercentage = Math.floor(((protein / tdeeDbList[0][0].cutProtein) * 100))
-        carbsCurrPercentage = Math.floor(((carbs / tdeeDbList[0][0].cutCarbs) * 100))
-        fatCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].cutFat) * 100))
-        caloriesCurrPercentage = Math.floor(((fat / tdeeDbList[0][0].cutCalories) * 100))
+    if (food[0] && tdeeDbList[0]?.[0]) {
+        const fitnessGoal = personalDbList?.[0]?.[0].fitnessGoal
+        proteinCurrPercentage = Math.floor(((protein / tdeeDbList[0][0][`${fitnessGoal}Protein`]) * 100))
+        carbsCurrPercentage = Math.floor(((carbs / tdeeDbList[0][0][`${fitnessGoal}Carbs`]) * 100))
+        fatCurrPercentage = Math.floor(((fat / tdeeDbList[0][0][`${fitnessGoal}Fat`]) * 100))
+        caloriesCurrPercentage = Math.floor(((calories / tdeeDbList[0][0][`${fitnessGoal}Calories`]) * 100))
     }
        
     ///////////// State used to graphically display progress bar increment/decrements /////////////
@@ -175,42 +181,42 @@ export default function MacrosCard() {
     // const shouldRenderCarousel = windowWidth < 400;
 
     return (
-            <div className="macros-card-grid">
-                {macroData.map((data, index) => (
+        <div className="macros-card-grid">
+            {macroData.map((data, index) => (
                 <div className={`card-${index + 1}`} key={index}>
                     <div className="macro-name-with-icon-container">
-                    <span className="macros-card-macro-name">{data.name}</span>
-                    <img className={`macroscard-icon ${data.iconClass}`} src={data.icon} alt={data.name} />
+                        <span className="macros-card-macro-name">{data.name}</span>
+                        <img className={`macroscard-icon ${data.iconClass}`} src={data.icon} alt={data.name} />
                     </div>
         
                     <div className="suggested-consumed-master-container">
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Consumed</span>
-                        <span className="macro-counter">{data.state || 0}</span>
-                    </div>
+                        <div className="suggested-consumed-sub-container">
+                            <span className="consumed-suggested-text">Consumed</span>
+                            <span className="macro-counter">{data.state || "-"}</span>
+                        </div>
         
-                    <div className="suggested-consumed-sub-container">
-                        <span className="consumed-suggested-text">Suggested</span>
-                        <span className="macro-counter">{data.suggested}</span>
-                    </div>
+                        <div className="suggested-consumed-sub-container">
+                            <span className="consumed-suggested-text">Suggested</span>
+                            <span className="macro-counter">{data.suggested}</span>
+                        </div>
                     </div>
         
                     <div className="macros-card-progressbar-container">
-                    <div className="progress-container">
-                        <div
-                        className="linear-progress"
-                        style={{
-                            width: `${data.percent > 100 ? 100 : data.percent || 0}%`,
-                            background: data.color,
-                        }}
-                        ></div>
-                        <span className="percentage">
-                        {data.percent > 0 ? `${data.percent} %` : '0 %'}
-                        </span>
-                    </div>
+                        <div className="progress-container">
+                            <div
+                                className="linear-progress"
+                                style={{
+                                    width: `${data.percent > 100 ? 100 : data.percent || 0}%`,
+                                    background: data.color,
+                                }}>
+                            </div>
+                            <span className="percentage">
+                                {data.percent > 0 ? `${data.percent} %` : '0 %'}
+                            </span>
+                        </div>
                     </div>
                 </div>
-                ))}
-            </div>
+            ))}
+        </div>
     )
 }
