@@ -30,19 +30,26 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/byuserId/:id", async (req, res) => {
-    const id = req.params.id;
-    const listOfFoods = await Food.findAll({where: {UserId: id}})
-    res.json(listOfFoods)
+router.get("/getById/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const food = await Food.findAll({where: {UserId: id}})
+        const serializedData = food.map(item => item.toJSON());
+
+        res.json(serializedData);
+    } catch {
+        console.log(err)
+        res.sendStatus(500)
+    }
 })
 
 
-router.delete('/:name', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        const name = req.params.name;
+        const id = req.params.id;
         await Food.destroy({
             where: {
-            name: name
+            id: id
             }
         });
         res.sendStatus(204);
