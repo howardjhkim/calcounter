@@ -27,4 +27,4 @@ export const db = getFirestore(app);
 
 export const provider = new GoogleAuthProvider()
 
-//https://calcounter-b4bd1e148395.herokuapp.com//
+//http://localhost:3001//
