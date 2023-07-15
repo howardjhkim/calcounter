@@ -7,11 +7,13 @@ const {validateToken} = require("../middlewares/AuthMiddleware")
 
 
 router.post("/", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, firstName, lastName } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
     Users.create({
       username: username,
       password: hash,
+      firstName: firstName,
+      lastName: lastName
     });
     res.json("SUCCESS");
   });
@@ -40,7 +42,7 @@ router.post("/login", async (req, res) => {
       "abcde"
     );
     // res.json(accessToken);
-    res.json({token: accessToken, username: username, id: user.id})
+    res.json({token: accessToken, username: username, id: user.id, firstName: user.firstName})
   });
 });
 
