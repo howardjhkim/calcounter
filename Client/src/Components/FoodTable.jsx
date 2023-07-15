@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {Context} from "../Context/DataContext"
 import Axios from "axios"
 import foodTable from "../CSS/FoodTable.css"
@@ -9,7 +9,7 @@ import trashIcon from "../Images/delete-icon.png"
 
 export default function FoodTable() {
     const [food, setFood] = useState([])
-    
+    const navigate = useNavigate()
     ///////////// Checks if user is logged /////////////
     const {userContext} = useContext(Context)
     const data = localStorage.getItem('userContext')
@@ -25,13 +25,14 @@ export default function FoodTable() {
     
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
-        Axios.get(`http://localhost:3001/food/getById/${id}`).then((res) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/food/getById/${id}`).then((res) => {
             setFood(res.data)
         })
-    }, [foodDbList])
+        console.log("test")
+    }, [foodDbList, food])
     
     const deleteFoodDb = (foodId) => {
-        Axios.delete(`http://localhost:3001/food/${foodId}`).then(() => {
+        Axios.delete(`https://calcounter-b4bd1e148395.herokuapp.com/food/${foodId}`).then(() => {
             setFood(food.filter((val) => {
                 return val.id != foodId;
             }))
@@ -39,10 +40,10 @@ export default function FoodTable() {
         addFoodDbList(food.filter((val) => {
             return val.id != foodId;
         }))
+
+        navigate("/")
     }
 
-
-    
 
     return (
         <div className="widget">
@@ -88,7 +89,7 @@ export default function FoodTable() {
 
                 </table>
                 
-                {foodDbList[0] && !foodDbList[0][0] &&(
+                {food.length === 0 && (
                     <div>
                         <img className="addimage" src={add} alt="Add food" />
                         <div className="addimage-texts-container">
