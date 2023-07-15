@@ -25,7 +25,7 @@ export default function Home() {
             <div className="homepage-grid-title-container">
                 {userContextData ? 
                     (<div className="homepage-grid-title-container">
-                        <span className="welcoming-text">Welcome backdsfdsfdsf, {userContextData?.firstName[0].toUpperCase()+userContextData.firstName.slice(1)}</span>
+                        <span className="welcoming-text">Welcome back, {userContextData?.firstName[0].toUpperCase()+userContextData.firstName.slice(1)}</span>
                         <span className="sub-welcoming-text">Here's an overview of your progress</span>
                     </div>) 
                     : 
