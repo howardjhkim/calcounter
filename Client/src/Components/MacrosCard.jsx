@@ -35,15 +35,15 @@ export default function MacrosCard() {
 
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
-        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((res) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/personal/getById/${id}`).then((res) => {
             addPersonalDbList(res.data)
         })
     
-        Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/tdee/getById/${id}`).then((res) => {
             addTdeeDbList(res.data)
         })
 
-        Axios.get(`http://localhost:3001/food/getById/${id}`).then((res) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/food/getById/${id}`).then((res) => {
             setFood(res.data)
         })
     }, [foodDbList])
@@ -68,6 +68,8 @@ export default function MacrosCard() {
     let carbsCurrPercentage = 0;
     let fatCurrPercentage = 0;
     let caloriesCurrPercentage = 0;
+
+    console.log(calories)
 
     ///////////// Calculates the macros percentage if TDEE AND food has been submitted /////////////
     if (food[0] && tdeeDbList[0]?.[0]) {

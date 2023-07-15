@@ -14,11 +14,15 @@ import Typography from '@mui/material/Typography';
 export default function Register() {
   const [username, setUserName] = useState("")
   const [password, setPassword] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   
   const onSubmit = () => {
-    axios.post('http://localhost:3001/users', {
+    axios.post('https://calcounter-b4bd1e148395.herokuapp.com/users', {
         username: username, 
-        password: password,  
+        password: password,
+        firstName: firstName,
+        lastName: lastName  
     })
   };
 
@@ -59,7 +63,7 @@ export default function Register() {
                 id="first-name"
                 label="First Name"
                 type="text"
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div style={{ flex: 1, marginLeft: '5px' }}>
@@ -69,7 +73,7 @@ export default function Register() {
                 id="last-name"
                 label="Last Name"
                 type="text"
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>

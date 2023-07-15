@@ -16,11 +16,11 @@ export default function ProfileBar() {
 
     ///////////// Database GET & DELETE /////////////
     useEffect(() => {
-        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((response) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/personal/getById/${id}`).then((response) => {
             addPersonalDbList(response.data)
         })
     
-        Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/tdee/getById/${id}`).then((res) => {
             addTdeeDbList(res.data)
         })
     }, [])

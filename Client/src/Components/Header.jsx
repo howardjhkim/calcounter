@@ -59,7 +59,7 @@ export default function Header() {
             alert("You must be logged in");
             return;
         }
-        Axios.post('http://localhost:3001/food', {
+        Axios.post('https://calcounter-b4bd1e148395.herokuapp.com/food', {
             name: foodName, 
             protein: Number(inputProtein),  
             carbs: Number(inputCarbs),
@@ -165,6 +165,12 @@ export default function Header() {
       }, [isOpen]);
 
 
+
+
+    
+    
+
+    
     return(
         <header className={isOpen ? "full-height" : ""}>
             <div className={isOpen ? "full-height-header-master" : "header-master"}>

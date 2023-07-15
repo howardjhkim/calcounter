@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import {Context} from "../Context/DataContext"
 import Axios from "axios"
 import tdee from "../CSS/Tdee.css"
+import MacrosCard from "../Components/MacrosCard"
 // import DatePicker from "react-date-picker";
 // import Select from 'react-select'
 
@@ -20,10 +21,10 @@ export default function Tdee() {
     
     /////////////////////////// Fetch database data //////////////////////////////////////
     useEffect(() => {
-        Axios.get(`http://localhost:3001/tdee/getById/${id}`).then((res) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/tdee/getById/${id}`).then((res) => {
             addTdeeDbList(res.data)
         })
-        Axios.get(`http://localhost:3001/personal/getById/${id}`).then((res) => {
+        Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/personal/getById/${id}`).then((res) => {
             addPersonalDbList(res.data)
         })
     }, [])
@@ -34,7 +35,7 @@ export default function Tdee() {
             alert("You must be logged in");
             return;
         }
-        Axios.post('http://localhost:3001/tdee', {
+        Axios.post('https://calcounter-b4bd1e148395.herokuapp.com/tdee', {
             cutProtein: macros.cut.protein, cutCarbs: macros.cut.carbs, cutFat: macros.cut.fat, cutCalories: macros.cut.calories,  
             maintainProtein: macros.maintain.protein, maintainCarbs: macros.maintain.carbs, maintainFat: macros.maintain.fat, maintainCalories: macros.maintain.calories,  
             gainProtein: macros.gain.protein, gainCarbs: macros.gain.carbs, gainFat: macros.gain.fat, gainCalories: macros.gain.calories,  
@@ -66,7 +67,7 @@ export default function Tdee() {
             alert("You must be logged in");
             return;
         }
-        Axios.post('http://localhost:3001/personal', {
+        Axios.post('https://calcounter-b4bd1e148395.herokuapp.com/personal', {
             weight: weight, age: age, height: height, goalWeight: goalWeight,
             activity: activity, startDate: startDate, targetDate: targetDate, daysRemaining: daysRemaining, tdeeDb: tdeeDb, bmrDb: bmrDb, fitnessGoal: fitnessGoal
         },{
@@ -227,6 +228,45 @@ export default function Tdee() {
         }
       };
 
+
+
+      const macroCardObj =  [
+        {name: 'Protein', data: tdeeDbList?.[0]?.[0]?.cutProtein|| null},
+        {name: 'Fat', data: tdeeDbList?.[0]?.[0]?.cutFat || null},
+        {name: 'Carbs', data: tdeeDbList?.[0]?.[0]?.cutCarbs || null},
+        {name: 'Calories', data: tdeeDbList?.[0]?.[0]?.cutCalories || null},
+        
+        {name: 'Protein', data: tdeeDbList?.[0]?.[0]?.maintainProtein || null},
+        {name: 'Fat', data: tdeeDbList?.[0]?.[0]?.maintainFat || null},
+        {name: 'Carbs', data: tdeeDbList?.[0]?.[0]?.maintainCarbs || null},
+        {name: 'Calories', data: tdeeDbList?.[0]?.[0]?.maintainCalories || null},
+    
+        {name: 'Protein', data: tdeeDbList?.[0]?.[0]?.gainProtein || null},
+        {name: 'Fat', data: tdeeDbList?.[0]?.[0]?.gainFat || null},
+        {name: 'Carbs', data: tdeeDbList?.[0]?.[0]?.gainCarbs || null},
+        {name: 'Calories', data: tdeeDbList?.[0]?.[0]?.gainCalories || null},
+    ]
+
+
+
+
+    function renderMacroCard(fitnessGoal, macroData) {
+        const backgroundColor =
+          personalDbList?.[0]?.[0]?.fitnessGoal === fitnessGoal ? 'rgb(232,240,254)' : '';
+    
+        return (
+          <div className={`self-widget tdee-${fitnessGoal}`} style={{ backgroundColor }}>
+            {fitnessGoal.charAt(0).toUpperCase() + fitnessGoal.slice(1)}
+            {macroData.map((el) => (
+              <div className="tdee-suggested-row">
+                <p>{el.name}</p>
+                <p>{el.data} g</p>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
     return (
         <div className="tdee-page-grid">   
             {/*////////////  1/2 1st half  ////////////*/} 
@@ -333,70 +373,13 @@ export default function Tdee() {
                     <p className="outside-component-title">Macronutrients</p>
                     <p className="outside-component-subtitle">Based on your current physique, you should consume the following:</p>              
                 </div>
-        
-                <div className="macros-container">
-                    <div className="self-widget tdee-cutting" style={{backgroundColor: personalDbList?.[0]?.[0]?.fitnessGoal === 'cut' ? 'rgb(232,240,254)' : ''}}>
-                        Cut
-                        <div className="tdee-suggested-row">
-                            <p>Protein</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.cutProtein|| null} g</p>
-                            
-                        </div>
-                        <div className="tdee-suggested-row">  
-                            <p>Fat</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.cutFat || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Carbs</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.cutCarbs || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Calories</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.cutCalories || null} cal</p>
-                        </div>
-                    </div>
 
-                    <div className="self-widget tdee-maintenance" style={{backgroundColor: personalDbList?.[0]?.[0]?.fitnessGoal === 'maintain' ? 'rgb(232,240,254)' : ''}}>
-                        Maintain
-                        <div className="tdee-suggested-row">
-                            <p>Protein</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.maintainProtein || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Fat</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.maintainFat || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Carbs</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.maintainCarbs || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Calories</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.maintainCalories || null} cal</p>
-                        </div>
-                    </div>
-                    
-                    <div className="self-widget tdee-bulking" style={{backgroundColor: personalDbList?.[0]?.[0]?.fitnessGoal === 'gain' ? 'rgb(232,240,254)' : ''}}>
-                        Gain
-                        <div className="tdee-suggested-row">
-                            <p>Protein</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.gainProtein || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Fat</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.gainFat || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Carbs</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.gainCarbs || null} g</p>
-                        </div>
-                        <div className="tdee-suggested-row">
-                            <p>Calories</p>
-                            <p>{tdeeDbList?.[0]?.[0]?.gainCalories || null} cal</p>
-                        </div>
-                    </div>
-                </div>                          
-            </div>
+                <div className="macros-container">
+                    {renderMacroCard("cut", macroCardObj.slice(0, 4))}
+                    {renderMacroCard("maintain", macroCardObj.slice(4, 8))}
+                    {renderMacroCard("gain", macroCardObj.slice(8, 12))}
+                </div>
+            </div>                          
         </div>       
     )
 }

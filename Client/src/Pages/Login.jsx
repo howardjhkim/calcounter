@@ -21,19 +21,21 @@ function Login() {
 
   const login = () => {
     const data = {username: username, password: password}
-    axios.post("http://localhost:3001/users/login", data).then((res) => {
+    axios.post("https://calcounter-b4bd1e148395.herokuapp.com/users/login", data).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
       } else {
         localStorage.setItem("accessToken", res.data.token)
         addUserContext({
           username: res.data.username,
-          id: res.data.id
+          id: res.data.id,
+          firstName: res.data.firstName
         })
 
         localStorage.setItem('userContext', JSON.stringify({
           username: res.data.username,
-          id: res.data.id
+          id: res.data.id,
+          firstName: res.data.firstName
         }));
 
         alert("login successful")
@@ -44,14 +46,16 @@ function Login() {
   }
     
   useEffect(() => {
-    axios.get("http://localhost:3001/users/auth", {headers: {accessToken: localStorage.getItem("accessToken")}}).then((res) => {
+    axios.get("https://calcounter-b4bd1e148395.herokuapp.com/users/auth", {headers: {accessToken: localStorage.getItem("accessToken")}}).then((res) => {
       if (res.data.error) {
         addIsAuth(false)
       } else {
         addIsAuth(true)
       }
     })
+
   }, [])
+  
 
   function Copyright(props) {
     return (
