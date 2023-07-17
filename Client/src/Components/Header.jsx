@@ -196,8 +196,8 @@ export default function Header() {
                                     <Link to="/"><img className="home-logo" src={newlogo} /></Link>
                                 </nav>
                                 <nav className="header-right-container">
-                                    <NavLink to="/login"><p>Login</p></NavLink>
-                                    <NavLink to="/register"><p>Register</p></NavLink>
+                                    {!isAuth ? <NavLink to="/register"><p>Register</p></NavLink> : <NavLink to={`/profile/${id}`}><p>Profile</p></NavLink>}
+                                    {!isAuth ? <NavLink to="/login"><p>Login</p></NavLink> : <Button onClick={signUserOut}>Sign Out</Button>}
                                 </nav>
                             </div>
                             <div className="header-searchbar" onClick={toggleModal}>
