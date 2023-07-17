@@ -10,7 +10,7 @@ import macroscard from "../CSS/MacrosCard.css"
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
-
+import useProgressBar from './useProgressBar';
 
 export default function MacrosCard() {
     
