@@ -69,8 +69,6 @@ export default function MacrosCard() {
     let fatCurrPercentage = 0;
     let caloriesCurrPercentage = 0;
 
-    console.log(calories)
-
     ///////////// Calculates the macros percentage if TDEE AND food has been submitted /////////////
     if (food[0] && tdeeDbList[0]?.[0]) {
         const fitnessGoal = personalDbList?.[0]?.[0].fitnessGoal

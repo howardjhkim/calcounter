@@ -28,7 +28,6 @@ export default function FoodTable() {
         Axios.get(`https://calcounter-b4bd1e148395.herokuapp.com/food/getById/${id}`).then((res) => {
             setFood(res.data)
         })
-        console.log("test")
     }, [foodDbList, food])
     
     const deleteFoodDb = (foodId) => {
