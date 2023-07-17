@@ -51,7 +51,6 @@ export default function VerticalNavbar() {
                     </NavLink>
                 </nav>
             </div>
-            
         </div>
     )
 }

@@ -125,7 +125,7 @@ export default function MacrosCard() {
         useProgressBar("carbs", carbsCurrPercentage, setMacroPercent);
         useProgressBar("fat", fatCurrPercentage, setMacroPercent);
         useProgressBar("calories", caloriesCurrPercentage, setMacroPercent);
-    }, [foodDbList])
+    }, [proteinCurrPercentage, carbsCurrPercentage, fatCurrPercentage, caloriesCurrPercentage, setMacroPercent])
 
     ///////////// Used for mapping cards dynamically /////////////
     const macroData = [
