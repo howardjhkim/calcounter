@@ -153,7 +153,7 @@ export default function Header() {
         } else {
             addIsAuth(false)
         }
-    },[isLoggedIn])
+    }, [isLoggedIn])
 
     ///////////// stops background from moving /////////////
     useEffect(() => {

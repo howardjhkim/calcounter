@@ -3,9 +3,6 @@ import { ReactComponent as Art } from "../Images/art.svg"
 import banner from "../CSS/Banner.css"
 import {Link, NavLink} from "react-router-dom"
 
-
-
-
 export default function Home() {
     
     ///////////// State for fetched quotes /////////////
@@ -22,7 +19,7 @@ export default function Home() {
                 setRandomQuote(data[Math.floor(Math.random() * data.length)]);
             })    
             .catch((error) => console.error(error));
-    },[])
+    }, [])
 
     
     return (
