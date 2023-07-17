@@ -10,7 +10,7 @@ import macroscard from "../CSS/MacrosCard.css"
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
-import useProgressBar from './useProgressBar';
+import useProgressBar from './ProgressBar';
 
 export default function MacrosCard() {
     
@@ -87,39 +87,39 @@ export default function MacrosCard() {
     })
     
     ///////////// Progressbar function /////////////
-    const useProgressBar = (macroName, endValue, setMacroPercent) => {
-        let speed = 12;
-        useEffect(() => {
-            const progress = setInterval(() => {
-                if (endValue > macroPercent[macroName]) {
-                    setMacroPercent((prevValue) => {
-                        const nextValue = prevValue[macroName] + 1;                        
-                        if (nextValue === endValue) {
-                            clearInterval(progress);
-                        };
+    // const useProgressBar = (macroName, endValue, setMacroPercent) => {
+    //     let speed = 12;
+    //     useEffect(() => {
+    //         const progress = setInterval(() => {
+    //             if (endValue > macroPercent[macroName]) {
+    //                 setMacroPercent((prevValue) => {
+    //                     const nextValue = prevValue[macroName] + 1;                        
+    //                     if (nextValue === endValue) {
+    //                         clearInterval(progress);
+    //                     };
                         
-                        return {
-                            ...prevValue,
-                            [macroName]: nextValue
-                        };
-                    });
-                } else if (endValue < macroPercent[macroName]) {
-                    setMacroPercent((prevValue) => {
-                        const nextValue = prevValue[macroName] - 1;                        
-                        if (nextValue === endValue) {
-                            clearInterval(progress);
-                        };
+    //                     return {
+    //                         ...prevValue,
+    //                         [macroName]: nextValue
+    //                     };
+    //                 });
+    //             } else if (endValue < macroPercent[macroName]) {
+    //                 setMacroPercent((prevValue) => {
+    //                     const nextValue = prevValue[macroName] - 1;                        
+    //                     if (nextValue === endValue) {
+    //                         clearInterval(progress);
+    //                     };
                         
-                        return {
-                            ...prevValue,
-                            [macroName]: nextValue
-                        };
-                    });
-                }  
-            }, speed);
-            return () => clearInterval(progress);
-        }, [endValue]);
-    }
+    //                     return {
+    //                         ...prevValue,
+    //                         [macroName]: nextValue
+    //                     };
+    //                 });
+    //             }  
+    //         }, speed);
+    //         return () => clearInterval(progress);
+    //     }, [endValue]);
+    // }
     useEffect(() => {
         useProgressBar("protein", proteinCurrPercentage, setMacroPercent);
         useProgressBar("carbs", carbsCurrPercentage, setMacroPercent);
